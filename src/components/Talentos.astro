@@ -2,13 +2,17 @@
 import Icono from "./Icono.astro";
 import { enlaceWhatsApp } from "../data/emisora";
 
+// Cada cuadro abre WhatsApp con un mensaje según lo que hace la persona.
 const categorias = [
-  { icono: "microfono", texto: "Cantantes independientes" },
-  { icono: "grupo", texto: "Nuevas bandas" },
-  { icono: "pluma", texto: "Compositores y poetas" },
-  { icono: "libro", texto: "Escritores y artistas" },
-  { icono: "charla", texto: "Entrevistas y mucho más" },
+  { icono: "microfono", texto: "Cantantes independientes", soy: "Soy cantante" },
+  { icono: "grupo", texto: "Nuevas bandas", soy: "Tenemos una banda" },
+  { icono: "pluma", texto: "Compositores y poetas", soy: "Soy compositor(a) / poeta" },
+  { icono: "libro", texto: "Escritores y artistas", soy: "Soy escritor(a) / artista" },
+  { icono: "charla", texto: "Entrevistas y mucho más", soy: "Quiero proponer una entrevista o un talento" },
 ];
+
+const mensajeCategoria = (soy: string) =>
+  `¡Hola! ${soy} y quiero participar en Talentos sin Fronteras 🎤\n\nMi nombre: \nDesde dónde escribo: \nCuéntenos un poco de lo que hago: `;
 
 const mensaje =
   "¡Hola! Quiero participar en Talentos sin Fronteras 🎤\n\nMi nombre: \nLo que hago (canto, compongo, escribo…): \nDesde dónde escribo: ";
@@ -27,16 +31,27 @@ const mensaje =
         ¿Cantas, compones o escribes? En <strong class="text-white">Talentos sin Fronteras</strong> tienes un escenario abierto para
         que te escuchen en varios países. Aficionado o profesional: aquí lo que cuenta es el corazón.
       </p>
+      <p class="mt-4 text-sm font-semibold text-oro-claro">Toca lo que haces y escríbenos directo por WhatsApp 👇</p>
     </div>
 
     <ul class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
       {
         categorias.map((c, i) => (
-          <li class="aparece vidrio flex flex-col items-center gap-3 rounded-3xl px-4 py-6 last:col-span-2 sm:last:col-span-1" style={`transition-delay:${i * 80}ms`}>
-            <span class="grid size-14 place-items-center rounded-full bg-oro/15 text-oro">
-              <Icono nombre={c.icono} class="size-7" />
-            </span>
-            <span class="text-sm font-semibold text-white">{c.texto}</span>
+          <li class="aparece last:col-span-2 sm:last:col-span-1" style={`transition-delay:${i * 80}ms`}>
+            <a
+              href={enlaceWhatsApp(mensajeCategoria(c.soy))}
+              target="_blank"
+              rel="noopener"
+              class="vidrio group flex h-full flex-col items-center gap-3 rounded-3xl px-4 py-6 transition hover:-translate-y-1 hover:border-oro/50 hover:bg-oro/5"
+            >
+              <span class="grid size-14 place-items-center rounded-full bg-oro/15 text-oro transition group-hover:bg-oro group-hover:text-noche">
+                <Icono nombre={c.icono} class="size-7" />
+              </span>
+              <span class="text-sm font-semibold text-white">{c.texto}</span>
+              <span class="mt-auto inline-flex items-center gap-1.5 text-xs font-semibold text-[#25d366]">
+                <Icono nombre="whatsapp" class="size-4" /> Participar
+              </span>
+            </a>
           </li>
         ))
       }

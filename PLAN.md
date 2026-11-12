@@ -12,7 +12,13 @@ Datos de la emisora en `src/data/emisora.ts`.
 - [x] Pide tu canción / dedicatoria → WhatsApp
 - [x] Compartir la emisora, contacto, emisora aliada (Radio Music Digital 105.7)
 
+## ⚠️ Urgente
+- [ ] Publicar el sitio con una dirección real: la plataforma de monetización le pide la URL al dueño para activar anunciantes
+
 ## Fase 2 — Panel para el dueño (subir y borrar información)
+- [ ] Sección pública "Voces que brillan aquí" (cantantes + Talento de la semana)
+- [ ] Fotos: el panel las achica solo antes de subirlas (el dueño sube la foto tal cual del celular)
+- [ ] Espacio para anunciantes (logos/banners que el dueño sube y borra)
 - [ ] Elegir sistema (propuesta: Supabase — base de datos + fotos + inicio de sesión, plan gratis)
 - [ ] Página /admin con usuario y contraseña del dueño
 - [ ] Programas: crear, editar, borrar (nombre, días, hora, volante)
@@ -27,5 +33,6 @@ Datos de la emisora en `src/data/emisora.ts`.
 - [ ] Duración de cada programa (puse 2 horas)
 - [ ] ¿El correo alegriastereomusical@gmail.com sigue vigente?
 - [ ] Volante de El Viernes Alegre (hoy se muestra un diseño propio)
-- [ ] Facebook / Instagram propios de Alegría Stereo
+- [x] Instagram: @alalegriastereomusical
+- [ ] Facebook propio de Alegría Stereo
 - [ ] Fotos reales: cabina, Robinson Peña, cantantes

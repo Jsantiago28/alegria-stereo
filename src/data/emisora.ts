@@ -16,6 +16,8 @@ export const emisora = {
   // Número para WhatsApp y llamadas: 1 + código de área + número, sin espacios.
   whatsapp: "18094201033",
   correo: "alegriastereomusical@gmail.com",
+  instagram: "https://www.instagram.com/alalegriastereomusical/",
+  instagramUsuario: "@alalegriastereomusical",
 
   generos: ["Romántica", "Tropical", "Baladas", "Clásicos", "Éxitos actuales"],
 };

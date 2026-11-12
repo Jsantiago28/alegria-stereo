@@ -26,12 +26,11 @@ La competencia (demo de QCoreT) no ofrecía ninguna de las dos.
 
 ## 🔴 PASO 1 — Publicar (URGENTE, empezar por aquí mañana)
 La plataforma de monetización le pide la URL al dueño para activar anunciantes.
-- [ ] Crear/entrar a la cuenta de Cloudflare (lo hace el usuario)
-- [ ] Workers & Pages → Create → Pages → Connect to Git → repo `alegria-stereo`, **nombre del proyecto: `alegriastereomusical`** (→ alegriastereomusical.pages.dev)
-      (preset: Astro · build: `npm run build` · salida: `dist`)
-- [ ] Revisar la versión publicada: radio, "Sonando ahora", WhatsApp, volante, celular
+- [x] Cuenta de Cloudflare
+- [x] Publicado en Cloudflare Pages (12/11/2026): **https://alegriastereomusical.pages.dev** — cada push a main se publica solo
+- [x] Revisada la versión publicada: radio suena, "Sonando ahora", horarios, sin errores
 - [ ] Revisar la vista previa al compartir el enlace por WhatsApp/redes
-- [ ] Actualizar `site` en `astro.config.mjs` con la dirección final
+- [x] `site` en `astro.config.mjs` = alegriastereomusical.pages.dev (cambiar cuando haya dominio)
 - [ ] Mandarle la URL al dueño
 - [ ] Dominio propio (Cloudflare, ~US$10–11/año, a nombre del dueño). Revisado el 12/11/2026 en el registro oficial:
       **alegriastereomusical.com** (recomendado) y **alegriastereo.com** estaban libres → el dueño elige uno (o los dos)

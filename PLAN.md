@@ -70,6 +70,22 @@ La plataforma de monetización le pide la URL al dueño para activar anunciantes
 - [ ] Fotos de los cantantes **con su permiso** + nombre artístico, país, género y redes de cada uno
 - [ ] Fotos de la cabina y de Robinson Peña
 - [ ] Su correo para el panel
+- [ ] Subir su logo al perfil de Zeno (hoy sale un círculo verde vacío)
+
+## 🔎 Que el dueño confirme con Zeno
+- [ ] **¿Zeno cuenta a los oyentes que escuchan desde nuestra página?** (NO está confirmado: Zeno no lo dice)
+      Prueba de 5 minutos:
+      1. El dueño abre las estadísticas de oyentes en vivo en su panel de Zeno y anota el número.
+      2. Abrimos alegriastereomusical.pages.dev en 2–3 teléfonos/computadoras y le damos play.
+      3. Si el número sube en 2–3 → confirmado.
+      → Si NO sube: cambiar nuestro reproductor por el reproductor oficial de Zeno (manteniendo el diseño).
+- [ ] **¿Los anuncios de audio de Zeno suenan también en nuestra página?** (deberían, porque van dentro de
+      la transmisión, pero confirmarlo; importante para la monetización)
+- [ ] **Licencias de música:** según Zeno, sus licencias (ASCAP, BMI, SESAC) solo cubren lo que se escucha en
+      zeno.fm, no en la página propia de la emisora. Zeno recomienda sacar licencias propias para el sitio web.
+      Pasa con cualquier página que transmita la radio (también con la demo de QCoreT).
+      → Que el dueño lo consulte, sobre todo antes de monetizar.
+      Fuente: https://help.zeno.fm/en/articles/8348796-plans-faq
 
 ## ✔️ Confirmado por el cliente
 - [x] Correo: alegriastereomusical@gmail.com

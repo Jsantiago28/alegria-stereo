@@ -34,6 +34,8 @@ const urlVistaPrevia = new URL(vistaPrevia.src, Astro.site).href;
     <meta name="theme-color" content="#050a24" />
     <link rel="icon" type="image/png" href={icono.src} />
     <link rel="apple-touch-icon" href={iconoApple.src} />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="Alegría Stereo" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_DO" />

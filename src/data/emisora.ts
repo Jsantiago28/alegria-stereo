@@ -10,7 +10,6 @@ export const emisora = {
   stream: "https://stream.zeno.fm/rv74vcczasxuv",
   // De aquí sale el título de la canción que está sonando ("Sonando ahora").
   sonandoAhora: "https://api.zeno.fm/mounts/metadata/subscribe/rv74vcczasxuv",
-  paginaZeno: "https://zeno.fm/radio/alegria-stereo-musical/",
 
   telefono: "(809) 420-1033",
   // Número para WhatsApp y llamadas: 1 + código de área + número, sin espacios.

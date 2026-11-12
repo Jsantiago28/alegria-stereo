@@ -1,0 +1,55 @@
+---
+import Icono from "./Icono.astro";
+import { emisora } from "../data/emisora";
+
+const puntos = [
+  {
+    icono: "musica",
+    titulo: "Música para todos los gustos",
+    texto: "Del bolero romántico al merengue, de la balada clásica al éxito del momento. Aquí siempre suena algo que te alegra.",
+  },
+  {
+    icono: "microfono",
+    titulo: "Una vitrina para el talento",
+    texto: "Le abrimos el micrófono a cantantes aficionados y profesionales, y muy especialmente a los de karaoke.",
+  },
+  {
+    icono: "mundo",
+    titulo: "Desde RD para el mundo",
+    texto: "Nos escuchan en República Dominicana, México, Perú y donde haya un dominicano con ganas de buena música.",
+  },
+];
+---
+
+<section id="nosotros" class="relative py-24">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="aparece mx-auto max-w-3xl text-center">
+      <p class="text-sm font-semibold tracking-[0.3em] text-oro">NOSOTROS</p>
+      <h2 class="mt-3 font-titulo text-4xl font-bold sm:text-5xl">
+        Hecha para <span class="oro">alegrarte</span> el día
+      </h2>
+      <p class="mt-6 text-lg text-suave">
+        {emisora.nombre} nace en Santo Domingo con una idea sencilla: poner buena música y abrirle el micrófono a la gente.
+        Aquí los clásicos de siempre conviven con los éxitos de hoy, y los que cantan con el corazón tienen su lugar.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-5 md:grid-cols-3">
+      {
+        puntos.map((p, i) => (
+          <article class="aparece vidrio group rounded-3xl p-7 transition hover:-translate-y-1 hover:border-oro/40" style={`transition-delay:${i * 100}ms`}>
+            <div class="grid size-14 place-items-center rounded-2xl bg-gradient-to-br from-azul to-celeste text-white shadow-lg shadow-azul/30">
+              <Icono nombre={p.icono} class="size-7" />
+            </div>
+            <h3 class="mt-5 font-titulo text-lg font-bold text-white">{p.titulo}</h3>
+            <p class="mt-2 text-suave">{p.texto}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <ul class="aparece mt-10 flex flex-wrap justify-center gap-3" aria-label="Géneros que suenan en la emisora">
+      {emisora.generos.map((g) => <li class="rounded-full border border-oro/30 bg-oro/10 px-5 py-2 font-semibold text-oro-claro">{g}</li>)}
+    </ul>
+  </div>
+</section>

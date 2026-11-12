@@ -1,0 +1,105 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
+import Icono from "./Icono.astro";
+import BotonPlay from "./BotonPlay.astro";
+import { emisora } from "../data/emisora";
+
+const barras = Array.from({ length: 28 });
+---
+
+<section id="inicio" class="luces relative overflow-hidden pt-24 pb-16 lg:pt-28 lg:pb-24">
+  <!-- Ecualizador gigante de fondo -->
+  <div class="ecualizador pointer-events-none absolute inset-x-0 bottom-0 flex h-40 items-end gap-1.5 px-2 opacity-25" aria-hidden="true">
+    {barras.map(() => <span />)}
+  </div>
+
+  <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-[1.1fr_1fr]">
+    <div class="text-center lg:text-left">
+      <p class="en-vivo inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold tracking-widest text-suave">
+        EN VIVO<span class="hidden sm:inline"> · RADIO ONLINE</span> · DESDE SANTO DOMINGO
+      </p>
+
+      <h1 class="mt-6 font-titulo text-5xl leading-[1.02] font-extrabold sm:text-6xl lg:text-7xl">
+        <span class="oro">Alegría</span>
+        <span class="block text-3xl tracking-[0.18em] text-white sm:text-4xl lg:text-5xl">STEREO</span>
+        <span class="oro">Musical</span>
+      </h1>
+
+      <p class="mt-6 text-xl font-semibold text-white">{emisora.lema}</p>
+      <p class="mx-auto mt-2 max-w-md text-suave lg:mx-0">
+        Romántica, tropical, baladas, clásicos y los éxitos de hoy. Dale play y que empiece la alegría.
+      </p>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+        <BotonPlay class="boton-oro text-lg !px-8 !py-4" icono="size-5">Escuchar ahora</BotonPlay>
+        <a href="#pide" class="boton-linea !py-4"><Icono nombre="musica" /> Pide tu canción</a>
+      </div>
+
+      <!-- Sonando ahora (el título llega en vivo desde Zeno) -->
+      <div class="vidrio mx-auto mt-8 flex max-w-md items-center gap-4 rounded-2xl p-4 text-left lg:mx-0">
+        <div class="ecualizador flex h-10 w-12 shrink-0 items-end gap-1" aria-hidden="true">
+          <span /><span /><span /><span /><span />
+        </div>
+        <div class="min-w-0" aria-live="polite">
+          <p class="text-xs font-semibold tracking-widest text-oro">SONANDO AHORA</p>
+          <p class="truncate font-semibold text-white" data-cancion>{emisora.nombre}</p>
+          <p class="truncate text-sm text-suave" data-artista>{emisora.lema}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- El logo como un disco que gira mientras suena -->
+    <div class="relative mx-auto w-full max-w-[26rem]">
+      <div class="absolute -inset-6 rounded-full bg-azul/30 blur-3xl" aria-hidden="true"></div>
+      <div class="borde-oro relative aspect-square overflow-hidden rounded-full">
+        <Image
+          src={logo}
+          alt={`Logo de ${emisora.nombre}`}
+          widths={[320, 520, 840]}
+          sizes="(min-width: 1024px) 416px, 85vw"
+          class="disco size-full scale-[1.02] object-cover"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <BotonPlay
+        class="pulso absolute -bottom-8 left-1/2 grid size-20 -translate-x-1/2 place-items-center rounded-full text-noche shadow-2xl transition hover:scale-105 boton-oro !p-0"
+        icono="size-8"
+      />
+    </div>
+  </div>
+
+  <!-- Al aire ahora / próximo programa (se calcula con la hora de RD) -->
+  <div class="relative mx-auto mt-16 max-w-6xl px-4">
+    <div id="al-aire" class="vidrio borde-oro grid gap-4 rounded-3xl p-5 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:p-6">
+      <div class="grid size-14 place-items-center rounded-2xl bg-oro/15 text-oro">
+        <Icono nombre="microfono" class="size-7" />
+      </div>
+      <div>
+        <p class="text-xs font-semibold tracking-widest text-oro" data-aire-etiqueta>PRÓXIMO PROGRAMA</p>
+        <p class="font-titulo text-xl font-bold text-white sm:text-2xl" data-aire-nombre>Nuestra programación</p>
+        <p class="text-sm text-suave" data-aire-detalle>Con Robinson Peña, «El Maestro del Amor»</p>
+      </div>
+      <div class="text-left sm:text-right">
+        <p class="text-xs font-semibold tracking-widest text-suave" data-aire-cuenta-etiqueta>EMPIEZA EN</p>
+        <p class="font-titulo text-2xl font-bold tabular-nums text-white" data-aire-cuenta>—</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Franja de géneros -->
+<div class="overflow-hidden border-y border-oro/20 bg-gradient-to-r from-oro-oscuro via-oro to-oro-oscuro py-3 text-noche" aria-hidden="true">
+  <div class="cinta flex w-max gap-8 font-titulo text-sm font-bold tracking-widest whitespace-nowrap">
+    {
+      [0, 1, 2, 3].map(() =>
+        emisora.generos.map((g) => (
+          <span class="flex items-center gap-8">
+            {g.toUpperCase()} <Icono nombre="estrella" class="size-3" />
+          </span>
+        )),
+      )
+    }
+  </div>
+</div>

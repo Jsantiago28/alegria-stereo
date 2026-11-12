@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+/* Colores sacados del logo: azul noche, oro y azul eléctrico. */
+@theme {
+  --color-noche: #050a24;
+  --color-noche-2: #0a1440;
+  --color-azul: #1f5bff;
+  --color-celeste: #4fc3ff;
+  --color-oro: #ffc21a;
+  --color-oro-claro: #ffe27a;
+  --color-oro-oscuro: #c98a00;
+  --color-fuego: #ff7a1a;
+  --color-tinta: #e8ecff;
+  --color-suave: #a9b3dc;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-titulo: "Unbounded Variable", "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  background: var(--color-noche);
+}
+
+body {
+  @apply bg-noche text-tinta font-sans antialiased;
+  overflow-x: hidden;
+}
+
+/* Texto dorado como el del logo. */
+.oro {
+  background: linear-gradient(180deg, var(--color-oro-claro) 10%, var(--color-oro) 50%, var(--color-oro-oscuro) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@layer components {
+/* Tarjeta de vidrio sobre el fondo oscuro. */
+.vidrio {
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.02));
+  border: 1px solid rgb(255 255 255 / 0.1);
+  backdrop-filter: blur(12px);
+}
+
+.borde-oro {
+  border: 1px solid rgb(255 194 26 / 0.35);
+  box-shadow: 0 0 0 1px rgb(255 194 26 / 0.08), 0 20px 60px -20px rgb(255 194 26 / 0.25);
+}
+
+.boton-oro {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold text-noche transition;
+  background: linear-gradient(180deg, var(--color-oro-claro), var(--color-oro) 55%, var(--color-oro-oscuro));
+  box-shadow: 0 10px 30px -10px rgb(255 194 26 / 0.7);
+}
+.boton-oro:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+.boton-linea {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3 font-semibold text-tinta transition hover:border-oro hover:text-oro;
+}
+
+.boton-wa {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-[#25d366] px-6 py-3 font-semibold text-[#06290f] transition hover:brightness-110;
+}
+}
+
+/* Fondo de luces de escenario. */
+.luces {
+  background:
+    radial-gradient(60% 50% at 15% 10%, rgb(31 91 255 / 0.45), transparent 70%),
+    radial-gradient(40% 40% at 85% 20%, rgb(255 194 26 / 0.18), transparent 70%),
+    radial-gradient(50% 40% at 70% 90%, rgb(255 122 26 / 0.15), transparent 70%),
+    var(--color-noche);
+}
+
+/* ---------- Reproductor: iconos según el estado (data-radio en <html>) ---------- */
+.icono-pausa, .icono-carga { display: none; }
+html[data-radio="sonando"] .icono-play { display: none; }
+html[data-radio="sonando"] .icono-pausa { display: block; }
+html[data-radio="cargando"] .icono-play { display: none; }
+html[data-radio="cargando"] .icono-carga { display: block; }
+
+.girar { animation: girar 1s linear infinite; }
+
+/* Ecualizador: se mueve solo cuando la radio está sonando. */
+.ecualizador span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(0deg, var(--color-azul), var(--color-celeste) 40%, var(--color-oro) 75%, var(--color-fuego));
+  transform-origin: bottom;
+  transform: scaleY(0.2);
+  transition: transform 0.4s;
+}
+html[data-radio="sonando"] .ecualizador span {
+  animation: barra 1.1s ease-in-out infinite alternate;
+}
+.ecualizador span:nth-child(2n) { animation-duration: 0.8s !important; }
+.ecualizador span:nth-child(3n) { animation-duration: 1.4s !important; animation-delay: -0.3s; }
+.ecualizador span:nth-child(5n) { animation-duration: 0.95s !important; animation-delay: -0.6s; }
+.ecualizador span:nth-child(7n) { animation-duration: 1.25s !important; animation-delay: -0.2s; }
+
+@keyframes barra {
+  0% { transform: scaleY(0.15); }
+  50% { transform: scaleY(0.9); }
+  100% { transform: scaleY(0.35); }
+}
+
+/* El logo gira como un disco mientras suena. */
+.disco { transition: transform 0.6s; }
+html[data-radio="sonando"] .disco { animation: girar 14s linear infinite; }
+
+/* Anillos que laten alrededor del botón de play. */
+.pulso::before, .pulso::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid var(--color-oro);
+  opacity: 0;
+}
+html[data-radio="sonando"] .pulso::before { animation: onda 2s ease-out infinite; }
+html[data-radio="sonando"] .pulso::after { animation: onda 2s ease-out 1s infinite; }
+
+@keyframes onda {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+@keyframes girar { to { transform: rotate(360deg); } }
+
+/* Punto rojo de EN VIVO. */
+.en-vivo::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #ff3b3b;
+  box-shadow: 0 0 0 0 rgb(255 59 59 / 0.7);
+  animation: latido 1.6s infinite;
+}
+@keyframes latido {
+  70% { box-shadow: 0 0 0 8px rgb(255 59 59 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(255 59 59 / 0); }
+}
+
+/* Franja de géneros que corre de lado a lado. */
+.cinta { animation: cinta 30s linear infinite; }
+@keyframes cinta { to { transform: translateX(-50%); } }
+
+/* Barra del reproductor de abajo: aparece al bajar o al darle play. */
+#mini {
+  transform: translateY(120%);
+  transition: transform 0.35s ease;
+}
+html[data-mini="si"] #mini { transform: none; }
+html[data-mini="si"] body { padding-bottom: 5.5rem; }
+
+/* Enlace de la sección que se está viendo. */
+.enlace-nav[aria-current] { color: var(--color-oro); }
+
+/* Aparecer al bajar (solo si hay JavaScript). */
+html.js .aparece { opacity: 0; transform: translateY(24px); transition: opacity 0.7s, transform 0.7s; }
+html.js .aparece.visto { opacity: 1; transform: none; }
+
+#menu-movil { display: none; }
+#menu-movil.abierto { display: flex; }
+
+input[type="range"] { accent-color: var(--color-oro); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  html.js .aparece { opacity: 1; transform: none; }
+}

@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
+import Icono from "./Icono.astro";
+import BotonPlay from "./BotonPlay.astro";
+import { emisora } from "../data/emisora";
+
+const enlaces = [
+  { texto: "Nosotros", href: "#nosotros" },
+  { texto: "Programación", href: "#programacion" },
+  { texto: "Talentos", href: "#talentos" },
+  { texto: "Pide tu canción", href: "#pide" },
+  { texto: "Contacto", href: "#contacto" },
+];
+---
+
+<header class="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-noche/70 backdrop-blur-xl">
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4" aria-label="Principal">
+    <a href="#inicio" class="flex items-center gap-2.5">
+      <Image src={logo} alt="" width={44} height={44} class="size-11 rounded-full" loading="eager" />
+      <span class="font-titulo text-sm leading-tight font-bold whitespace-nowrap max-[359px]:hidden">
+        <span class="oro">Alegría</span><br /><span class="text-[0.6rem] tracking-[0.2em] text-suave sm:text-[0.7rem]">STEREO MUSICAL</span>
+      </span>
+    </a>
+
+    <ul class="hidden items-center gap-6 text-sm font-semibold text-suave lg:flex">
+      {
+        enlaces.map((e) => (
+          <li>
+            <a href={e.href} class="enlace-nav transition hover:text-white">
+              {e.texto}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center gap-2">
+      <BotonPlay class="boton-oro !px-4 !py-2 text-sm whitespace-nowrap" icono="size-4">
+        <span class="hidden sm:inline">Escuchar en vivo</span>
+        <span class="sm:hidden">En vivo</span>
+      </BotonPlay>
+      <button
+        id="boton-menu"
+        type="button"
+        class="grid size-10 place-items-center rounded-full border border-white/15 lg:hidden"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="menu-movil"
+      >
+        <Icono nombre="menu" />
+      </button>
+    </div>
+  </nav>
+
+  <div id="menu-movil" class="flex-col gap-1 border-t border-white/5 px-4 pb-4 lg:hidden">
+    {
+      enlaces.map((e) => (
+        <a href={e.href} class="enlace-nav rounded-xl px-3 py-3 font-semibold text-suave hover:bg-white/5">
+          {e.texto}
+        </a>
+      ))
+    }
+    <a href={`https://wa.me/${emisora.whatsapp}`} class="boton-wa mt-2" target="_blank" rel="noopener">
+      <Icono nombre="whatsapp" /> Escríbenos
+    </a>
+  </div>
+</header>

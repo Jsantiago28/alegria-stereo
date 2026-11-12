@@ -1,0 +1,49 @@
+---
+import "@fontsource/poppins/400.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource-variable/unbounded";
+import "../styles/global.css";
+import { getImage } from "astro:assets";
+import logo from "../assets/logo.png";
+import { emisora } from "../data/emisora";
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+}
+
+const {
+  titulo = `${emisora.nombre} · Radio en vivo desde Santo Domingo`,
+  descripcion = `${emisora.lema}. Romántica, tropical, baladas, clásicos y éxitos actuales en vivo. Pide tu canción por WhatsApp.`,
+} = Astro.props;
+
+const icono = await getImage({ src: logo, width: 192, height: 192, format: "png" });
+const iconoApple = await getImage({ src: logo, width: 180, height: 180, format: "png" });
+const vistaPrevia = await getImage({ src: logo, width: 630, height: 630, format: "jpg" });
+const urlVistaPrevia = new URL(vistaPrevia.src, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="es" data-radio="parado">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <meta name="theme-color" content="#050a24" />
+    <link rel="icon" type="image/png" href={icono.src} />
+    <link rel="apple-touch-icon" href={iconoApple.src} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_DO" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:image" content={urlVistaPrevia} />
+    <meta name="twitter:card" content="summary" />
+    <script is:inline>document.documentElement.classList.add("js");</script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

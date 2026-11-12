@@ -1,0 +1,17 @@
+---
+// Botón de play/pausa. Todos los botones de la página controlan la misma radio.
+import Icono from "./Icono.astro";
+
+interface Props {
+  class?: string;
+  icono?: string;
+}
+const { class: clase = "", icono = "size-6" } = Astro.props;
+---
+
+<button type="button" data-play aria-label="Escuchar en vivo" aria-pressed="false" class={clase}>
+  <span class="icono-play"><Icono nombre="play" class={icono} /></span>
+  <span class="icono-pausa"><Icono nombre="pausa" class={icono} /></span>
+  <span class="icono-carga"><Icono nombre="carga" class={`${icono} girar`} /></span>
+  <slot />
+</button>

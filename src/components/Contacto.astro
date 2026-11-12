@@ -1,0 +1,82 @@
+---
+import Icono from "./Icono.astro";
+import BotonPlay from "./BotonPlay.astro";
+import { emisora, aliada } from "../data/emisora";
+---
+
+<section id="escuchar" class="py-24">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="aparece text-center">
+      <p class="text-sm font-semibold tracking-[0.3em] text-oro">ESCÚCHANOS</p>
+      <h2 class="mt-3 font-titulo text-4xl font-bold sm:text-5xl">Donde <span class="oro">estés</span></h2>
+      <p class="mt-4 text-lg text-suave">Solo necesitas internet. Sin descargas, sin registrarte.</p>
+    </div>
+
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      <article class="aparece vidrio flex flex-col rounded-3xl p-7">
+        <Icono nombre="radio" class="size-9 text-oro" />
+        <h3 class="mt-4 font-titulo text-lg font-bold">Aquí mismo</h3>
+        <p class="mt-2 flex-1 text-suave">Dale play y la radio sigue sonando mientras recorres la página.</p>
+        <BotonPlay class="boton-oro mt-6" icono="size-4">Escuchar ahora</BotonPlay>
+      </article>
+      <article class="aparece vidrio flex flex-col rounded-3xl p-7" style="transition-delay:100ms">
+        <Icono nombre="celular" class="size-9 text-oro" />
+        <h3 class="mt-4 font-titulo text-lg font-bold">En tu celular</h3>
+        <p class="mt-2 flex-1 text-suave">Búscanos en la aplicación Zeno Radio como «{emisora.nombre}».</p>
+        <a href={emisora.paginaZeno} target="_blank" rel="noopener" class="boton-linea mt-6">
+          <Icono nombre="enlace" class="size-4" /> Abrir en Zeno
+        </a>
+      </article>
+      <article class="aparece vidrio flex flex-col rounded-3xl p-7" style="transition-delay:200ms">
+        <Icono nombre="compartir" class="size-9 text-oro" />
+        <h3 class="mt-4 font-titulo text-lg font-bold">Compártela</h3>
+        <p class="mt-2 flex-1 text-suave">Mándale la emisora a tu familia y amigos. ¡Entre más, más alegría!</p>
+        <button type="button" data-compartir class="boton-linea mt-6">
+          <Icono nombre="compartir" class="size-4" /> Compartir emisora
+        </button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="relative overflow-hidden bg-noche-2/60 py-24">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+    <div class="aparece">
+      <p class="text-sm font-semibold tracking-[0.3em] text-oro">CONTACTO</p>
+      <h2 class="mt-3 font-titulo text-4xl font-bold sm:text-5xl">Hablemos</h2>
+      <p class="mt-4 text-lg text-suave">
+        Para anunciarte, participar en un programa o simplemente saludar: escríbenos o llámanos.
+      </p>
+      <a href={`https://wa.me/${emisora.whatsapp}`} target="_blank" rel="noopener" class="boton-wa mt-8 text-lg !px-8 !py-4">
+        <Icono nombre="whatsapp" class="size-6" /> Escríbenos por WhatsApp
+      </a>
+    </div>
+
+    <ul class="aparece grid gap-4 sm:grid-cols-2">
+      <li>
+        <a href={`tel:+${emisora.whatsapp}`} class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
+          <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-oro/15 text-oro"><Icono nombre="telefono" /></span>
+          <span><span class="block text-xs tracking-widest text-suave">TELÉFONO Y WHATSAPP</span><span class="font-semibold text-white">{emisora.telefono}</span></span>
+        </a>
+      </li>
+      <li>
+        <a href={`mailto:${emisora.correo}`} class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
+          <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-oro/15 text-oro"><Icono nombre="correo" /></span>
+          <span class="min-w-0"><span class="block text-xs tracking-widest text-suave">CORREO</span><span class="block truncate font-semibold text-white">{emisora.correo}</span></span>
+        </a>
+      </li>
+      <li>
+        <div class="vidrio flex h-full items-center gap-4 rounded-2xl p-5">
+          <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-oro/15 text-oro"><Icono nombre="mapa" /></span>
+          <span><span class="block text-xs tracking-widest text-suave">DESDE</span><span class="font-semibold text-white">{emisora.ciudad}</span></span>
+        </div>
+      </li>
+      <li>
+        <a href={aliada.web} target="_blank" rel="noopener" class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
+          <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-oro/15 text-oro"><Icono nombre="radio" /></span>
+          <span><span class="block text-xs tracking-widest text-suave">EMISORA ALIADA</span><span class="font-semibold text-white">{aliada.nombre}</span></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>

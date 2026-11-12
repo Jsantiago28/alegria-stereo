@@ -1,0 +1,112 @@
+---
+import { Image, getImage } from "astro:assets";
+import volanteTalentos from "../assets/volante-talentos.png";
+import Icono from "./Icono.astro";
+import { programas, otrosPaises, hora12, diasTexto } from "../data/emisora";
+
+const volantes = { talentos: volanteTalentos };
+// Versión grande (y liviana) del volante para verlo completo al tocarlo.
+const volantesGrandes = {
+  talentos: (await getImage({ src: volanteTalentos, width: 1024, format: "webp", quality: 82 })).src,
+};
+---
+
+<section id="programacion" class="relative overflow-hidden bg-noche-2/60 py-24">
+  <div class="pointer-events-none absolute -top-40 right-0 size-[30rem] rounded-full bg-azul/20 blur-3xl" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-6xl px-4">
+    <div class="aparece max-w-2xl">
+      <p class="text-sm font-semibold tracking-[0.3em] text-oro">PROGRAMACIÓN</p>
+      <h2 class="mt-3 font-titulo text-4xl font-bold sm:text-5xl">Nuestros <span class="oro">programas</span></h2>
+      <p class="mt-4 text-lg text-suave">Con Robinson Peña, «El Maestro del Amor». Las horas se ajustan solas a tu país.</p>
+    </div>
+
+    <div class="mt-12 grid gap-8 lg:grid-cols-2">
+      {
+        programas.map((p, i) => (
+          <article class="aparece vidrio flex flex-col overflow-hidden rounded-3xl" data-programa={i}>
+            {p.volante ? (
+              <a
+                href={volantesGrandes[p.volante]}
+                target="_blank"
+                rel="noopener"
+                class="group relative block aspect-[4/3] overflow-hidden"
+                aria-label={`Ver el volante de ${p.nombre} completo`}
+              >
+                <Image
+                  src={volantes[p.volante]}
+                  alt={`Volante de ${p.nombre}`}
+                  widths={[480, 720, 1024]}
+                  sizes="(min-width: 1024px) 560px, 95vw"
+                  class="size-full object-cover object-[50%_20%] transition duration-700 group-hover:scale-105"
+                />
+                <span class="absolute right-3 bottom-3 inline-flex items-center gap-1.5 rounded-full bg-noche/80 px-3 py-1.5 text-xs font-semibold backdrop-blur">
+                  <Icono nombre="ampliar" class="size-3.5" /> Ver volante
+                </span>
+              </a>
+            ) : (
+              <div class="relative grid aspect-[4/3] place-items-center overflow-hidden bg-gradient-to-br from-fuego via-oro-oscuro to-noche-2">
+                <div class="ecualizador absolute inset-x-0 bottom-0 flex h-1/2 items-end gap-1 px-2 opacity-40" aria-hidden="true">
+                  {Array.from({ length: 22 }).map(() => <span />)}
+                </div>
+                <div class="relative text-center">
+                  <p class="font-titulo text-sm tracking-[0.4em] text-noche/80">CADA VIERNES</p>
+                  <p class="mt-2 font-titulo text-5xl leading-none font-black text-white drop-shadow-lg sm:text-6xl">
+                    El Viernes
+                    <br />
+                    <span class="text-noche">Alegre</span>
+                  </p>
+                </div>
+              </div>
+            )}
+
+            <div class="flex flex-1 flex-col p-6 sm:p-7">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-oro/15 px-3 py-1 text-xs font-bold tracking-wide text-oro">
+                  <Icono nombre="calendario" class="size-3.5" /> {diasTexto(p.dias).toUpperCase()}
+                </span>
+                <span
+                  data-al-aire
+                  hidden
+                  class="en-vivo inline-flex items-center gap-1.5 rounded-full bg-red-500/15 px-3 py-1 text-xs font-bold tracking-wide text-red-300"
+                >
+                  AL AIRE AHORA
+                </span>
+              </div>
+
+              <h3 class="mt-4 font-titulo text-2xl font-bold text-white">{p.nombre}</h3>
+              <p class="text-sm text-suave">
+                con <strong class="text-white">{p.locutor}</strong>, «{p.apodo}»
+              </p>
+              <p class="mt-3 font-semibold text-oro-claro">{p.lema}</p>
+              <p class="mt-1 text-suave">{p.descripcion}</p>
+
+              <ul class="mt-4 flex flex-wrap gap-2">
+                {p.etiquetas.map((e) => <li class="rounded-full border border-white/10 px-3 py-1 text-xs text-suave">{e}</li>)}
+              </ul>
+
+              <div class="mt-6 grid grid-cols-3 gap-2 rounded-2xl border border-white/10 bg-noche/50 p-3 text-center">
+                <div>
+                  <p class="text-[0.65rem] font-bold tracking-widest text-oro">RD</p>
+                  <p class="font-titulo text-sm font-bold text-white">{hora12(p.hora, p.minuto)}</p>
+                  <p class="text-[0.7rem] text-suave">Rep. Dom.</p>
+                </div>
+                {otrosPaises.map((o) => (
+                  <div class="border-l border-white/10">
+                    <p class="text-[0.65rem] font-bold tracking-widest text-oro">{o.codigo}</p>
+                    <p class="font-titulo text-sm font-bold text-white">{hora12(p.hora + o.diferencia, p.minuto)}</p>
+                    <p class="text-[0.7rem] text-suave">{o.pais}</p>
+                  </div>
+                ))}
+              </div>
+              <p class="mt-3 flex items-center gap-1.5 text-sm text-celeste" data-tu-hora hidden>
+                <Icono nombre="reloj" class="size-4" /> <span />
+              </p>
+              {p.presenta && <p class="mt-3 text-xs text-suave">Presenta: {p.presenta}</p>}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

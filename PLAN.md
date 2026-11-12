@@ -31,7 +31,7 @@ Datos de la emisora en `src/data/emisora.ts`.
 
 ## Por confirmar con el cliente
 - [ ] Duración de cada programa (puse 2 horas)
-- [ ] ¿El correo alegriastereomusical@gmail.com sigue vigente?
+- [x] Correo confirmado: alegriastereomusical@gmail.com
 - [ ] Volante de El Viernes Alegre (hoy se muestra un diseño propio)
 - [x] Instagram: @alalegriastereomusical
 - [x] TikTok: @alegriastereomusical

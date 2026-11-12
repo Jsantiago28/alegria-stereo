@@ -1,39 +1,78 @@
 # Alegría Stereo Musical — Plan del sitio
 
 Sitio web de la emisora (cliente real). Astro + Tailwind.
-Datos de la emisora en `src/data/emisora.ts`.
+- Datos de la emisora: `src/data/emisora.ts`
+- Repositorio privado: https://github.com/Jsantiago28/alegria-stereo (rama `main`)
+- Ver en la PC: `npm run dev` → http://localhost:4321
 
-## Fase 1 — Sitio público ✅
+**Lo que se le prometió al cliente:** panel de administrador para publicar sin saber de código + base de datos.
+La competencia (demo de QCoreT) no ofrecía ninguna de las dos.
+
+---
+
+## ✅ Fase 1 — Sitio público (HECHO)
 - [x] Reproductor en vivo (señal de Zeno), barra fija abajo, controles en la pantalla de bloqueo del celular
 - [x] "Sonando ahora" en tiempo real (título de la canción desde Zeno)
 - [x] "Al aire ahora / Próximo programa" con cuenta regresiva (hora de RD)
 - [x] Programación con horas de RD, México, Perú y la hora del visitante
-- [x] Talentos sin Fronteras con su volante, botón para participar por WhatsApp
+- [x] Talentos sin Fronteras con su volante completo (todos los lunes, 8:00 p. m. RD)
+- [x] Cuadros de Talentos: cada categoría abre WhatsApp con su propio mensaje
 - [x] Pide tu canción / dedicatoria → WhatsApp
 - [x] Compartir la emisora, contacto, emisora aliada (Radio Music Digital 105.7)
+- [x] WhatsApp/teléfono (809) 420-1033, correo, Instagram y TikTok
+- [x] Repositorio privado en GitHub
 
-## ⚠️ Urgente
-- [ ] Publicar el sitio con una dirección real: la plataforma de monetización le pide la URL al dueño para activar anunciantes
+---
 
-## Fase 2 — Panel para el dueño (subir y borrar información)
-- [ ] Sección pública "Voces que brillan aquí" (cantantes + Talento de la semana)
-- [ ] Fotos: el panel las achica solo antes de subirlas (el dueño sube la foto tal cual del celular)
-- [ ] Espacio para anunciantes (logos/banners que el dueño sube y borra)
-- [ ] Elegir sistema (propuesta: Supabase — base de datos + fotos + inicio de sesión, plan gratis)
-- [ ] Página /admin con usuario y contraseña del dueño
-- [ ] Programas: crear, editar, borrar (nombre, días, hora, volante)
-- [ ] Anuncios / noticias / eventos con foto: subir y borrar
-- [ ] Galería de fotos y talentos destacados
+## 🔴 PASO 1 — Publicar (URGENTE, empezar por aquí mañana)
+La plataforma de monetización le pide la URL al dueño para activar anunciantes.
+- [ ] Crear/entrar a la cuenta de Cloudflare (lo hace el usuario)
+- [ ] Workers & Pages → Create → Pages → Connect to Git → repo `alegria-stereo`
+      (preset: Astro · build: `npm run build` · salida: `dist`)
+- [ ] Revisar la versión publicada: radio, "Sonando ahora", WhatsApp, volante, celular
+- [ ] Revisar la vista previa al compartir el enlace por WhatsApp/redes
+- [ ] Actualizar `site` en `astro.config.mjs` con la dirección final
+- [ ] Mandarle la URL al dueño
+- [ ] Dominio propio (ej. alegriastereo.com, ~US$10–15/año) — cuando el cliente decida
 
-## Fase 3 — Publicar
-- [ ] Cloudflare Pages (gratis) y dominio propio
-- [ ] Vista previa al compartir por WhatsApp/redes
+## 🟠 PASO 2 — Base de datos (Supabase)
+- [ ] Crear proyecto `alegria-stereo` en Supabase (ideal: en una cuenta del dueño; la cuenta del usuario
+      ya tiene Barbería PRO y el plan gratis permite 2 proyectos)
+- [ ] Pasar el **Project URL** y la **anon / publishable key** (NUNCA la service_role / secret)
+- [ ] Correo del dueño para entrar al panel
+- [ ] Yo preparo el SQL (tablas, fotos, permisos) → el usuario lo pega en Supabase y le da "Run"
 
-## Por confirmar con el cliente
+## 🟠 PASO 3 — Panel /admin para el dueño
+- [ ] Entrar con correo y contraseña (solo el dueño)
+- [ ] **Cantantes:** agregar, editar, borrar, marcar "Talento de la semana" (foto, nombre, país, género, redes)
+- [ ] **Programas:** agregar, editar, borrar (nombre, días, hora, duración, descripción, volante)
+- [ ] **Anuncios / eventos / noticias** con foto: subir y borrar
+- [ ] **Anunciantes:** logos/banners que el dueño sube y quita
+- [ ] **Datos de la emisora:** teléfono, correo, redes
+- [ ] **Pedidos de canciones e inscripciones de talentos** guardados en una lista (además de WhatsApp)
+- [ ] Las fotos se achican solas antes de subirlas (el dueño sube la foto tal cual del celular)
+- [ ] Si Supabase falla, la página sigue mostrando la información de respaldo
+
+## 🟡 PASO 4 — Secciones nuevas en la página pública
+- [ ] "Voces que brillan aquí": Talento de la semana + galería de cantantes (se ve en grande al tocar,
+      en el celular se desliza de lado) + botón "¿Quieres estar aquí? Participa"
+      → va debajo de Talentos y antes de Pide tu canción
+- [ ] Anuncios / eventos
+- [ ] Espacio para anunciantes
+- [ ] Facebook (cuando el dueño lo mande)
+
+---
+
+## 📋 Pendiente que mande el dueño
 - [ ] Duración de cada programa (puse 2 horas)
-- [x] Correo confirmado: alegriastereomusical@gmail.com
-- [ ] Volante de El Viernes Alegre (hoy se muestra un diseño propio)
+- [ ] Volante de El Viernes Alegre (hoy se muestra un diseño propio en naranja)
+- [ ] Facebook de la emisora (si tiene)
+- [ ] Fotos de los cantantes **con su permiso** + nombre artístico, país, género y redes de cada uno
+- [ ] Fotos de la cabina y de Robinson Peña
+- [ ] Su correo para el panel
+
+## ✔️ Confirmado por el cliente
+- [x] Correo: alegriastereomusical@gmail.com
 - [x] Instagram: @alalegriastereomusical
 - [x] TikTok: @alegriastereomusical
-- [ ] Facebook propio de Alegría Stereo
-- [ ] Fotos reales: cabina, Robinson Peña, cantantes
+- [x] WhatsApp y teléfono: (809) 420-1033

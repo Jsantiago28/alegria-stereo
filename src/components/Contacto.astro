@@ -77,7 +77,13 @@ import { emisora, aliada } from "../data/emisora";
           <span class="min-w-0"><span class="block text-xs tracking-widest text-suave">INSTAGRAM</span><span class="block truncate font-semibold text-white">{emisora.instagramUsuario}</span></span>
         </a>
       </li>
-      <li class="sm:col-span-2">
+      <li>
+        <a href={emisora.tiktok} target="_blank" rel="noopener" class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
+          <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-black text-white ring-1 ring-white/15"><Icono nombre="tiktok" /></span>
+          <span class="min-w-0"><span class="block text-xs tracking-widest text-suave">TIKTOK</span><span class="block truncate font-semibold text-white">{emisora.tiktokUsuario}</span></span>
+        </a>
+      </li>
+      <li>
         <a href={aliada.web} target="_blank" rel="noopener" class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
           <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-oro/15 text-oro"><Icono nombre="radio" /></span>
           <span><span class="block text-xs tracking-widest text-suave">EMISORA ALIADA</span><span class="font-semibold text-white">{aliada.nombre}</span></span>

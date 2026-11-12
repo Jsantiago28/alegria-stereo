@@ -34,5 +34,6 @@ Datos de la emisora en `src/data/emisora.ts`.
 - [ ] ¿El correo alegriastereomusical@gmail.com sigue vigente?
 - [ ] Volante de El Viernes Alegre (hoy se muestra un diseño propio)
 - [x] Instagram: @alalegriastereomusical
+- [x] TikTok: @alegriastereomusical
 - [ ] Facebook propio de Alegría Stereo
 - [ ] Fotos reales: cabina, Robinson Peña, cantantes

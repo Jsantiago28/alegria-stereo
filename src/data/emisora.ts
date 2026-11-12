@@ -18,6 +18,8 @@ export const emisora = {
   correo: "alegriastereomusical@gmail.com",
   instagram: "https://www.instagram.com/alalegriastereomusical/",
   instagramUsuario: "@alalegriastereomusical",
+  tiktok: "https://www.tiktok.com/@alegriastereomusical",
+  tiktokUsuario: "@alegriastereomusical",
 
   generos: ["Romántica", "Tropical", "Baladas", "Clásicos", "Éxitos actuales"],
 };

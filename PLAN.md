@@ -33,7 +33,8 @@ La plataforma de monetización le pide la URL al dueño para activar anunciantes
 - [ ] Revisar la vista previa al compartir el enlace por WhatsApp/redes
 - [ ] Actualizar `site` en `astro.config.mjs` con la dirección final
 - [ ] Mandarle la URL al dueño
-- [ ] Dominio propio (ej. alegriastereo.com, ~US$10–15/año) — cuando el cliente decida
+- [ ] Dominio propio (Cloudflare, ~US$10–11/año, a nombre del dueño). Revisado el 12/11/2026 en el registro oficial:
+      **alegriastereomusical.com** (recomendado) y **alegriastereo.com** estaban libres → el dueño elige uno (o los dos)
 
 ## 🟠 PASO 2 — Base de datos (Supabase)
 - [ ] Crear proyecto `alegria-stereo` en Supabase (ideal: en una cuenta del dueño; la cuenta del usuario

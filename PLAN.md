@@ -27,7 +27,7 @@ La competencia (demo de QCoreT) no ofrecía ninguna de las dos.
 ## 🔴 PASO 1 — Publicar (URGENTE, empezar por aquí mañana)
 La plataforma de monetización le pide la URL al dueño para activar anunciantes.
 - [ ] Crear/entrar a la cuenta de Cloudflare (lo hace el usuario)
-- [ ] Workers & Pages → Create → Pages → Connect to Git → repo `alegria-stereo`
+- [ ] Workers & Pages → Create → Pages → Connect to Git → repo `alegria-stereo`, **nombre del proyecto: `alegriastereomusical`** (→ alegriastereomusical.pages.dev)
       (preset: Astro · build: `npm run build` · salida: `dist`)
 - [ ] Revisar la versión publicada: radio, "Sonando ahora", WhatsApp, volante, celular
 - [ ] Revisar la vista previa al compartir el enlace por WhatsApp/redes

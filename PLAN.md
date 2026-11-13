@@ -49,7 +49,7 @@ La plataforma de monetización le pide la URL al dueño para activar anunciantes
 - [x] `supabase/03-endurecer-permisos.sql` aplicado a mano (0 avisos de rendimiento).
       Ojo: Claude no puede aplicar SQL con `drop`; Supabase pide confirmarlo a mano.
 - [x] Usuario del dueño creado y hecho administrador (12/11/2026); probado: puede editar
-- [ ] Apagar registros públicos: Authentication → Sign In / Providers → desactivar "Allow new users to sign up"
+- [x] Registros públicos apagados (13/11/2026). Probado: Supabase responde "signup_disabled"
 - [ ] (Opcional) "Leaked password protection" en Authentication (puede requerir plan de pago)
 
 ## ✅ PASO 3 — Panel /admin para el dueño (publicado 12/11/2026: alegriastereomusical.com/admin)
@@ -95,7 +95,7 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 1. **Seguridad**
    - [x] Reglas de la base probadas (el público no ve pedidos ni comentarios pendientes; nadie edita sin ser admin)
    - [x] En el código solo está la clave pública de Supabase (nunca la secreta)
-   - [ ] **Tú:** apagar registros públicos en Supabase (Authentication → Sign In / Providers → "Allow new users to sign up")
+   - [x] Registros públicos apagados en Supabase (13/11/2026, probado)
    - [ ] **Dueño:** cambiar su contraseña del panel por una que solo él sepa (si la creó Jonathan)
 2. **Cuentas y propiedad** (dejarlo por escrito; es lo que más problemas da después)
    - [x] Dominio a nombre del dueño (Cloudflare, US$11.17/año, renovación automática)

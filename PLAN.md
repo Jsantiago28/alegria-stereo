@@ -85,8 +85,8 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 ---
 
 ## 📋 Pendiente que mande el dueño
-- [ ] Duración de cada programa (puse 2 horas)
-- [ ] Volante de El Viernes Alegre (hoy se muestra un diseño propio en naranja)
+- [x] Duración de cada programa → el dueño la corrige él mismo en el panel (Programas → Editar)
+- [x] Volante de El Viernes Alegre → el dueño lo sube él mismo en el panel (Programas → Editar)
 - [ ] Facebook de la emisora (si tiene)
 - [ ] Fotos de los cantantes **con su permiso** + nombre artístico, país, género y redes de cada uno
 - [ ] Fotos de la cabina y de Robinson Peña

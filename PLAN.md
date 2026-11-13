@@ -72,23 +72,23 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 - [ ] Borrar el pedido de prueba "PRUEBA CLAUDE" desde el panel
 - [x] Si Supabase falla, la página sigue mostrando la información de respaldo (programas)
 
-## 🟡 PASO 4 — Secciones nuevas en la página pública
-- [ ] "Voces que brillan aquí": Talento de la semana + galería de cantantes (se ve en grande al tocar,
+## ✅ PASO 4 — La página muestra lo del panel (publicado 12/11/2026)
+- [x] "Voces que brillan aquí": Talento de la semana + galería de cantantes (se ve en grande al tocar,
       en el celular se desliza de lado) + botón "¿Quieres estar aquí? Participa"
       → va debajo de Talentos y antes de Pide tu canción
 - [x] Anuncios / eventos (se ven hasta el día del evento)
-- [ ] Espacio para anunciantes
-- [ ] Datos de contacto (teléfono, WhatsApp, correo, redes) que el dueño cambia en el panel
+- [x] Espacio para anunciantes (+ botón "¿Quieres anunciar tu negocio aquí?")
+- [x] Datos de contacto (teléfono, WhatsApp, correo, redes) que el dueño cambia en el panel
 - [x] Programas desde el panel (12/11/2026)
-- [ ] Facebook (cuando el dueño lo mande)
+- [x] Facebook y YouTube: aparecen solos cuando el dueño los pone en "Datos de la emisora"
 
 ---
 
 ## 📋 Pendiente que mande el dueño
 - [x] Duración de cada programa → el dueño la corrige él mismo en el panel (Programas → Editar)
 - [x] Volante de El Viernes Alegre → el dueño lo sube él mismo en el panel (Programas → Editar)
-- [ ] Facebook de la emisora (si tiene)
-- [ ] Fotos de los cantantes **con su permiso** + nombre artístico, país, género y redes de cada uno
+- [x] Facebook / YouTube → el dueño los pone él mismo en el panel (Datos de la emisora)
+- [ ] Fotos de los cantantes **con su permiso** → el dueño los agrega él mismo en el panel (Cantantes)
 - [ ] Fotos de la cabina y de Robinson Peña
 - [x] Su correo para el panel
 

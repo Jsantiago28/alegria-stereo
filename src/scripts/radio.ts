@@ -1,5 +1,6 @@
 import { emisora, programas, DIFERENCIA_RD, nombresDias, enlaceWhatsApp } from "../data/emisora";
 import { guardarPedido } from "../lib/config";
+import { traerProgramas, ponerTarjetas, type ProgramaVivo } from "./programas-vivo";
 
 const raiz = document.documentElement;
 const audio = document.getElementById("audio") as HTMLAudioElement;
@@ -133,11 +134,13 @@ const HORA = 3600_000;
 const visitanteEnRD = new Date().getTimezoneOffset() === -DIFERENCIA_RD * 60;
 
 type Turno = { indice: number; inicio: number; fin: number };
+let listaProgramas: ProgramaVivo[] = programas;
+const conApodo = (p: ProgramaVivo) => (p.apodo ? `${p.locutor}, «${p.apodo}»` : p.locutor);
 
 function turnos(ahora: number): Turno[] {
   const rd = new Date(ahora + DIFERENCIA_RD * HORA); // sus campos UTC = reloj de RD
   const lista: Turno[] = [];
-  programas.forEach((p, indice) => {
+  listaProgramas.forEach((p, indice) => {
     for (let d = -1; d <= 7; d++) {
       const relojRD = Date.UTC(rd.getUTCFullYear(), rd.getUTCMonth(), rd.getUTCDate() + d, p.hora, p.minuto);
       if (!p.dias.includes(new Date(relojRD).getUTCDay())) continue;
@@ -171,18 +174,18 @@ function actualizarAlAire() {
   const proximo = lista.find((t) => t.inicio > ahora);
 
   if (actual) {
-    const p = programas[actual.indice];
+    const p = listaProgramas[actual.indice];
     q("[data-aire-etiqueta]").textContent = "🔴 AL AIRE AHORA";
     q("[data-aire-nombre]").textContent = p.nombre;
-    q("[data-aire-detalle]").textContent = `Con ${p.locutor}, «${p.apodo}». ¡Dale play!`;
+    q("[data-aire-detalle]").textContent = `Con ${conApodo(p)}. ¡Dale play!`;
     q("[data-aire-cuenta-etiqueta]").textContent = "TERMINA EN";
     q("[data-aire-cuenta]").textContent = cuentaRegresiva(actual.fin - ahora);
   } else if (proximo) {
-    const p = programas[proximo.indice];
+    const p = listaProgramas[proximo.indice];
     const rd = new Date(proximo.inicio + DIFERENCIA_RD * HORA);
     q("[data-aire-etiqueta]").textContent = "PRÓXIMO PROGRAMA";
     q("[data-aire-nombre]").textContent = p.nombre;
-    q("[data-aire-detalle]").textContent = `${nombresDias[rd.getUTCDay()]} con ${p.locutor}, «${p.apodo}»`;
+    q("[data-aire-detalle]").textContent = `${nombresDias[rd.getUTCDay()]} con ${conApodo(p)}`;
     q("[data-aire-cuenta-etiqueta]").textContent = "EMPIEZA EN";
     q("[data-aire-cuenta]").textContent = cuentaRegresiva(proximo.inicio - ahora);
   }
@@ -195,7 +198,8 @@ function actualizarAlAire() {
 }
 
 // En cada tarjeta: la hora del programa en la zona del visitante (si no está en RD).
-if (!visitanteEnRD) {
+function ponerTuHora() {
+  if (visitanteEnRD) return;
   const lista = turnos(Date.now());
   document.querySelectorAll<HTMLElement>("[data-programa]").forEach((tarjeta) => {
     const turno = lista.find((t) => t.indice === Number(tarjeta.dataset.programa) && t.fin > Date.now());
@@ -205,6 +209,17 @@ if (!visitanteEnRD) {
     destino.hidden = false;
   });
 }
+ponerTuHora();
+
+// Los programas que el dueño maneja desde el panel (Supabase) reemplazan a los escritos en la página.
+traerProgramas().then((desdeLaBase) => {
+  if (!desdeLaBase) return; // sin conexión: se queda lo que ya se ve
+  const nombresDeAntes = listaProgramas.map((p) => p.nombre);
+  listaProgramas = desdeLaBase;
+  ponerTarjetas(listaProgramas, nombresDeAntes);
+  ponerTuHora();
+  actualizarAlAire();
+});
 
 actualizarAlAire();
 setInterval(actualizarAlAire, 1000);

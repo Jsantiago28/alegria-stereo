@@ -104,7 +104,9 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
    - [x] Lista de cuentas en `docs/entrega.html` (sección 4)
    - [x] Dueño para firma legal: **Robinzon Peña**. ⚠️ El dominio se registró a nombre de «Robinzon Urbaez»:
          confirmar que el nombre del registro del dominio sea el correcto.
-   - [ ] Precio del proyecto, garantía y mantenimiento (Jonathan decide; Claude dio una recomendación)
+   - [x] Precio: **oferta especial RD$18,500** (proyecto completo). **3 meses de mantenimiento gratis**; después
+         **RD$1,500 por servicio**, solo cuando el dueño lo necesite. En el documento al cliente solo se mencionan
+         el dominio (a nombre de Robinzon Peña) y la base de datos (correo de la emisora).
 3. **Prueba completa en teléfonos reales**
    - [ ] **Tú:** Android y iPhone: radio suena, botones de WhatsApp, formularios (pedido y comentario)
    - [ ] **Tú + Dueño:** panel desde el celular del dueño: subir foto de la galería, aprobar comentario, cambiar programa
@@ -130,7 +132,8 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 10. **Manual del dueño** (Yo)
     - [x] `docs/manual-del-dueno.html` con 13 capturas (datos de ejemplo) en `docs/capturas/`
 11. **Documento de entrega** (Yo)
-    - [x] `docs/entrega.html` (faltan los [POR DEFINIR]: cuentas, soporte, fecha, nombre legal del dueño, WhatsApp de Jonathan)
+    - [x] Se entregan en **PDF**: `docs/pdf/` (Documento de entrega, 7 págs.; Manual del panel, 24 págs.).
+          Los .html de `docs/` son la fuente; para regenerar los PDF, pedírselo a Claude.
 
 ## 💡 Ideas para más adelante (solo si el dueño lo pide)
 - [ ] **"Escúchalo otra vez" (pódcast / programas grabados):** sección en la página con episodios o videos, manejada

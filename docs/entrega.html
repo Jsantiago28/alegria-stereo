@@ -122,7 +122,14 @@
     .pd, .pc { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     a { color: inherit; text-decoration: none; }
     .firmas-bloque { break-inside: avoid; }
+    .parte h2 { break-after: avoid; }
+    .oferta, .tabla, .nota, .ojo { break-inside: avoid; }
   }
+  .oferta { margin: 14px 0 18px; padding: 18px 20px; border-radius: 14px; background: #0a1440; color: #fff; text-align: center; }
+  .oferta span { display: block; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #ffd75a; }
+  .oferta b { display: block; font-size: 40px; line-height: 1.15; color: #ffc21a; margin: 4px 0; }
+  .oferta small { display: block; color: #c9d0ee; font-size: 14px; }
+  @media print { .oferta { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 </style>
 </head>
 <body>
@@ -135,7 +142,7 @@
   <div class="meta">
     <div><span>Cliente</span>Alegría Stereo Musical · Robinzon Peña</div>
     <div><span>Desarrollador</span>Jonathan Santiago</div>
-    <div><span>Fecha de entrega</span>[POR DEFINIR]</div>
+    <div><span>Fecha de entrega</span>____ / ____ / ________</div>
   </div>
 </header>
 
@@ -172,7 +179,7 @@
     <li><b>Voces que brillan aquí</b>: Talento de la semana y galería de cantantes con su ficha y redes; botón «¿Quieres estar aquí? Participa».</li>
     <li><b>Pide tu canción / dedicatoria</b>: se envía por WhatsApp y además queda guardado en el panel.</li>
     <li><b>Gracias a quienes nos apoyan</b>: logos de anunciantes y botón «¿Quieres anunciar tu negocio aquí?».</li>
-    <li><b>Donde estés</b>: «Agregar a mi celular» (la página se instala como una aplicación) y «Compartir emisora».</li>
+    <li><b>Instalar la app</b>: la emisora se instala como una aplicación en Android, iPhone, Windows y Mac (botón arriba, en el menú del celular y en Contacto), y «Compartir emisora».</li>
     <li><b>Hablemos</b> (contacto): WhatsApp, teléfono, correo, Instagram, TikTok, y Facebook/YouTube cuando se agreguen; emisora aliada Radio Music Digital 105.7.</li>
     <li><b>Lo que dicen nuestros oyentes</b>: los oyentes dejan comentario con nombre, país y estrellas; solo se publican los que el dueño aprueba.</li>
     <li>Pie de página con el crédito «Diseño y desarrollo web: Jonathan Santiago».</li>
@@ -192,28 +199,24 @@
     <li>Interruptor <b>«Mostrar en la página»</b> en cantantes, programas, anuncios y anunciantes, para esconder sin borrar.</li>
     <li>Aviso con número (campanita) de pedidos nuevos y comentarios por revisar.</li>
     <li>Las fotos se achican solas en el celular antes de subirlas.</li>
+    <li><b>Escuchar la radio</b> desde el panel, y <b>«Instalar el panel»</b> como aplicación aparte («Panel Alegría»).</li>
     <li>Colores de pantalla <b>Noche / Día / Sol</b> (este último para leer al sol).</li>
     <li>Confirmación antes de borrar cualquier cosa.</li>
   </ul>
-  <div class="nota"><b>Incluido aparte</b>Manual del dueño, en lenguaje sencillo, con los pasos para usar cada parte del panel (archivo <i>manual-del-dueno.html</i>).</div>
+  <div class="nota"><b>Incluido aparte</b>Manual del dueño, en lenguaje sencillo, con los pasos para usar cada parte del panel (se entrega en PDF junto a este documento).</div>
 </section>
 
 <!-- 4 -->
-<section class="parte salto">
-  <h2><span class="num">4.</span>Cuentas y servicios</h2>
+<section class="parte">
+  <h2><span class="num">4.</span>Cuentas a nombre del dueño</h2>
   <div class="tabla">
   <table>
-    <tr><th>Servicio</th><th>Para qué sirve</th><th>A nombre de</th><th>Costo</th></tr>
-    <tr><td>Dominio alegriastereomusical.com (Cloudflare)</td><td>La dirección de la página.</td><td>Registrado a nombre del dueño, dentro de la cuenta de Cloudflare de Jonathan</td><td>US$11.17 al año, renovación automática activa</td></tr>
-    <tr><td>Cloudflare Pages</td><td>Hospeda la página (la pone en internet).</td><td>Jonathan Santiago (la administra)</td><td>Gratis</td></tr>
-    <tr><td>GitHub (repositorio privado Jsantiago28/alegria-stereo)</td><td>Guarda el código de la página. Cada cambio que se sube aquí se publica solo en la página.</td><td>Jonathan Santiago (la administra)</td><td>Gratis</td></tr>
-    <tr><td>Supabase (proyecto «alegria-stereo»)</td><td>Base de datos y fotos: lo que el dueño pone en el panel, los pedidos y los comentarios. También maneja la entrada al panel.</td><td>La emisora</td><td>Gratis (plan gratuito)</td></tr>
-    <tr><td>Zeno.fm</td><td>La señal de la radio en vivo y el «Sonando ahora».</td><td>El dueño</td><td>Según el plan del dueño en Zeno</td></tr>
-    <tr><td>Gmail alegriastereomusical@gmail.com</td><td>Correo de la emisora y usuario del panel. Aquí llegan los correos de recuperación de contraseña.</td><td>El dueño</td><td>Gratis</td></tr>
+    <tr><th style="width:24%">Servicio</th><th style="width:30%">Para qué sirve</th><th style="width:28%">A nombre de</th><th style="width:18%">Costo</th></tr>
+    <tr><td>Dominio <b>alegriastereomusical.com</b></td><td>La dirección de la página en internet.</td><td>Robinzon Peña</td><td>US$11.17 al año, con renovación automática</td></tr>
+    <tr><td>Base de datos (Supabase)</td><td>Guarda lo del panel, los pedidos, los comentarios y las fotos, y maneja la entrada al panel.</td><td>La emisora, con el correo <b>alegriastereomusical@gmail.com</b></td><td>Gratis (plan gratuito)</td></tr>
   </table>
   </div>
-  <p><b>Costo fijo total para mantener la página:</b> US$11.17 al año (solo el dominio), mientras los demás servicios sigan en sus planes gratuitos.</p>
-  <div class="ojo"><b>Cómo quedan las cuentas</b>Jonathan administra el hospedaje (Cloudflare) y el código (GitHub) para darle mantenimiento a la página. La base de datos (Supabase) y el correo están a nombre de la emisora, y el dominio está registrado a nombre del dueño. Si en algún momento el dueño decide cambiar de desarrollador, Jonathan le pasa el dominio y una copia completa del código sin costo adicional.</div>
+  <p><b>Costo fijo para mantener la página en línea:</b> US$11.17 al año (el dominio).</p>
 </section>
 
 <!-- 5 -->
@@ -241,7 +244,7 @@
 </section>
 
 <!-- 6 -->
-<section class="parte salto">
+<section class="parte">
   <h2><span class="num">6.</span>Cosas importantes que hay que saber</h2>
 
   <h3>La base de datos gratuita se puede «dormir»</h3>
@@ -257,8 +260,7 @@
 
   <h3>Copias de seguridad</h3>
   <ul>
-    <li><b>El código</b> está guardado en GitHub, con todo su historial.</li>
-    <li><b>La base de datos</b>: el plan gratuito de Supabase no guarda copias automáticas que se puedan descargar. La primera copia se sacó el 13/11/2026, al momento de la entrega. Se recomienda una copia al mes. Responsable: <span class="pd">[POR DEFINIR]</span>.</li>
+    <li><b>La base de datos</b>: el plan gratuito de Supabase no guarda copias automáticas que se puedan descargar. La primera copia se sacó el 13/11/2026, al momento de la entrega. Se recomienda una copia al mes; durante los 3 meses de mantenimiento gratis la saca Jonathan.</li>
     <li><b>Las fotos</b> subidas desde el panel están en Supabase (Storage). La copia de la base guarda la lista de fotos; las fotos en sí se descargan aparte desde Supabase. Al momento de la entrega no había fotos subidas.</li>
   </ul>
 
@@ -266,7 +268,7 @@
   <p>La página solo reproduce la señal de Zeno. Todo lo de Zeno lo maneja el dueño por su cuenta: su perfil y logo allí, sus estadísticas, si cuenta a los oyentes que escuchan desde esta página, los anuncios de audio y las <b>licencias de música</b>. Según Zeno, sus licencias cubren la escucha en zeno.fm; el dueño debe confirmar con Zeno o con quien corresponda si cubren también la escucha desde su propia página. Esto quedó avisado y está fuera del trabajo de desarrollo.</p>
 
   <h3>Cómo se hacen cambios al diseño o a las secciones</h3>
-  <p>El contenido diario se cambia desde el panel. Los cambios de diseño, de textos fijos o funciones nuevas se hacen en el código; al subirlos a GitHub, Cloudflare publica la página nueva sola en uno o dos minutos.</p>
+  <p>El contenido del día a día lo cambia el dueño desde el panel. Los cambios de diseño, de textos fijos o las secciones nuevas los hace Jonathan, como servicio de mantenimiento o cotizados aparte.</p>
 </section>
 
 <!-- 7 -->
@@ -280,68 +282,44 @@
     <li>Enviar a Jonathan fotos de la cabina y de Robinson Peña para la página.</li>
     <li>Poner Facebook y YouTube en «Datos de la emisora» cuando los tenga.</li>
     <li>Resolver con Zeno lo de su perfil, logo, conteo de oyentes, anuncios de audio y licencias de música.</li>
-    <li>Mantener activa la renovación automática del dominio y la tarjeta al día.</li>
   </ul>
 </section>
 
 <!-- 8 -->
 <section class="parte">
-  <h2><span class="num">8.</span>Soporte después de la entrega</h2>
+  <h2><span class="num">8.</span>Inversión, mantenimiento y soporte</h2>
+  <div class="oferta">
+    <span>Oferta especial · Proyecto completo</span>
+    <b>RD$18,500</b>
+    <small>Página web + panel del dueño + base de datos + manual, tal como se describe en este documento.</small>
+  </div>
   <div class="tabla">
   <table>
     <tr><th>Punto</th><th>Acuerdo</th></tr>
-    <tr><td>Duración de la garantía</td><td><span class="pd">[POR DEFINIR]</span></td></tr>
-    <tr><td>Qué incluye</td><td><span class="pd">[POR DEFINIR]</span></td></tr>
-    <tr><td>Qué no incluye</td><td><span class="pd">[POR DEFINIR]</span></td></tr>
-    <tr><td>Precio después de la garantía</td><td><span class="pd">[POR DEFINIR]</span></td></tr>
-    <tr><td>Cómo pedir ayuda y tiempo de respuesta</td><td><span class="pd">[POR DEFINIR]</span></td></tr>
+    <tr><td>Mantenimiento gratis</td><td><b>3 meses</b> desde la fecha de entrega.</td></tr>
+    <tr><td>Qué incluye el mantenimiento</td><td>Corregir cualquier falla de lo entregado, revisar que la página y el panel funcionen, reactivar la base de datos si se pausa, sacar la copia de seguridad del mes y hacer cambios pequeños de textos o fotos que el panel no cubra.</td></tr>
+    <tr><td>Después de los 3 meses</td><td><b>RD$1,500 por servicio de mantenimiento</b>, solo cuando el dueño lo necesite. No hay pago mensual fijo.</td></tr>
+    <tr><td>Qué no incluye</td><td>Secciones o funciones nuevas (se cotizan aparte), el contenido que sube el dueño, lo de Zeno.fm y el pago anual del dominio.</td></tr>
+    <tr><td>Cómo pedir ayuda</td><td>Escribiéndole a Jonathan Santiago (jonathansantiago.pages.dev).</td></tr>
   </table>
-  </div>
-  <div class="nota"><b>Sugerencia de lo que suele incluirse</b>
-    <ul>
-      <li><b>Garantía</b> (por ejemplo, 30 a 90 días): corregir sin costo cualquier falla de lo que se entregó.</li>
-      <li><b>Mantenimiento opcional</b> (mensual o anual): revisar que todo funcione, reactivar la base si se pausa, sacar copias de seguridad, actualizar el sistema y hacer cambios pequeños de texto o fotos que el panel no cubra.</li>
-      <li><b>No incluido normalmente</b>: funciones o secciones nuevas (se cotizan aparte), el contenido que sube el dueño, lo de Zeno.fm y los pagos de servicios de terceros como el dominio.</li>
-    </ul>
   </div>
 </section>
 
 <!-- 9 -->
-<section class="parte salto">
-  <h2><span class="num">9.</span>Revisión final antes de firmar</h2>
-  <p>Lista de verificación técnica. <span class="quien">Responsable: Jonathan, salvo donde se indica.</span></p>
-  <ul class="check">
-    <li class="hecho">Reglas de la base de datos probadas (privacidad de pedidos y comentarios, solo el administrador edita).</li>
-    <li class="hecho">Solo la clave pública en el código.</li>
-    <li class="hecho">Dominio a nombre del dueño, con renovación automática.</li>
-    <li>Apagar el registro de cuentas nuevas en Supabase.</li>
-    <li>Prueba completa en Android y iPhone: radio, botones de WhatsApp, formularios de pedido y comentario.</li>
-    <li class="hecho">Borrar los datos de prueba (comentario y pedido «PRUEBA CLAUDE», 13/11/2026).</li>
-    <li class="hecho">Vista previa al compartir el enlace por WhatsApp y Facebook (logo y nombre).</li>
-    <li class="hecho">Mapa del sitio y archivo para buscadores, para que Google encuentre la página.</li>
-    <li class="hecho">Página de error 404 con el diseño de la emisora.</li>
-    <li class="hecho">Medición de velocidad y accesibilidad en celular (Lighthouse: accesibilidad, buenas prácticas y SEO en 100).</li>
-    <li class="hecho">Aviso de privacidad corto (alegriastereomusical.com/privacidad).</li>
-    <li class="hecho">Primera copia de seguridad de la base de datos (13/11/2026).</li>
-  </ul>
-</section>
-
-<!-- 10 -->
 <section class="parte">
-  <h2><span class="num">10.</span>Ideas para más adelante</h2>
+  <h2><span class="num">9.</span>Ideas para más adelante</h2>
   <p>No están incluidas en esta entrega; se pueden cotizar si el dueño las quiere.</p>
   <ul>
     <li><b>«Escúchalo otra vez»</b> (pódcast o programas grabados): una sección con episodios o videos, manejada desde el panel igual que los anuncios (el dueño pega el enlace de YouTube o Spotify). Requiere grabar el programa al aire, editarlo y <b>quitar las canciones completas</b>, porque la licencia de la radio en vivo no cubre escucharlas a pedido; se deja la conversación: entrevistas, saludos, comentarios. Se puede subir gratis a Spotify for Creators, que lo reparte a Spotify, Apple y otras.</li>
     <li><b>Presentaciones completas de Talentos sin Fronteras</b>: como los artistas cantan sus propias canciones, con su permiso se pueden publicar enteras, y ellos mismos las comparten.</li>
     <li><b>Video en vivo</b> desde la cabina por Facebook Live, YouTube o TikTok Live mientras se transmite.</li>
     <li><b>Inscripciones de talentos guardadas en el panel</b>: hoy los cuadros de Talentos abren WhatsApp; la pestaña «Inscripciones de talentos» del panel ya existe y podría llenarse desde un formulario en la página.</li>
-    <li>Centrar la galería de cantantes cuando haya solo uno o dos.</li>
   </ul>
 </section>
 
 <!-- 11 -->
 <section class="parte firmas-bloque">
-  <h2><span class="num">11.</span>Conformidad de la entrega</h2>
+  <h2><span class="num">10.</span>Conformidad de la entrega</h2>
   <p>Las partes confirman que la página y el panel descritos en este documento fueron entregados y revisados.</p>
   <p>Fecha de entrega: <span class="campo">&nbsp;</span></p>
   <div class="firmas">

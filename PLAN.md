@@ -24,16 +24,18 @@ La competencia (demo de QCoreT) no ofrecía ninguna de las dos.
 
 ---
 
-## 🔴 PASO 1 — Publicar (URGENTE, empezar por aquí mañana)
+## 🔴 PASO 1 — Publicar
 La plataforma de monetización le pide la URL al dueño para activar anunciantes.
 - [x] Cuenta de Cloudflare
 - [x] Publicado en Cloudflare Pages (12/11/2026): **https://alegriastereomusical.pages.dev** — cada push a main se publica solo
 - [x] Revisada la versión publicada: radio suena, "Sonando ahora", horarios, sin errores
 - [ ] Revisar la vista previa al compartir el enlace por WhatsApp/redes
-- [x] `site` en `astro.config.mjs` = alegriastereomusical.pages.dev (cambiar cuando haya dominio)
+- [x] `site` en `astro.config.mjs` = https://alegriastereomusical.com
 - [ ] Mandarle la URL al dueño
-- [ ] Dominio propio (Cloudflare, ~US$10–11/año, a nombre del dueño). Revisado el 12/11/2026 en el registro oficial:
-      **alegriastereomusical.com** (recomendado) y **alegriastereo.com** estaban libres → el dueño elige uno (o los dos)
+- [x] Dominio **alegriastereomusical.com** comprado en Cloudflare (12/11/2026, US$11.17/año) a nombre de Robinzon Urbaez — revisar que la renovación automática esté activa
+- [x] Conectado a la página: https://alegriastereomusical.com funciona con https
+- [ ] Conectar también **www.alegriastereomusical.com** (Custom domains → Set up a custom domain)
+- [ ] ⚠️ **El dueño debe verificar el correo de Cloudflare/ICANN en alegriastereomusical@gmail.com antes del 26/11/2026** o suspenden el dominio
 
 ## 🟠 PASO 2 — Base de datos (Supabase)
 - [ ] Crear proyecto `alegria-stereo` en Supabase (ideal: en una cuenta del dueño; la cuenta del usuario

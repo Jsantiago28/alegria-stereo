@@ -20,11 +20,17 @@ const anio = new Date().getFullYear();
       <a href="#contacto" class="hover:text-white">Contacto</a>
     </nav>
     <div class="flex gap-3">
-      <a href={emisora.instagram} target="_blank" rel="noopener" aria-label="Instagram de la emisora" class="grid size-11 place-items-center rounded-full border border-white/15 hover:border-oro hover:text-oro">
+      <a href={emisora.instagram} data-red="instagram" target="_blank" rel="noopener" aria-label="Instagram de la emisora" class="grid size-11 place-items-center rounded-full border border-white/15 hover:border-oro hover:text-oro">
         <Icono nombre="instagram" />
       </a>
-      <a href={emisora.tiktok} target="_blank" rel="noopener" aria-label="TikTok de la emisora" class="grid size-11 place-items-center rounded-full border border-white/15 hover:border-oro hover:text-oro">
+      <a href={emisora.tiktok} data-red="tiktok" target="_blank" rel="noopener" aria-label="TikTok de la emisora" class="grid size-11 place-items-center rounded-full border border-white/15 hover:border-oro hover:text-oro">
         <Icono nombre="tiktok" />
+      </a>
+      <a href="#" hidden data-red="facebook" target="_blank" rel="noopener" aria-label="Facebook de la emisora" class="grid size-11 place-items-center rounded-full border border-white/15 hover:border-oro hover:text-oro">
+        <Icono nombre="facebook" />
+      </a>
+      <a href="#" hidden data-red="youtube" target="_blank" rel="noopener" aria-label="YouTube de la emisora" class="grid size-11 place-items-center rounded-full border border-white/15 hover:border-oro hover:text-oro">
+        <Icono nombre="youtube" />
       </a>
       <a href={`https://wa.me/${emisora.whatsapp}`} target="_blank" rel="noopener" aria-label="WhatsApp de la emisora" class="grid size-11 place-items-center rounded-full border border-white/15 hover:border-oro hover:text-oro">
         <Icono nombre="whatsapp" />

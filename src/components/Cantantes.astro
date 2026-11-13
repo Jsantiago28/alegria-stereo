@@ -1,0 +1,40 @@
+---
+// "Voces que brillan aquí": los cantantes que el dueño agrega en el panel (/admin → Cantantes).
+// Viene escondida y se muestra sola cuando hay cantantes (src/scripts/cantantes-vivo.ts).
+import Icono from "./Icono.astro";
+---
+
+<section id="voces" class="relative overflow-hidden bg-noche-2/60 py-24" hidden>
+  <div class="pointer-events-none absolute -top-32 left-0 size-[28rem] rounded-full bg-oro/10 blur-3xl" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-6xl px-4">
+    <div class="max-w-2xl">
+      <p class="text-sm font-semibold tracking-[0.3em] text-oro">NUESTROS TALENTOS</p>
+      <h2 class="mt-3 font-titulo text-4xl font-bold sm:text-5xl">Voces que <span class="oro">brillan aquí</span></h2>
+      <p class="mt-4 text-lg text-suave">Artistas que han pasado por nuestro micrófono. Toca a cada uno para conocerlo.</p>
+    </div>
+
+    <!-- Talento de la semana -->
+    <div data-destacado class="mt-12" hidden></div>
+
+    <!-- Galería: en el celular se desliza de lado -->
+    <ul
+      data-galeria
+      class="mt-10 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 lg:grid-cols-4"
+    ></ul>
+
+    <div class="mt-10 text-center">
+      <a href="#talentos" class="boton-oro text-lg !px-8 !py-4"><Icono nombre="microfono" class="size-6" /> ¿Quieres estar aquí? Participa</a>
+    </div>
+  </div>
+
+  <dialog
+    id="ficha-cantante"
+    class="m-auto w-[min(92vw,30rem)] overflow-hidden rounded-3xl border border-white/10 bg-noche-2 p-0 text-tinta backdrop:bg-black/70"
+    aria-label="Ficha del cantante"
+  >
+    <div data-ficha></div>
+    <form method="dialog" class="p-5 pt-0">
+      <button class="boton-linea w-full">Cerrar</button>
+    </form>
+  </dialog>
+</section>

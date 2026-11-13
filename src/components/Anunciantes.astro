@@ -1,0 +1,19 @@
+---
+// Negocios que patrocinan la emisora (los sube el dueño en /admin → Anunciantes).
+// Viene escondida y se muestra sola cuando hay anunciantes (src/scripts/anunciantes-vivo.ts).
+import Icono from "./Icono.astro";
+import { enlaceWhatsApp } from "../data/emisora";
+
+const mensaje = "¡Hola! Me interesa anunciar mi negocio en Alegría Stereo Musical 📢\n\nMi negocio: \nTeléfono: ";
+---
+
+<section id="anunciantes" class="relative py-20" hidden>
+  <div class="mx-auto max-w-6xl px-4 text-center">
+    <p class="text-sm font-semibold tracking-[0.3em] text-oro">NUESTROS PATROCINADORES</p>
+    <h2 class="mt-3 font-titulo text-3xl font-bold sm:text-4xl">Gracias a quienes <span class="oro">nos apoyan</span></h2>
+    <ul data-logos class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"></ul>
+    <a href={enlaceWhatsApp(mensaje)} target="_blank" rel="noopener" class="boton-linea mt-10">
+      <Icono nombre="whatsapp" /> ¿Quieres anunciar tu negocio aquí?
+    </a>
+  </div>
+</section>

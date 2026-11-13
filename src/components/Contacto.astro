@@ -57,15 +57,15 @@ import { emisora, aliada } from "../data/emisora";
 
     <ul class="aparece grid gap-4 sm:grid-cols-2">
       <li>
-        <a href={`tel:+${emisora.whatsapp}`} class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
+        <a href={`tel:+${emisora.whatsapp}`} data-dato="tel" class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
           <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-oro/15 text-oro"><Icono nombre="telefono" /></span>
-          <span><span class="block text-xs tracking-widest text-suave">TELÉFONO Y WHATSAPP</span><span class="font-semibold text-white">{emisora.telefono}</span></span>
+          <span><span class="block text-xs tracking-widest text-suave">TELÉFONO Y WHATSAPP</span><span class="font-semibold text-white" data-dato="telefono">{emisora.telefono}</span></span>
         </a>
       </li>
       <li>
-        <a href={`mailto:${emisora.correo}`} class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
+        <a href={`mailto:${emisora.correo}`} data-dato="mailto" class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
           <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-oro/15 text-oro"><Icono nombre="correo" /></span>
-          <span class="min-w-0"><span class="block text-xs tracking-widest text-suave">CORREO</span><span class="block truncate font-semibold text-white">{emisora.correo}</span></span>
+          <span class="min-w-0"><span class="block text-xs tracking-widest text-suave">CORREO</span><span class="block truncate font-semibold text-white" data-dato="correo">{emisora.correo}</span></span>
         </a>
       </li>
       <li>
@@ -75,15 +75,27 @@ import { emisora, aliada } from "../data/emisora";
         </div>
       </li>
       <li>
-        <a href={emisora.instagram} target="_blank" rel="noopener" class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
+        <a href={emisora.instagram} data-red="instagram" target="_blank" rel="noopener" class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
           <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af] text-white"><Icono nombre="instagram" /></span>
-          <span class="min-w-0"><span class="block text-xs tracking-widest text-suave">INSTAGRAM</span><span class="block truncate font-semibold text-white">{emisora.instagramUsuario}</span></span>
+          <span class="min-w-0"><span class="block text-xs tracking-widest text-suave">INSTAGRAM</span><span class="block truncate font-semibold text-white" data-red-usuario="instagram">{emisora.instagramUsuario}</span></span>
         </a>
       </li>
       <li>
-        <a href={emisora.tiktok} target="_blank" rel="noopener" class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
+        <a href={emisora.tiktok} data-red="tiktok" target="_blank" rel="noopener" class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
           <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-black text-white ring-1 ring-white/15"><Icono nombre="tiktok" /></span>
-          <span class="min-w-0"><span class="block text-xs tracking-widest text-suave">TIKTOK</span><span class="block truncate font-semibold text-white">{emisora.tiktokUsuario}</span></span>
+          <span class="min-w-0"><span class="block text-xs tracking-widest text-suave">TIKTOK</span><span class="block truncate font-semibold text-white" data-red-usuario="tiktok">{emisora.tiktokUsuario}</span></span>
+        </a>
+      </li>
+      <li hidden data-red-caja="facebook">
+        <a href="#" data-red="facebook" target="_blank" rel="noopener" class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
+          <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-[#1877f2] text-white"><Icono nombre="facebook" /></span>
+          <span class="min-w-0"><span class="block text-xs tracking-widest text-suave">FACEBOOK</span><span class="block truncate font-semibold text-white" data-red-usuario="facebook"></span></span>
+        </a>
+      </li>
+      <li hidden data-red-caja="youtube">
+        <a href="#" data-red="youtube" target="_blank" rel="noopener" class="vidrio flex h-full items-center gap-4 rounded-2xl p-5 transition hover:border-oro/40">
+          <span class="grid size-12 shrink-0 place-items-center rounded-xl bg-[#ff0000] text-white"><Icono nombre="youtube" /></span>
+          <span class="min-w-0"><span class="block text-xs tracking-widest text-suave">YOUTUBE</span><span class="block truncate font-semibold text-white" data-red-usuario="youtube"></span></span>
         </a>
       </li>
       <li>

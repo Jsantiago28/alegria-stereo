@@ -11,6 +11,8 @@ const enlaces = [
   // Solo se muestra cuando hay anuncios publicados (lo enciende src/scripts/anuncios-vivo.ts).
   { texto: "Eventos", href: "#anuncios", soloConAnuncios: true },
   { texto: "Talentos", href: "#talentos" },
+  // Solo se muestra cuando hay cantantes publicados (lo enciende src/scripts/cantantes-vivo.ts).
+  { texto: "Voces", href: "#voces", soloConVoces: true },
   { texto: "Pide tu canción", href: "#pide" },
   { texto: "Contacto", href: "#contacto" },
 ];
@@ -28,7 +30,7 @@ const enlaces = [
     <ul class="hidden items-center gap-6 text-sm font-semibold text-suave lg:flex">
       {
         enlaces.map((e) => (
-          <li hidden={e.soloConAnuncios} data-enlace-anuncios={e.soloConAnuncios ? "" : undefined}>
+          <li hidden={e.soloConAnuncios || e.soloConVoces} data-enlace-anuncios={e.soloConAnuncios ? "" : undefined} data-enlace-voces={e.soloConVoces ? "" : undefined}>
             <a href={e.href} class="enlace-nav transition hover:text-white">
               {e.texto}
             </a>
@@ -61,8 +63,9 @@ const enlaces = [
         <a
           href={e.href}
           class="enlace-nav rounded-xl px-3 py-3 font-semibold text-suave hover:bg-white/5"
-          hidden={e.soloConAnuncios}
+          hidden={e.soloConAnuncios || e.soloConVoces}
           data-enlace-anuncios={e.soloConAnuncios ? "" : undefined}
+          data-enlace-voces={e.soloConVoces ? "" : undefined}
         >
           {e.texto}
         </a>

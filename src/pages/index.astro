@@ -6,7 +6,9 @@ import Nosotros from "../components/Nosotros.astro";
 import Programacion from "../components/Programacion.astro";
 import Anuncios from "../components/Anuncios.astro";
 import Talentos from "../components/Talentos.astro";
+import Cantantes from "../components/Cantantes.astro";
 import PideCancion from "../components/PideCancion.astro";
+import Anunciantes from "../components/Anunciantes.astro";
 import Contacto from "../components/Contacto.astro";
 import Pie from "../components/Pie.astro";
 ---
@@ -19,7 +21,9 @@ import Pie from "../components/Pie.astro";
     <Programacion />
     <Anuncios />
     <Talentos />
+    <Cantantes />
     <PideCancion />
+    <Anunciantes />
     <Contacto />
   </main>
   <Pie />
@@ -27,6 +31,13 @@ import Pie from "../components/Pie.astro";
 
 <script>
   import "../scripts/radio.ts";
+  // Lo que el dueño maneja desde el panel (/admin). Si Supabase no responde, la página sigue igual.
+  import { cargarContacto } from "../scripts/contacto-vivo.ts";
   import { cargarAnuncios } from "../scripts/anuncios-vivo.ts";
+  import { cargarCantantes } from "../scripts/cantantes-vivo.ts";
+  import { cargarAnunciantes } from "../scripts/anunciantes-vivo.ts";
+  cargarContacto();
   cargarAnuncios();
+  cargarCantantes();
+  cargarAnunciantes();
 </script>

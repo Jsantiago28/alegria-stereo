@@ -34,7 +34,7 @@ La plataforma de monetización le pide la URL al dueño para activar anunciantes
 - [ ] Mandarle la URL al dueño
 - [x] Dominio **alegriastereomusical.com** comprado en Cloudflare (12/11/2026, US$11.17/año) a nombre de Robinzon Urbaez — revisar que la renovación automática esté activa
 - [x] Conectado a la página: https://alegriastereomusical.com funciona con https
-- [ ] Conectar también **www.alegriastereomusical.com** (Custom domains → Set up a custom domain)
+- [x] www.alegriastereomusical.com conectado (registro CNAME www → alegriastereomusical.pages.dev agregado a mano en DNS)
 - [ ] ⚠️ **El dueño debe verificar el correo de Cloudflare/ICANN en alegriastereomusical@gmail.com antes del 26/11/2026** o suspenden el dominio
 
 ## 🟠 PASO 2 — Base de datos (Supabase)

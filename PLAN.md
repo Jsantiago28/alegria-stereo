@@ -104,7 +104,8 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
    - [x] Lista de cuentas en `docs/entrega.html` (sección 4)
    - [x] Dueño para firma legal: **Robinzon Peña**. ⚠️ El dominio se registró a nombre de «Robinzon Urbaez»:
          confirmar que el nombre del registro del dominio sea el correcto.
-   - [x] Precio: **oferta especial RD$18,500** (proyecto completo). **3 meses de mantenimiento gratis**; después
+   - [x] **Entregado el 13/11/2026, de forma digital.** Precio normal RD$45,000 → **oferta especial RD$18,500**
+         (precio especial para Robinzon Peña; ahorro RD$26,500). **3 meses de mantenimiento gratis**; después
          **RD$1,500 por servicio**, solo cuando el dueño lo necesite. En el documento al cliente solo se mencionan
          el dominio (a nombre de Robinzon Peña) y la base de datos (correo de la emisora).
 3. **Prueba completa en teléfonos reales**

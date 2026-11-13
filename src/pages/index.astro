@@ -12,9 +12,12 @@ import Comentarios from "../components/Comentarios.astro";
 import Anunciantes from "../components/Anunciantes.astro";
 import Contacto from "../components/Contacto.astro";
 import Pie from "../components/Pie.astro";
+import { SUPABASE_URL } from "../lib/config";
 ---
 
 <Layout>
+  <!-- Conectar antes con Supabase: la página le pide datos apenas abre. -->
+  <link slot="head" rel="preconnect" href={SUPABASE_URL} crossorigin />
   <Navbar />
   <main>
     <Hero />

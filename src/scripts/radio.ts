@@ -24,7 +24,7 @@ function ponerEstado(estado: Estado) {
   const activo = estado !== "parado";
   botonesPlay.forEach((b) => {
     b.setAttribute("aria-pressed", String(activo));
-    b.setAttribute("aria-label", activo ? "Pausar la radio" : "Escuchar en vivo");
+    if (b.hasAttribute("aria-label")) b.setAttribute("aria-label", activo ? "Pausar la radio" : "Escuchar en vivo");
   });
   if ("mediaSession" in navigator) navigator.mediaSession.playbackState = activo ? "playing" : "paused";
   if (activo) mostrarMini(true);

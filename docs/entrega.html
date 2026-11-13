@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documento de entrega</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noche: #050a24;
+    --noche2: #0a1440;
+    --oro: #ffc21a;
+    --oro-osc: #8a5d00;
+    --tinta: #1a1d2e;
+    --suave: #5a6075;
+    --linea: #e2e5ef;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--tinta);
+    background: #f4f6fb;
+  }
+  .hoja { max-width: 860px; margin: 0 auto; padding: 0 16px 48px; }
+
+  .portada {
+    background: linear-gradient(160deg, var(--noche) 0%, var(--noche2) 100%);
+    color: #fff;
+    padding: 36px 24px 30px;
+    border-bottom: 5px solid var(--oro);
+    margin: 0 -16px 24px;
+  }
+  .portada .chico { color: var(--oro); font-weight: 700; letter-spacing: .14em; font-size: 12px; text-transform: uppercase; margin: 0; }
+  .portada h1 { margin: 8px 0 10px; font-size: 32px; line-height: 1.15; }
+  .portada p { margin: 0; color: #d6dbf0; max-width: 640px; }
+  .meta { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+  .meta div { background: rgba(255,255,255,.06); border: 1px solid rgba(255,194,26,.35); border-radius: 12px; padding: 10px 12px; font-size: 14px; }
+  .meta span { display: block; color: var(--oro); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+
+  section.parte {
+    background: #fff;
+    border: 1px solid var(--linea);
+    border-radius: 16px;
+    padding: 22px 20px;
+    margin-bottom: 18px;
+  }
+  h2 {
+    font-size: 22px; line-height: 1.25; margin: 0 0 12px; color: var(--noche2);
+    padding-bottom: 8px; border-bottom: 3px solid var(--oro);
+  }
+  h2 .num { color: var(--oro-osc); margin-right: 6px; }
+  h3 { font-size: 17px; margin: 18px 0 6px; color: var(--noche2); }
+  p { margin: 8px 0; }
+  ul, ol { padding-left: 22px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  a { color: var(--noche2); }
+
+  .tabla { width: 100%; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14.5px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  th { background: var(--noche2); color: #fff; font-weight: 600; }
+  tr:nth-child(even) td { background: #f7f8fc; }
+  tr { break-inside: avoid; }
+  td:first-child { font-weight: 600; }
+
+  .pd { background: #fff3c4; color: #6b4700; font-weight: 700; padding: 0 6px; border-radius: 6px; white-space: nowrap; }
+  .pc { background: #e6ebff; color: #23307a; font-weight: 700; padding: 0 6px; border-radius: 6px; white-space: nowrap; }
+
+  .nota, .ojo, .bien { border-radius: 12px; padding: 12px 16px; margin: 14px 0; break-inside: avoid; }
+  .nota { background: #fff8e1; border-left: 6px solid var(--oro); }
+  .ojo { background: #fdecea; border-left: 6px solid #b42318; }
+  .bien { background: #e8f6ee; border-left: 6px solid #1c7c45; }
+  .nota b:first-child, .ojo b:first-child, .bien b:first-child { display: block; margin-bottom: 2px; }
+
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .dir { border: 2px solid var(--oro); border-radius: 14px; padding: 12px 14px; }
+  .dir span { display: block; font-size: 12px; font-weight: 700; color: var(--oro-osc); letter-spacing: .08em; text-transform: uppercase; }
+  .dir b { font-size: 17px; word-break: break-all; }
+
+  ul.check { list-style: none; padding-left: 0; }
+  ul.check li { padding-left: 30px; position: relative; }
+  ul.check li::before { content: "☐"; position: absolute; left: 4px; top: -1px; font-size: 18px; color: var(--noche2); }
+  ul.check li.hecho::before { content: "☑"; color: #1c7c45; }
+  .quien { font-size: 12px; font-weight: 700; color: var(--suave); text-transform: uppercase; letter-spacing: .06em; }
+
+  .firmas { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 18px; }
+  .firma { padding-top: 54px; }
+  .firma .raya { border-top: 1.5px solid var(--tinta); padding-top: 6px; }
+  .firma small { display: block; color: var(--suave); }
+  .campo { border-bottom: 1px solid var(--tinta); display: inline-block; min-width: 200px; }
+
+  .pie { text-align: center; color: var(--suave); font-size: 13px; margin-top: 22px; }
+
+  @media (max-width: 600px) {
+    body { font-size: 15.5px; }
+    .portada h1 { font-size: 26px; }
+    .dos, .firmas { grid-template-columns: 1fr; }
+    table { font-size: 13.5px; }
+    th, td { padding: 8px 7px; }
+  }
+
+  @media print {
+    @page { size: letter; margin: 15mm 14mm 16mm; }
+    body { background: #fff; font-size: 10.5pt; line-height: 1.45; }
+    .hoja { max-width: none; padding: 0; }
+    .portada { background: #fff; color: var(--noche2); margin: 0 0 12pt; padding: 0 0 12pt; border-bottom: 4px solid var(--oro); }
+    .portada .chico { color: var(--oro-osc); }
+    .portada p { color: var(--tinta); max-width: none; }
+    .meta div { background: #fff; border: 1px solid var(--oro); }
+    .meta span { color: var(--oro-osc); }
+    section.parte { border: 0; border-radius: 0; padding: 0; margin: 0 0 14pt; background: #fff; }
+    .salto { break-before: page; }
+    h2, h3 { break-after: avoid; }
+    th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    tr:nth-child(even) td { background: #fff; }
+    .pd, .pc { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    a { color: inherit; text-decoration: none; }
+    .firmas-bloque { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="hoja">
+
+<header class="portada">
+  <p class="chico">Documento de entrega del proyecto</p>
+  <h1>Página web de Alegría Stereo Musical</h1>
+  <p>Resumen de lo que se construyó, dónde está, qué cuentas y servicios usa, cuánto cuesta mantenerlo y qué debe saber el dueño para cuidarlo.</p>
+  <div class="meta">
+    <div><span>Cliente</span>Alegría Stereo Musical</div>
+    <div><span>Desarrollador</span>Jonathan Santiago</div>
+    <div><span>Fecha de entrega</span>[POR DEFINIR]</div>
+  </div>
+</header>
+
+<!-- 1 -->
+<section class="parte">
+  <h2><span class="num">1.</span>Resumen del proyecto</h2>
+  <p>Se construyó la página web oficial de la emisora, con la radio en vivo, la programación, los talentos, los pedidos de canciones y los comentarios de los oyentes. Además, se hizo un <b>panel de administración</b> para que el dueño, desde su celular y sin saber de programación, cambie lo que sale en la página: cantantes, programas, anuncios, anunciantes y datos de contacto.</p>
+  <p>La página está hecha para verse bien primero en el celular, carga rápido y sigue funcionando (radio y programación de respaldo) aunque la base de datos no responda en un momento dado.</p>
+</section>
+
+<!-- 2 -->
+<section class="parte">
+  <h2><span class="num">2.</span>Direcciones</h2>
+  <div class="dos">
+    <div class="dir"><span>Página pública</span><b>https://alegriastereomusical.com</b><br><small>También funciona con www.</small></div>
+    <div class="dir"><span>Panel del dueño</span><b>https://alegriastereomusical.com/admin</b><br><small>Entra con: alegriastereomusical@gmail.com</small></div>
+  </div>
+  <p style="margin-top:12px">La contraseña del panel no se escribe en este documento. Si se olvida, se crea una nueva con «¿Olvidaste tu contraseña?» en la pantalla de entrada.</p>
+</section>
+
+<!-- 3 -->
+<section class="parte">
+  <h2><span class="num">3.</span>Lo que se entregó</h2>
+
+  <h3>La página pública</h3>
+  <ul>
+    <li><b>Radio en vivo</b> con la señal de Zeno.fm, en una barra fija abajo; se controla también desde la pantalla de bloqueo del celular.</li>
+    <li><b>«Sonando ahora»</b>: el nombre de la canción que está sonando, en tiempo real.</li>
+    <li><b>«Al aire ahora» / «Próximo programa»</b> con cuenta regresiva, calculado en hora de República Dominicana.</li>
+    <li><b>Nosotros</b>: quiénes son y qué música ponen.</li>
+    <li><b>Nuestros programas</b>: horarios en hora de RD, México, Perú y la hora de quien visita la página, con el volante de cada programa.</li>
+    <li><b>Lo que viene</b> (anuncios y eventos): los eventos se quitan solos después de su fecha.</li>
+    <li><b>Talentos sin Fronteras</b>: cuadros por categoría; cada uno abre WhatsApp con su propio mensaje.</li>
+    <li><b>Voces que brillan aquí</b>: Talento de la semana y galería de cantantes con su ficha y redes; botón «¿Quieres estar aquí? Participa».</li>
+    <li><b>Pide tu canción / dedicatoria</b>: se envía por WhatsApp y además queda guardado en el panel.</li>
+    <li><b>Gracias a quienes nos apoyan</b>: logos de anunciantes y botón «¿Quieres anunciar tu negocio aquí?».</li>
+    <li><b>Donde estés</b>: «Agregar a mi celular» (la página se instala como una aplicación) y «Compartir emisora».</li>
+    <li><b>Hablemos</b> (contacto): WhatsApp, teléfono, correo, Instagram, TikTok, y Facebook/YouTube cuando se agreguen; emisora aliada Radio Music Digital 105.7.</li>
+    <li><b>Lo que dicen nuestros oyentes</b>: los oyentes dejan comentario con nombre, país y estrellas; solo se publican los que el dueño aprueba.</li>
+    <li>Pie de página con el crédito «Diseño y desarrollo web: Jonathan Santiago».</li>
+  </ul>
+
+  <h3>El panel del dueño (/admin)</h3>
+  <ul>
+    <li><b>Entrada segura</b> con correo y contraseña, solo para el dueño, y recuperación con «¿Olvidaste tu contraseña?».</li>
+    <li><b>Inicio</b>: pedidos nuevos, próximo programa, Talento de la semana, canción sonando, programación de la semana y acciones rápidas.</li>
+    <li><b>Pedidos</b>: lista de pedidos de canciones y dedicatorias; marcar atendido / marcar como nuevo, borrar.</li>
+    <li><b>Comentarios</b>: pestañas Por revisar, Publicados y Ocultos; aprobar, destacar, ocultar, borrar.</li>
+    <li><b>Cantantes</b>: agregar, editar y borrar, con foto, país, género, frase y redes; marcar el Talento de la semana.</li>
+    <li><b>Programas</b>: nombre, días, hora de RD, duración, locutor, descripción, temas y volante.</li>
+    <li><b>Anuncios y eventos</b>: título, texto, fecha del evento, foto y enlace.</li>
+    <li><b>Anunciantes</b>: logo o banner, nombre del negocio y enlace.</li>
+    <li><b>Datos de la emisora</b>: teléfono, WhatsApp, correo, Instagram, TikTok, Facebook y YouTube.</li>
+    <li>Interruptor <b>«Mostrar en la página»</b> en cantantes, programas, anuncios y anunciantes, para esconder sin borrar.</li>
+    <li>Aviso con número (campanita) de pedidos nuevos y comentarios por revisar.</li>
+    <li>Las fotos se achican solas en el celular antes de subirlas.</li>
+    <li>Colores de pantalla <b>Noche / Día / Sol</b> (este último para leer al sol).</li>
+    <li>Confirmación antes de borrar cualquier cosa.</li>
+  </ul>
+  <div class="nota"><b>Incluido aparte</b>Manual del dueño, en lenguaje sencillo, con los pasos para usar cada parte del panel (archivo <i>manual-del-dueno.html</i>).</div>
+</section>
+
+<!-- 4 -->
+<section class="parte salto">
+  <h2><span class="num">4.</span>Cuentas y servicios</h2>
+  <div class="tabla">
+  <table>
+    <tr><th>Servicio</th><th>Para qué sirve</th><th>A nombre de</th><th>Costo</th></tr>
+    <tr><td>Dominio alegriastereomusical.com (Cloudflare)</td><td>La dirección de la página.</td><td>El dueño</td><td>US$11.17 al año, renovación automática activa</td></tr>
+    <tr><td>Cloudflare Pages</td><td>Hospeda la página (la pone en internet).</td><td><span class="pd">[POR DEFINIR]</span></td><td>Gratis</td></tr>
+    <tr><td>GitHub (repositorio privado Jsantiago28/alegria-stereo)</td><td>Guarda el código de la página. Cada cambio que se sube aquí se publica solo en la página.</td><td><span class="pd">[POR DEFINIR]</span> (hoy en la cuenta de Jonathan)</td><td>Gratis</td></tr>
+    <tr><td>Supabase (proyecto «alegria-stereo»)</td><td>Base de datos y fotos: lo que el dueño pone en el panel, los pedidos y los comentarios. También maneja la entrada al panel.</td><td><span class="pd">[POR DEFINIR]</span> (hoy en la cuenta de Jonathan)</td><td>Gratis (plan gratuito)</td></tr>
+    <tr><td>Zeno.fm</td><td>La señal de la radio en vivo y el «Sonando ahora».</td><td>El dueño</td><td>Según el plan del dueño en Zeno</td></tr>
+    <tr><td>Gmail alegriastereomusical@gmail.com</td><td>Correo de la emisora y usuario del panel. Aquí llegan los correos de recuperación de contraseña.</td><td>El dueño</td><td>Gratis</td></tr>
+  </table>
+  </div>
+  <p><b>Costo fijo total para mantener la página:</b> US$11.17 al año (solo el dominio), mientras los demás servicios sigan en sus planes gratuitos.</p>
+  <div class="ojo"><b>Por decidir antes de firmar</b>Quién queda como dueño de las cuentas de Cloudflare (hosting), GitHub (código) y Supabase (base de datos): pasárselas al dueño o dejar escrito que Jonathan las administra en su nombre. <span class="pd">[POR DEFINIR]</span></div>
+</section>
+
+<!-- 5 -->
+<section class="parte">
+  <h2><span class="num">5.</span>Seguridad y datos</h2>
+  <ul>
+    <li><b>Solo el dueño entra al panel.</b> Además de la contraseña, la base de datos comprueba que la cuenta sea de administrador; cualquier otra cuenta es rechazada y no puede cambiar nada.</li>
+    <li><b>Los pedidos son privados.</b> Los oyentes pueden enviar pedidos, pero nadie más que el dueño puede verlos, cambiarlos ni borrarlos.</li>
+    <li><b>Los comentarios se revisan.</b> Los oyentes no pueden publicar directo: el comentario queda pendiente hasta que el dueño lo aprueba. El formulario tiene además una trampa simple contra robots.</li>
+    <li><b>Las reglas se probaron:</b> un visitante no ve pedidos ni comentarios pendientes, y nadie que no sea administrador puede editar.</li>
+    <li>En el código de la página solo está la clave <b>pública</b> de la base de datos (la que está hecha para eso). La clave secreta nunca se usó en la página.</li>
+    <li>Toda la página funciona con conexión segura (https).</li>
+  </ul>
+  <h3>Qué datos guarda la página</h3>
+  <div class="tabla">
+  <table>
+    <tr><th>De dónde</th><th>Qué se guarda</th><th>Quién lo ve</th></tr>
+    <tr><td>Pide tu canción</td><td>Nombre, canción, para quién, saludo y ciudad o país.</td><td>Solo el dueño (panel). También le llega por WhatsApp.</td></tr>
+    <tr><td>Comentarios</td><td>Nombre, país, estrellas y el comentario.</td><td>El dueño; el público solo los que él aprueba.</td></tr>
+    <tr><td>Panel</td><td>Cantantes, programas, anuncios, anunciantes, datos de contacto y sus fotos.</td><td>Público (es lo que sale en la página).</td></tr>
+  </table>
+  </div>
+  <p>La página <b>no pide</b> correos, teléfonos, direcciones ni datos de pago a los oyentes.</p>
+  <div class="nota"><b>Aviso de privacidad</b>La página tiene un aviso corto en <b>alegriastereomusical.com/privacidad</b> que explica qué se guarda, para qué, y cómo pedir que se borre. Tiene enlaces desde el pie de página y desde los formularios de pedidos y comentarios.</div>
+</section>
+
+<!-- 6 -->
+<section class="parte salto">
+  <h2><span class="num">6.</span>Cosas importantes que hay que saber</h2>
+
+  <h3>La base de datos gratuita se puede «dormir»</h3>
+  <p>En el plan gratuito, Supabase pausa el proyecto si pasa alrededor de una semana sin que nadie lo use. Como la página consulta la base cada vez que alguien la visita, mientras haya oyentes entrando es difícil que pase.</p>
+  <p><b>Cómo se nota:</b> la radio y la programación de respaldo siguen funcionando, pero no salen los cantantes, anuncios, anunciantes ni comentarios, y el panel dice «No se pudo cargar la información».</p>
+  <p><b>Cómo se reactiva:</b></p>
+  <ol>
+    <li>Entrar a supabase.com con la cuenta dueña del proyecto <span class="pd">[POR DEFINIR]</span>.</li>
+    <li>Abrir el proyecto «alegria-stereo».</li>
+    <li>Tocar el botón para restaurarlo («Restore project») y esperar unos minutos a que vuelva a estar activo.</li>
+  </ol>
+  <p>Lo que estaba guardado no se pierde al pausarse.</p>
+
+  <h3>Copias de seguridad</h3>
+  <ul>
+    <li><b>El código</b> está guardado en GitHub, con todo su historial.</li>
+    <li><b>La base de datos</b>: el plan gratuito de Supabase no guarda copias automáticas que se puedan descargar. La primera copia se sacó el 13/11/2026, al momento de la entrega. Se recomienda una copia al mes. Responsable: <span class="pd">[POR DEFINIR]</span>.</li>
+    <li><b>Las fotos</b> subidas desde el panel están en Supabase (Storage). La copia de la base guarda la lista de fotos; las fotos en sí se descargan aparte desde Supabase. Al momento de la entrega no había fotos subidas.</li>
+  </ul>
+
+  <h3>La radio (Zeno.fm) la maneja el dueño</h3>
+  <p>La página solo reproduce la señal de Zeno. Todo lo de Zeno lo maneja el dueño por su cuenta: su perfil y logo allí, sus estadísticas, si cuenta a los oyentes que escuchan desde esta página, los anuncios de audio y las <b>licencias de música</b>. Según Zeno, sus licencias cubren la escucha en zeno.fm; el dueño debe confirmar con Zeno o con quien corresponda si cubren también la escucha desde su propia página. Esto quedó avisado y está fuera del trabajo de desarrollo.</p>
+
+  <h3>Cómo se hacen cambios al diseño o a las secciones</h3>
+  <p>El contenido diario se cambia desde el panel. Los cambios de diseño, de textos fijos o funciones nuevas se hacen en el código; al subirlos a GitHub, Cloudflare publica la página nueva sola en uno o dos minutos.</p>
+</section>
+
+<!-- 7 -->
+<section class="parte">
+  <h2><span class="num">7.</span>Pendientes del dueño</h2>
+  <ul class="check">
+    <li>Cambiar la contraseña del panel por una que solo él sepa (si la creó Jonathan).</li>
+    <li>Probar el panel desde su celular junto a Jonathan: subir una foto de la galería, aprobar un comentario, cambiar un programa.</li>
+    <li>Revisar y corregir en el panel la duración de cada programa y subir los volantes que falten (por ejemplo, El Viernes Alegre).</li>
+    <li>Agregar cantantes en el panel, <b>siempre con el permiso del artista</b> para usar su foto y su nombre.</li>
+    <li>Enviar a Jonathan fotos de la cabina y de Robinson Peña para la página.</li>
+    <li>Poner Facebook y YouTube en «Datos de la emisora» cuando los tenga.</li>
+    <li>Resolver con Zeno lo de su perfil, logo, conteo de oyentes, anuncios de audio y licencias de música.</li>
+    <li>Mantener activa la renovación automática del dominio y la tarjeta al día.</li>
+  </ul>
+</section>
+
+<!-- 8 -->
+<section class="parte">
+  <h2><span class="num">8.</span>Soporte después de la entrega</h2>
+  <div class="tabla">
+  <table>
+    <tr><th>Punto</th><th>Acuerdo</th></tr>
+    <tr><td>Duración de la garantía</td><td><span class="pd">[POR DEFINIR]</span></td></tr>
+    <tr><td>Qué incluye</td><td><span class="pd">[POR DEFINIR]</span></td></tr>
+    <tr><td>Qué no incluye</td><td><span class="pd">[POR DEFINIR]</span></td></tr>
+    <tr><td>Precio después de la garantía</td><td><span class="pd">[POR DEFINIR]</span></td></tr>
+    <tr><td>Cómo pedir ayuda y tiempo de respuesta</td><td><span class="pd">[POR DEFINIR]</span></td></tr>
+  </table>
+  </div>
+  <div class="nota"><b>Sugerencia de lo que suele incluirse</b>
+    <ul>
+      <li><b>Garantía</b> (por ejemplo, 30 a 90 días): corregir sin costo cualquier falla de lo que se entregó.</li>
+      <li><b>Mantenimiento opcional</b> (mensual o anual): revisar que todo funcione, reactivar la base si se pausa, sacar copias de seguridad, actualizar el sistema y hacer cambios pequeños de texto o fotos que el panel no cubra.</li>
+      <li><b>No incluido normalmente</b>: funciones o secciones nuevas (se cotizan aparte), el contenido que sube el dueño, lo de Zeno.fm y los pagos de servicios de terceros como el dominio.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="parte salto">
+  <h2><span class="num">9.</span>Revisión final antes de firmar</h2>
+  <p>Lista de verificación técnica. <span class="quien">Responsable: Jonathan, salvo donde se indica.</span></p>
+  <ul class="check">
+    <li class="hecho">Reglas de la base de datos probadas (privacidad de pedidos y comentarios, solo el administrador edita).</li>
+    <li class="hecho">Solo la clave pública en el código.</li>
+    <li class="hecho">Dominio a nombre del dueño, con renovación automática.</li>
+    <li>Apagar el registro de cuentas nuevas en Supabase.</li>
+    <li>Prueba completa en Android y iPhone: radio, botones de WhatsApp, formularios de pedido y comentario.</li>
+    <li>Borrar los datos de prueba (por ejemplo, el comentario «PRUEBA CLAUDE»).</li>
+    <li class="hecho">Vista previa al compartir el enlace por WhatsApp y Facebook (logo y nombre).</li>
+    <li class="hecho">Mapa del sitio y archivo para buscadores, para que Google encuentre la página.</li>
+    <li class="hecho">Página de error 404 con el diseño de la emisora.</li>
+    <li class="hecho">Medición de velocidad y accesibilidad en celular (Lighthouse: accesibilidad, buenas prácticas y SEO en 100).</li>
+    <li class="hecho">Aviso de privacidad corto (alegriastereomusical.com/privacidad).</li>
+    <li class="hecho">Primera copia de seguridad de la base de datos (13/11/2026).</li>
+  </ul>
+</section>
+
+<!-- 10 -->
+<section class="parte">
+  <h2><span class="num">10.</span>Ideas para más adelante</h2>
+  <p>No están incluidas en esta entrega; se pueden cotizar si el dueño las quiere.</p>
+  <ul>
+    <li><b>«Escúchalo otra vez»</b> (pódcast o programas grabados): una sección con episodios o videos, manejada desde el panel igual que los anuncios (el dueño pega el enlace de YouTube o Spotify). Requiere grabar el programa al aire, editarlo y <b>quitar las canciones completas</b>, porque la licencia de la radio en vivo no cubre escucharlas a pedido; se deja la conversación: entrevistas, saludos, comentarios. Se puede subir gratis a Spotify for Creators, que lo reparte a Spotify, Apple y otras.</li>
+    <li><b>Presentaciones completas de Talentos sin Fronteras</b>: como los artistas cantan sus propias canciones, con su permiso se pueden publicar enteras, y ellos mismos las comparten.</li>
+    <li><b>Video en vivo</b> desde la cabina por Facebook Live, YouTube o TikTok Live mientras se transmite.</li>
+    <li><b>Inscripciones de talentos guardadas en el panel</b>: hoy los cuadros de Talentos abren WhatsApp; la pestaña «Inscripciones de talentos» del panel ya existe y podría llenarse desde un formulario en la página.</li>
+    <li>Centrar la galería de cantantes cuando haya solo uno o dos.</li>
+  </ul>
+</section>
+
+<!-- 11 -->
+<section class="parte firmas-bloque">
+  <h2><span class="num">11.</span>Conformidad de la entrega</h2>
+  <p>Las partes confirman que la página y el panel descritos en este documento fueron entregados y revisados.</p>
+  <p>Fecha de entrega: <span class="campo">&nbsp;</span></p>
+  <div class="firmas">
+    <div class="firma">
+      <div class="raya"><b>Por la emisora</b>
+        <small>Nombre: ______________________________</small>
+        <small>Alegría Stereo Musical</small>
+      </div>
+    </div>
+    <div class="firma">
+      <div class="raya"><b>Jonathan Santiago</b>
+        <small>Diseño y desarrollo web</small>
+        <small>jonathansantiago.pages.dev</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="pie">Alegría Stereo Musical · Documento de entrega · alegriastereomusical.com</p>
+
+</div>
+</body>
+</html>

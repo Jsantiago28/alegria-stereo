@@ -1,0 +1,85 @@
+---
+// Aviso de privacidad: qué guarda la página y para qué. Texto sencillo, sin lenguaje legal complicado.
+import Layout from "../layouts/Layout.astro";
+import { emisora } from "../data/emisora";
+
+const actualizado = "13 de noviembre de 2026";
+const titulo = "text-xl font-bold text-white font-titulo mt-10";
+const parrafo = "mt-3 text-suave leading-relaxed";
+---
+
+<Layout titulo={`Aviso de privacidad · ${emisora.nombre}`} descripcion={`Qué datos guarda la página de ${emisora.nombre} y para qué.`}>
+  <main class="mx-auto max-w-3xl px-4 py-16 sm:py-24">
+    <a href="/" class="boton-linea !py-2 text-sm">← Volver a la página</a>
+
+    <p class="mt-10 text-sm font-semibold tracking-[0.3em] text-oro">PRIVACIDAD</p>
+    <h1 class="mt-3 font-titulo text-4xl font-bold sm:text-5xl">Aviso de <span class="oro">privacidad</span></h1>
+    <p class="mt-4 text-sm text-suave">Última actualización: {actualizado}</p>
+
+    <div class="vidrio mt-8 rounded-3xl p-6 sm:p-8">
+      <p class="text-lg text-white">
+        En {emisora.nombre} cuidamos tus datos. Aquí te contamos, en pocas palabras, qué guardamos cuando usas esta página y
+        para qué lo usamos.
+      </p>
+    </div>
+
+    <h2 class={titulo}>1. Lo que guardamos</h2>
+    <ul class="mt-3 list-disc space-y-2 pl-6 text-suave">
+      <li>
+        <strong class="text-white">Cuando pides una canción:</strong> la canción, tu nombre y, si los escribes, a quién va dedicada,
+        tu saludo y desde dónde nos escuchas. Además se abre WhatsApp con tu mensaje; lo que envíes por WhatsApp queda en esa
+        conversación.
+      </li>
+      <li>
+        <strong class="text-white">Cuando dejas un comentario:</strong> tu nombre, tu país (si lo pones), las estrellas y tu comentario.
+      </li>
+    </ul>
+    <p class={parrafo}>
+      <strong class="text-white">No te pedimos</strong> correo, teléfono, dirección ni ningún dato de pago. No usamos herramientas para
+      seguirte ni para mostrarte publicidad.
+    </p>
+
+    <h2 class={titulo}>2. Para qué lo usamos</h2>
+    <ul class="mt-3 list-disc space-y-2 pl-6 text-suave">
+      <li>Los <strong class="text-white">pedidos</strong> son para que la emisora los vea y los ponga al aire. Solo la emisora los ve; no se publican en la página.</li>
+      <li>
+        Los <strong class="text-white">comentarios</strong> se publican en la página con tu nombre y tu país
+        <strong class="text-white">solo después de que la emisora los revise y los apruebe</strong>. La emisora puede no publicar,
+        ocultar o borrar cualquier comentario.
+      </li>
+    </ul>
+    <p class={parrafo}>No vendemos ni regalamos tus datos a nadie.</p>
+
+    <h2 class={titulo}>3. Dónde se guardan</h2>
+    <p class={parrafo}>
+      Los pedidos y comentarios se guardan en un servicio de base de datos en internet (Supabase), protegido para que solo la
+      emisora pueda ver los pedidos y los comentarios que todavía no se han aprobado. La página está alojada en Cloudflare.
+    </p>
+    <p class={parrafo}>
+      La radio en vivo y el título de la canción que está sonando vienen de Zeno.fm. Como cualquier página de internet, estos
+      servicios pueden ver datos técnicos de tu conexión (como tu dirección IP) para poder funcionar.
+    </p>
+
+    <h2 class={titulo}>4. Lo que se queda en tu celular o computadora</h2>
+    <p class={parrafo}>
+      La página solo recuerda el <strong class="text-white">volumen</strong> que elegiste para la radio, en tu propio navegador. No usa
+      cookies para seguirte.
+    </p>
+
+    <h2 class={titulo}>5. Si quieres que borremos tus datos</h2>
+    <p class={parrafo}>
+      Escríbenos y borramos tu pedido o tu comentario. Solo dinos tu nombre y, si puedes, la fecha aproximada.
+    </p>
+    <div class="mt-5 flex flex-wrap gap-3">
+      <a href={`https://wa.me/${emisora.whatsapp}`} target="_blank" rel="noopener" class="boton-wa">Escribir por WhatsApp</a>
+      <a href={`mailto:${emisora.correo}`} class="boton-linea">{emisora.correo}</a>
+    </div>
+
+    <h2 class={titulo}>6. Cambios a este aviso</h2>
+    <p class={parrafo}>
+      Si cambiamos algo de este aviso, lo actualizaremos aquí y cambiaremos la fecha de arriba.
+    </p>
+
+    <p class="mt-14 text-center text-sm text-suave">© {new Date().getFullYear()} {emisora.nombre} · {emisora.ciudad}</p>
+  </main>
+</Layout>

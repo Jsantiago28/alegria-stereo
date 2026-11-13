@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual del panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noche: #050a24;
+    --noche2: #0a1440;
+    --oro: #ffc21a;
+    --oro-osc: #8a5d00;
+    --tinta: #1a1d2e;
+    --suave: #5a6075;
+    --linea: #e2e5ef;
+    --fondo-nota: #fff8e1;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--tinta);
+    background: #f4f6fb;
+  }
+  .hoja { max-width: 760px; margin: 0 auto; padding: 0 16px 48px; }
+
+  .portada {
+    background: linear-gradient(160deg, var(--noche) 0%, var(--noche2) 100%);
+    color: #fff;
+    padding: 36px 24px 30px;
+    border-bottom: 5px solid var(--oro);
+    margin: 0 -16px 24px;
+  }
+  .portada .chico { color: var(--oro); font-weight: 700; letter-spacing: .14em; font-size: 13px; text-transform: uppercase; margin: 0; }
+  .portada h1 { margin: 8px 0 10px; font-size: 32px; line-height: 1.15; }
+  .portada p { margin: 0; color: #d6dbf0; }
+  .portada .dir { margin-top: 18px; background: rgba(255,194,26,.12); border: 1px solid rgba(255,194,26,.45); border-radius: 14px; padding: 12px 16px; }
+  .portada .dir b { color: var(--oro); font-size: 20px; word-break: break-all; }
+
+  .indice { background: #fff; border: 1px solid var(--linea); border-radius: 16px; padding: 16px 20px; margin-bottom: 24px; }
+  .indice h2 { margin: 0 0 8px; font-size: 18px; border: 0; padding: 0; }
+  .indice ol { margin: 0; padding-left: 22px; columns: 2; column-gap: 28px; font-size: 16px; }
+  .indice a { color: var(--noche2); text-decoration: none; }
+  .indice li { break-inside: avoid; }
+
+  section.parte {
+    background: #fff;
+    border: 1px solid var(--linea);
+    border-radius: 18px;
+    padding: 22px 20px;
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 24px;
+    line-height: 1.25;
+    margin: 0 0 12px;
+    color: var(--noche2);
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--oro);
+  }
+  h2 .num {
+    display: inline-block; min-width: 38px; height: 38px; line-height: 38px; text-align: center;
+    border-radius: 50%; background: var(--noche2); color: var(--oro); font-size: 18px; margin-right: 8px; vertical-align: 2px;
+  }
+  h3 { font-size: 19px; margin: 20px 0 6px; color: var(--noche2); }
+  p { margin: 8px 0; }
+
+  ol.pasos { counter-reset: paso; list-style: none; padding: 0; margin: 10px 0; }
+  ol.pasos > li {
+    counter-increment: paso;
+    position: relative;
+    padding: 10px 12px 10px 54px;
+    margin: 8px 0;
+    background: #f7f8fc;
+    border-radius: 12px;
+  }
+  ol.pasos > li::before {
+    content: counter(paso);
+    position: absolute; left: 10px; top: 9px;
+    width: 32px; height: 32px; line-height: 32px; text-align: center;
+    border-radius: 50%; background: var(--oro); color: var(--noche); font-weight: 700;
+  }
+  ul { padding-left: 24px; margin: 8px 0; }
+  li { margin: 4px 0; }
+
+  .boton {
+    display: inline-block; padding: 1px 10px; border-radius: 8px;
+    background: var(--noche2); color: #fff; font-weight: 600; font-size: .92em; white-space: nowrap;
+  }
+  .boton.rojo { background: #b42318; }
+  .boton.linea { background: #fff; color: var(--noche2); border: 2px solid var(--noche2); }
+
+  .nota, .ojo, .bien {
+    border-radius: 12px; padding: 12px 16px; margin: 14px 0;
+  }
+  .nota { background: var(--fondo-nota); border-left: 6px solid var(--oro); }
+  .ojo { background: #fdecea; border-left: 6px solid #b42318; }
+  .bien { background: #e8f6ee; border-left: 6px solid #1c7c45; }
+  .nota b:first-child, .ojo b:first-child, .bien b:first-child { display: block; margin-bottom: 2px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 16px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  th { background: var(--noche2); color: #fff; font-weight: 600; }
+  tr { break-inside: avoid; }
+
+  .contacto {
+    background: linear-gradient(160deg, var(--noche) 0%, var(--noche2) 100%);
+    color: #fff; border-radius: 18px; padding: 22px 20px; margin-bottom: 20px;
+  }
+  .contacto h2 { color: #fff; }
+  .contacto a { color: var(--oro); }
+  .pie { text-align: center; color: var(--suave); font-size: 14px; margin-top: 24px; }
+
+  @media (max-width: 560px) {
+    body { font-size: 17px; }
+    .portada h1 { font-size: 27px; }
+    .indice ol { columns: 1; }
+    h2 { font-size: 21px; }
+  }
+
+  @media print {
+    @page { size: letter; margin: 14mm 14mm 16mm; }
+    body { background: #fff; font-size: 11.5pt; line-height: 1.5; }
+    .hoja { max-width: none; padding: 0; }
+    .portada {
+      background: #fff; color: var(--noche2); margin: 0 0 14pt; padding: 0 0 12pt;
+      border-bottom: 4px solid var(--oro);
+    }
+    .portada .chico { color: var(--oro-osc); }
+    .portada p { color: var(--tinta); }
+    .portada .dir { background: #fff; border: 1.5px solid var(--oro); }
+    .portada .dir b { color: var(--noche2); }
+    .indice, section.parte { border: 0; padding: 0; border-radius: 0; background: #fff; }
+    section.parte { break-before: page; }
+    section.parte.junto { break-before: auto; margin-top: 18pt; }
+    h2, h3 { break-after: avoid; }
+    ol.pasos > li { background: #fff; border: 1px solid var(--linea); break-inside: avoid; }
+    .nota, .ojo, .bien { break-inside: avoid; }
+    .boton { background: #fff; color: var(--noche2); border: 1.5px solid var(--noche2); }
+    .boton.rojo { color: #b42318; border-color: #b42318; background: #fff; }
+    .contacto { background: #fff; color: var(--tinta); border: 2px solid var(--oro); break-inside: avoid; }
+    .contacto h2 { color: var(--noche2); }
+    .contacto a { color: var(--noche2); }
+    a { color: inherit; text-decoration: none; }
+    th { background: var(--noche2); color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    ol.pasos > li::before, h2 .num { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="hoja">
+
+<header class="portada">
+  <p class="chico">Alegría Stereo Musical · Manual del dueño</p>
+  <h1>Cómo usar tu panel</h1>
+  <p>Con el panel tú mismo cambias lo que sale en la página de la emisora: cantantes, programas, anuncios, anunciantes, teléfono y redes. También ves los pedidos de canciones y los comentarios de los oyentes. No hace falta saber de computadoras.</p>
+  <div class="dir">Dirección del panel:<br><b>alegriastereomusical.com/admin</b></div>
+</header>
+
+<nav class="indice" aria-label="Contenido">
+  <h2>Lo que hay en este manual</h2>
+  <ol>
+    <li><a href="#entrar">Entrar al panel</a></li>
+    <li><a href="#inicio-celular">Ponerlo en tu celular</a></li>
+    <li><a href="#olvide">Si olvidas la contraseña</a></li>
+    <li><a href="#menu">El menú</a></li>
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#pedidos">Pedidos</a></li>
+    <li><a href="#comentarios">Comentarios</a></li>
+    <li><a href="#cantantes">Cantantes</a></li>
+    <li><a href="#programas">Programas</a></li>
+    <li><a href="#anuncios">Anuncios y eventos</a></li>
+    <li><a href="#anunciantes">Anunciantes</a></li>
+    <li><a href="#datos">Datos de la emisora</a></li>
+    <li><a href="#colores">Colores de la pantalla</a></li>
+    <li><a href="#fotos">Las fotos</a></li>
+    <li><a href="#falla">Si algo falla</a></li>
+  </ol>
+</nav>
+
+<!-- 1 -->
+<section class="parte junto" id="entrar">
+  <h2><span class="num">1</span>Entrar al panel</h2>
+  <ol class="pasos">
+    <li>Abre el navegador del celular (Chrome o Safari).</li>
+    <li>Arriba, donde se escriben las direcciones, pon: <b>alegriastereomusical.com/admin</b></li>
+    <li>En <b>Correo</b> escribe tu correo: <b>alegriastereomusical@gmail.com</b></li>
+    <li>En <b>Contraseña</b> escribe tu contraseña.</li>
+    <li>Toca <span class="boton">Entrar</span>.</li>
+  </ol>
+  <div class="nota"><b>Bueno saber</b>Normalmente el celular te recuerda. La próxima vez que abras el panel, entras directo sin escribir nada.</div>
+  <div class="ojo"><b>Cuidado</b>Si sale «El correo o la contraseña no son correctos», revisa que no haya un espacio de más y que las letras estén bien. Si no te acuerdas, mira la parte 3.</div>
+  <h3>Para salir</h3>
+  <p>Abre el menú (las tres rayitas ☰ de arriba a la izquierda) y toca <b>Salir</b>, al final. Hazlo siempre si usaste un celular o una computadora que no es tuya.</p>
+</section>
+
+<!-- 2 -->
+<section class="parte junto" id="inicio-celular">
+  <h2><span class="num">2</span>Ponerlo en la pantalla de tu celular</h2>
+  <p>Así el panel queda como un botón más, igual que WhatsApp.</p>
+  <h3>Si tu celular es Android (Chrome)</h3>
+  <ol class="pasos">
+    <li>Abre el panel como en la parte 1.</li>
+    <li>Toca los tres puntitos <b>⋮</b> de arriba a la derecha.</li>
+    <li>Toca <b>Agregar a la pantalla principal</b> (o «Añadir a pantalla de inicio»).</li>
+    <li>Toca <b>Agregar</b>.</li>
+  </ol>
+  <h3>Si tu celular es iPhone (Safari)</h3>
+  <ol class="pasos">
+    <li>Abre el panel en Safari.</li>
+    <li>Toca el botón de compartir (el cuadrito con la flecha hacia arriba ⬆).</li>
+    <li>Baja y toca <b>Agregar a inicio</b>.</li>
+    <li>Toca <b>Agregar</b>.</li>
+  </ol>
+  <div class="nota"><b>Bueno saber</b>Los nombres de estos botones cambian un poco según el modelo del celular. Si no los encuentras, pídele ayuda a Jonathan.</div>
+</section>
+
+<!-- 3 -->
+<section class="parte junto" id="olvide">
+  <h2><span class="num">3</span>Si olvidas la contraseña</h2>
+  <ol class="pasos">
+    <li>En la pantalla de entrar, escribe tu correo en <b>Correo</b>.</li>
+    <li>Toca <b>¿Olvidaste tu contraseña?</b> (debajo del botón Entrar).</li>
+    <li>Sale el aviso: «Te enviamos un correo con un enlace para crear una contraseña nueva».</li>
+    <li>Abre tu Gmail. Si no ves el correo, búscalo en <b>Spam</b>.</li>
+    <li>Toca el enlace del correo. Se abre el panel con la pantalla <b>Nueva contraseña</b>.</li>
+    <li>Escribe la contraseña nueva en <b>Nueva contraseña</b> y otra vez en <b>Repítela</b>. Debe tener mínimo 8 letras o números.</li>
+    <li>Toca <span class="boton">Guardar contraseña</span>. Listo, ya estás dentro.</li>
+  </ol>
+  <div class="ojo"><b>Tu contraseña es solo tuya</b>No se la des a nadie, ni la mandes por WhatsApp. Anótala en un lugar seguro. Si la contraseña te la creó otra persona, cámbiala con estos mismos pasos para que solo tú la sepas.</div>
+</section>
+
+<!-- 4 -->
+<section class="parte" id="menu">
+  <h2><span class="num">4</span>El menú</h2>
+  <p>En el celular, toca las tres rayitas <b>☰</b> de arriba a la izquierda. Se abre el menú con estas partes:</p>
+  <table>
+    <tr><th>Botón</th><th>Para qué sirve</th></tr>
+    <tr><td><b>Inicio</b></td><td>Un resumen de lo que pasa hoy.</td></tr>
+    <tr><td><b>Pedidos</b></td><td>Canciones y saludos que piden los oyentes.</td></tr>
+    <tr><td><b>Comentarios</b></td><td>Lo que escriben los oyentes sobre la emisora.</td></tr>
+    <tr><td><b>Cantantes</b></td><td>Los artistas que salen en la página.</td></tr>
+    <tr><td><b>Programas</b></td><td>Los programas, sus días y horas.</td></tr>
+    <tr><td><b>Anuncios y eventos</b></td><td>Noticias, avisos y eventos.</td></tr>
+    <tr><td><b>Anunciantes</b></td><td>Logos de los negocios que apoyan la emisora.</td></tr>
+    <tr><td><b>Datos de la emisora</b></td><td>Teléfono, WhatsApp, correo y redes.</td></tr>
+    <tr><td><b>Colores de la pantalla</b></td><td>Noche, Día o Sol (parte 13).</td></tr>
+    <tr><td><b>Ver la página</b></td><td>Abre la página pública para ver cómo quedó.</td></tr>
+    <tr><td><b>Salir</b></td><td>Cierra el panel.</td></tr>
+  </table>
+  <div class="nota"><b>La campanita 🔔</b>Arriba hay una campanita. Si tiene un número, hay pedidos nuevos o comentarios por revisar. Tócala y te lleva a ellos. Al lado de <b>Pedidos</b> y <b>Comentarios</b> en el menú también sale el número.</div>
+</section>
+
+<!-- 5 -->
+<section class="parte junto" id="inicio">
+  <h2><span class="num">5</span>Inicio</h2>
+  <p>Es la primera pantalla. Aquí ves de un vistazo:</p>
+  <ul>
+    <li><b>Pedidos nuevos</b>: cuántos hay sin atender y cuál fue el último. Tócalo para verlos.</li>
+    <li><b>Próximo programa</b> (o <b>Al aire ahora</b>): cuál sigue y cuánto falta, en hora de RD.</li>
+    <li><b>Talento de la semana</b>: el cantante que marcaste con la estrella.</li>
+    <li><b>Sonando ahora</b>: la canción que está sonando en la radio. Es solo para mirar.</li>
+    <li><b>Programación de la semana</b> y <b>Últimos pedidos</b>.</li>
+    <li><b>Acciones rápidas</b>: botones para agregar un cantante o un anuncio de una vez.</li>
+  </ul>
+</section>
+
+<!-- 6 -->
+<section class="parte" id="pedidos">
+  <h2><span class="num">6</span>Pedidos de canciones</h2>
+  <p>Cuando un oyente pide una canción o un saludo en la página, te llega por WhatsApp <b>y también</b> queda guardado aquí. Los oyentes no pueden ver los pedidos de otros; solo tú.</p>
+  <p>Cada pedido muestra el nombre, desde dónde escribe, la canción, para quién es y el saludo.</p>
+  <h3>Cuando ya lo pusiste al aire</h3>
+  <ol class="pasos">
+    <li>Toca <b>Pedidos</b> en el menú.</li>
+    <li>Busca el pedido y toca <span class="boton">✓ Marcar atendido</span>.</li>
+    <li>El pedido se pone gris y dice «Atendido». Si te equivocaste, toca <span class="boton linea">Marcar como nuevo</span>.</li>
+  </ol>
+  <h3>Para borrar un pedido</h3>
+  <ol class="pasos">
+    <li>Toca <span class="boton rojo">Borrar</span> en ese pedido.</li>
+    <li>Te pregunta si estás seguro. Toca <span class="boton rojo">Sí, borrar</span>. Si no, toca <b>No, cancelar</b>.</li>
+  </ol>
+  <div class="ojo"><b>Lo borrado no vuelve</b>Cuando borras algo, se borra para siempre. Si tienes duda, mejor márcalo como atendido.</div>
+  <div class="nota"><b>Para ver si llegaron pedidos nuevos</b>Toca <span class="boton linea">Actualizar</span> arriba a la derecha.<br>La pestaña <b>Inscripciones de talentos</b> por ahora queda vacía: los artistas que quieren participar te escriben directo por WhatsApp.</div>
+</section>
+
+<!-- 7 -->
+<section class="parte" id="comentarios">
+  <h2><span class="num">7</span>Comentarios de los oyentes</h2>
+  <p>Los oyentes pueden dejar un comentario en la página, con su nombre, su país y estrellas. <b>Ningún comentario sale en la página hasta que tú lo apruebes.</b> Así nadie puede poner groserías ni cosas feas.</p>
+  <p>Hay tres pestañas:</p>
+  <table>
+    <tr><th>Pestaña</th><th>Qué hay ahí</th></tr>
+    <tr><td><b>Por revisar</b></td><td>Los comentarios nuevos que todavía no has visto.</td></tr>
+    <tr><td><b>Publicados</b></td><td>Los que aprobaste. Estos sí salen en la página.</td></tr>
+    <tr><td><b>Ocultos</b></td><td>Los que decidiste no mostrar.</td></tr>
+  </table>
+  <h3>Qué puedes hacer con cada comentario</h3>
+  <ul>
+    <li><span class="boton">✓ Aprobar</span>: el comentario sale en la página.</li>
+    <li><span class="boton linea">★ Destacar</span>: sale de primero en la página, con borde dorado. Solo aparece en los ya aprobados. Para quitarlo, toca <b>Quitar destacado</b>.</li>
+    <li><span class="boton linea">Ocultar</span>: el comentario no sale en la página, pero lo guardas.</li>
+    <li><span class="boton rojo">Borrar</span>: se borra para siempre (te pregunta antes).</li>
+  </ul>
+  <h3>Paso a paso</h3>
+  <ol class="pasos">
+    <li>Toca <b>Comentarios</b> en el menú. Se abre en <b>Por revisar</b>.</li>
+    <li>Lee el comentario.</li>
+    <li>Si está bien, toca <b>Aprobar</b>. Si no te gusta, toca <b>Ocultar</b> o <b>Borrar</b>.</li>
+  </ol>
+  <div class="nota"><b>Bueno saber</b>En la página salen los últimos 9 comentarios aprobados, primero los destacados. Si un comentario oculto lo quieres publicar después, ve a <b>Ocultos</b> y toca <b>Aprobar</b>.</div>
+</section>
+
+<!-- 8 -->
+<section class="parte" id="cantantes">
+  <h2><span class="num">8</span>Cantantes</h2>
+  <p>Los cantantes salen en la página en la parte <b>«Voces que brillan aquí»</b>. Si no hay ninguno, esa parte no aparece.</p>
+  <div class="ojo"><b>Antes de publicar a un artista</b>Pídele permiso para poner su foto y su nombre en la página. Lo mejor es que te lo diga por WhatsApp, así queda escrito.</div>
+  <h3>Agregar un cantante</h3>
+  <ol class="pasos">
+    <li>Toca <b>Cantantes</b> en el menú.</li>
+    <li>Toca <span class="boton">+ Agregar cantante</span>.</li>
+    <li>En <b>Foto del cantante</b>, toca <b>Elegir foto</b> y escoge la foto de tu galería, o tómala con la cámara.</li>
+    <li>Escribe el <b>Nombre artístico</b>. Es lo único obligatorio.</li>
+    <li>Si quieres, llena <b>País</b>, <b>Género</b> (bachata, merengue…), <b>Frase corta</b>, y los enlaces de su <b>Instagram</b>, <b>Facebook</b>, <b>YouTube</b> y <b>TikTok</b>.</li>
+    <li>Toca <span class="boton">Guardar</span>. Sale «Guardado» y ya está en la página.</li>
+  </ol>
+  <h3>Talento de la semana ⭐</h3>
+  <ol class="pasos">
+    <li>Abre al cantante con <span class="boton linea">Editar</span>.</li>
+    <li>Prende el botón <b>Talento de la semana</b>.</li>
+    <li>Toca <b>Guardar</b>. Sale en grande arriba de todos, y en el panel lo ves con una estrella.</li>
+  </ol>
+  <p>Solo puede haber uno a la vez. Cuando marcas a uno nuevo, al anterior se le quita solo.</p>
+  <h3>Esconder a un cantante sin borrarlo</h3>
+  <p>Abre al cantante con <b>Editar</b>, apaga <b>Mostrar en la página</b> y toca <b>Guardar</b>. Ya no sale en la página, pero sigue guardado en el panel con la marca «Oculto». Para que vuelva a salir, prende el botón otra vez.</p>
+  <h3>Cambiar o borrar</h3>
+  <ul>
+    <li>Para cambiar algo: <b>Editar</b> → cambias → <b>Guardar</b>.</li>
+    <li>Para cambiar la foto: en Editar, toca <b>Elegir foto</b> y escoge otra. Para quitarla: <b>Quitar foto</b>.</li>
+    <li>Para borrarlo para siempre: <span class="boton rojo">Borrar</span> → <b>Sí, borrar</b>.</li>
+  </ul>
+</section>
+
+<!-- 9 -->
+<section class="parte" id="programas">
+  <h2><span class="num">9</span>Programas</h2>
+  <p>Lo que pongas aquí sale en <b>«Nuestros programas»</b> de la página. La página calcula sola cuál está <b>al aire ahora</b>, cuál es el <b>próximo</b>, y la hora en otros países.</p>
+  <h3>Agregar o cambiar un programa</h3>
+  <ol class="pasos">
+    <li>Toca <b>Programas</b> en el menú.</li>
+    <li>Toca <span class="boton">+ Agregar programa</span>, o <span class="boton linea">Editar</span> en uno que ya existe.</li>
+    <li>Escribe el <b>Nombre del programa</b>.</li>
+    <li>En <b>¿Qué días sale?</b> toca las letras de los días: L (lunes), M (martes), M (miércoles), J, V, S, D (domingo). Los días marcados se pintan. Toca otra vez para desmarcar.</li>
+    <li>En <b>Hora en que empieza</b> pon la hora <b>de República Dominicana</b>. La página la cambia sola para los oyentes de otros países.</li>
+    <li>En <b>Duración</b> escoge cuánto dura: de 30 minutos a 5 horas.</li>
+    <li>Revisa el <b>Locutor</b> (ya viene «Robinson Peña») y el <b>Apodo del locutor</b>.</li>
+    <li>Si quieres, llena <b>Lema</b>, <b>Descripción</b>, <b>Temas del programa</b> (separados con comas) y <b>Lo presenta (emisora aliada)</b>.</li>
+    <li>En <b>Volante del programa</b> toca <b>Elegir foto</b> para subir el volante (el afiche del programa).</li>
+    <li>Toca <span class="boton">Guardar</span>.</li>
+  </ol>
+  <div class="ojo"><b>Ojo con los horarios que chocan</b>El panel no te avisa si dos programas caen a la misma hora el mismo día. Si eso pasa, la página se confunde con cuál está «al aire». Antes de guardar, mira la lista y fíjate que no se crucen.</div>
+  <div class="nota"><b>Para quitar un programa por un tiempo</b>Apaga <b>Mostrar en la página</b> y guarda. Cuando vuelva, lo prendes otra vez.</div>
+</section>
+
+<!-- 10 -->
+<section class="parte" id="anuncios">
+  <h2><span class="num">10</span>Anuncios y eventos</h2>
+  <p>Noticias, avisos y eventos de la emisora. Salen en la página en <b>«Lo que viene»</b>, y arriba en el menú de la página aparece «Eventos».</p>
+  <ol class="pasos">
+    <li>Toca <b>Anuncios y eventos</b> en el menú.</li>
+    <li>Toca <span class="boton">+ Agregar anuncio</span>.</li>
+    <li>Escribe el <b>Título</b> (obligatorio) y el <b>Texto</b> con los detalles.</li>
+    <li>Si es un evento, pon la <b>Fecha del evento</b>.</li>
+    <li>Si quieres, sube una <b>Foto del anuncio</b> y pon un <b>Enlace</b> para más información.</li>
+    <li>Toca <span class="boton">Guardar</span>.</li>
+  </ol>
+  <div class="bien"><b>Los eventos se quitan solos</b>Si le pones fecha, el anuncio se ve en la página <b>hasta el mismo día del evento</b>. Al día siguiente ya no sale (sigue guardado en el panel). Los anuncios <b>sin fecha</b> se quedan en la página hasta que tú los escondas o los borres.</div>
+</section>
+
+<!-- 11 -->
+<section class="parte junto" id="anunciantes">
+  <h2><span class="num">11</span>Anunciantes</h2>
+  <p>Los logos de los negocios que patrocinan la emisora. Salen en la página en <b>«Gracias a quienes nos apoyan»</b>. Si no hay ninguno, esa parte no aparece.</p>
+  <ol class="pasos">
+    <li>Toca <b>Anunciantes</b> en el menú.</li>
+    <li>Toca <span class="boton">+ Agregar anunciante</span>.</li>
+    <li>En <b>Logo o banner</b> toca <b>Elegir foto</b> y escoge el logo.</li>
+    <li>Escribe el <b>Nombre del negocio</b>.</li>
+    <li>Si quieres, pon un <b>Enlace</b>: su página, su Instagram o su WhatsApp.</li>
+    <li>Toca <span class="boton">Guardar</span>.</li>
+  </ol>
+  <p>Cuando un negocio deje de anunciarse, apaga <b>Mostrar en la página</b> o bórralo.</p>
+</section>
+
+<!-- 12 -->
+<section class="parte" id="datos">
+  <h2><span class="num">12</span>Datos de la emisora</h2>
+  <p>El teléfono, el WhatsApp, el correo y las redes que salen en la página.</p>
+  <ol class="pasos">
+    <li>Toca <b>Datos de la emisora</b> en el menú.</li>
+    <li>Cambia lo que necesites.</li>
+    <li>Toca <span class="boton">Guardar cambios</span>.</li>
+  </ol>
+  <table>
+    <tr><th>Dato</th><th>Cómo escribirlo</th></tr>
+    <tr><td><b>Teléfono</b></td><td>Como se lee, por ejemplo: (809) 420-1033</td></tr>
+    <tr><td><b>WhatsApp</b></td><td>Solo números, con el <b>1</b> delante y sin espacios ni rayitas. Ejemplo: <b>18094201033</b></td></tr>
+    <tr><td><b>Correo</b></td><td>El correo de la emisora.</td></tr>
+    <tr><td><b>Instagram, TikTok</b></td><td>El enlace completo del perfil.</td></tr>
+    <tr><td><b>Facebook, YouTube</b></td><td>El enlace completo, cuando los tengas.</td></tr>
+  </table>
+  <div class="bien"><b>Facebook y YouTube aparecen solos</b>Cuando pongas el enlace de Facebook o de YouTube y guardes, el botón aparece solo en la página. Si dejas una casilla vacía, esa red no se muestra.</div>
+  <div class="nota"><b>Cómo copiar el enlace de una red</b>Abre tu perfil en la aplicación (Facebook, YouTube…), toca <b>Compartir</b> → <b>Copiar enlace</b>, y pégalo en la casilla dejando el dedo apretado → <b>Pegar</b>.</div>
+</section>
+
+<!-- 13 -->
+<section class="parte junto" id="colores">
+  <h2><span class="num">13</span>Colores de la pantalla: Noche, Día, Sol</h2>
+  <p>Puedes cambiar los colores del panel para verlo mejor. Esto <b>solo cambia tu pantalla</b>, no la página de los oyentes.</p>
+  <ul>
+    <li><b>Noche</b>: fondo azul oscuro. Bueno para de noche.</li>
+    <li><b>Día</b>: fondo claro.</li>
+    <li><b>Sol</b>: blanco y negro bien fuerte. Se lee mejor afuera, con sol.</li>
+  </ul>
+  <p>Escógelo en el menú, en <b>Colores de la pantalla</b>. O toca el botón del sol / la luna de arriba: cada toque cambia al siguiente. Tu celular lo recuerda para la próxima vez.</p>
+</section>
+
+<!-- 14 -->
+<section class="parte junto" id="fotos">
+  <h2><span class="num">14</span>Las fotos</h2>
+  <ul>
+    <li>Sube la foto tal cual sale de tu celular. El panel la achica sola para que la página cargue rápido.</li>
+    <li>Después de elegirla, la ves en pequeño. Si no es la que querías, toca <b>Quitar foto</b> o <b>Elegir foto</b> otra vez.</li>
+    <li>La foto se sube cuando tocas <b>Guardar</b>. El botón dice «Subiendo foto…»: espera a que salga «Guardado» y no cierres la pantalla.</li>
+    <li>Usa fotos claras, derechas y con buena luz.</li>
+  </ul>
+</section>
+
+<!-- 15 -->
+<section class="parte" id="falla">
+  <h2><span class="num">15</span>Si algo falla</h2>
+  <p>Prueba esto en orden:</p>
+  <ol class="pasos">
+    <li><b>Revisa el internet.</b> Mira que tengas datos o Wi-Fi. Abre otra página (por ejemplo Google) para probar.</li>
+    <li><b>Recarga la página.</b> Desliza la pantalla hacia abajo desde arriba, o toca la flechita circular ⟳ del navegador.</li>
+    <li>Si sale <b>«No se pudo guardar. Revisa tu internet e intenta de nuevo.»</b>, espera un momento y toca <b>Guardar</b> otra vez. Lo que escribiste sigue ahí.</li>
+    <li>Si sale <b>«No se pudo cargar la información»</b>, toca <span class="boton">Intentar de nuevo</span>.</li>
+    <li>Cierra el navegador del todo y ábrelo de nuevo.</li>
+    <li>Si nada de esto funciona, <b>avísale a Jonathan</b>. Mándale una captura de pantalla de lo que ves y dile qué estabas haciendo.</li>
+  </ol>
+  <div class="nota"><b>Si la radio no suena en la página</b>La señal de la radio viene de Zeno.fm. Revisa primero que la emisora esté transmitiendo en Zeno.</div>
+  <div class="nota"><b>Si la página no muestra lo que pusiste en el panel</b>(cantantes, anuncios, comentarios), avísale a Jonathan. Puede ser que el servicio donde se guardan los datos se haya pausado por falta de uso, y se arregla rápido.</div>
+</section>
+
+<section class="contacto">
+  <h2>¿Necesitas ayuda?</h2>
+  <p><b>Jonathan Santiago</b> — diseño y desarrollo de la página.</p>
+  <p>Portafolio: <a href="https://jonathansantiago.pages.dev">jonathansantiago.pages.dev</a></p>
+  <p>WhatsApp / teléfono: [POR DEFINIR]</p>
+</section>
+
+<p class="pie">Alegría Stereo Musical · Manual del panel · alegriastereomusical.com/admin</p>
+
+</div>
+</body>
+</html>

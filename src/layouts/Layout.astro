@@ -11,17 +11,22 @@ import { emisora } from "../data/emisora";
 interface Props {
   titulo?: string;
   descripcion?: string;
+  /** true = Google no la guarda (ej. la página 404). */
+  noindex?: boolean;
 }
 
 const {
   titulo = `${emisora.nombre} · Radio en vivo desde Santo Domingo`,
   descripcion = `${emisora.lema}. Romántica, tropical, baladas, clásicos y éxitos actuales en vivo. Pide tu canción por WhatsApp.`,
+  noindex = false,
 } = Astro.props;
 
 const icono = await getImage({ src: logo, width: 192, height: 192, format: "png" });
 const iconoApple = await getImage({ src: logo, width: 180, height: 180, format: "png" });
 const vistaPrevia = await getImage({ src: logo, width: 630, height: 630, format: "jpg" });
 const urlVistaPrevia = new URL(vistaPrevia.src, Astro.site).href;
+const urlPagina = new URL(Astro.url.pathname, Astro.site).href;
+const textoVistaPrevia = `Logo de ${emisora.nombre}`;
 ---
 
 <!doctype html>
@@ -36,13 +41,26 @@ const urlVistaPrevia = new URL(vistaPrevia.src, Astro.site).href;
     <link rel="apple-touch-icon" href={iconoApple.src} />
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="apple-mobile-web-app-title" content="Alegría Stereo" />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={urlPagina} />}
+    <!-- Vista previa al compartir (WhatsApp, Facebook, X) -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={emisora.nombre} />
     <meta property="og:locale" content="es_DO" />
+    {!noindex && <meta property="og:url" content={urlPagina} />}
     <meta property="og:title" content={titulo} />
     <meta property="og:description" content={descripcion} />
     <meta property="og:image" content={urlVistaPrevia} />
+    <meta property="og:image:secure_url" content={urlVistaPrevia} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="630" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={textoVistaPrevia} />
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={titulo} />
+    <meta name="twitter:description" content={descripcion} />
+    <meta name="twitter:image" content={urlVistaPrevia} />
+    <meta name="twitter:image:alt" content={textoVistaPrevia} />
+    <slot name="head" />
     <script is:inline>document.documentElement.classList.add("js");</script>
   </head>
   <body>

@@ -7,9 +7,11 @@ interface Props {
   icono?: string;
 }
 const { class: clase = "", icono = "size-6" } = Astro.props;
+// Si el botón tiene texto visible, ese texto es su nombre; si es solo el icono, lleva aria-label.
+const soloIcono = !Astro.slots.has("default");
 ---
 
-<button type="button" data-play aria-label="Escuchar en vivo" aria-pressed="false" class={clase}>
+<button type="button" data-play aria-label={soloIcono ? "Escuchar en vivo" : undefined} aria-pressed="false" class={clase}>
   <span class="icono-play"><Icono nombre="play" class={icono} /></span>
   <span class="icono-pausa"><Icono nombre="pausa" class={icono} /></span>
   <span class="icono-carga"><Icono nombre="carga" class={`${icono} girar`} /></span>

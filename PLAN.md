@@ -29,7 +29,7 @@ La plataforma de monetización le pide la URL al dueño para activar anunciantes
 - [x] Cuenta de Cloudflare
 - [x] Publicado en Cloudflare Pages (12/11/2026): **https://alegriastereomusical.pages.dev** — cada push a main se publica solo
 - [x] Revisada la versión publicada: radio suena, "Sonando ahora", horarios, sin errores
-- [ ] Revisar la vista previa al compartir el enlace por WhatsApp/redes
+- [x] Revisar la vista previa al compartir el enlace por WhatsApp/redes (etiquetas completas 13/11/2026)
 - [x] `site` en `astro.config.mjs` = https://alegriastereomusical.com
 - [x] El dueño ya tiene su dirección: alegriastereomusical.com
 - [x] Dominio **alegriastereomusical.com** comprado en Cloudflare (12/11/2026, US$11.17/año) a nombre de Robinzon Urbaez — renovación automática ACTIVA (confirmado 12/11/2026)
@@ -82,7 +82,7 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 - [x] Programas desde el panel (12/11/2026)
 - [x] Comentarios y reseñas de los oyentes (13/11/2026): nombre, país, estrellas; salen solo cuando el dueño los
       aprueba en el panel (Comentarios → Aprobar / Ocultar / Destacar / Borrar). Tabla: `supabase/04-comentarios.sql`
-- [ ] Borrar el comentario de prueba "PRUEBA CLAUDE" desde el panel (Comentarios → Por revisar)
+- [x] Borrar el comentario de prueba "PRUEBA CLAUDE" desde el panel (borrado 13/11/2026)
 - [x] Facebook y YouTube: aparecen solos cuando el dueño los pone en "Datos de la emisora"
 - [x] Crédito en el pie de página: «Diseño y desarrollo web: Jonathan Santiago» → https://jonathansantiago.pages.dev
 
@@ -104,27 +104,28 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
    - [ ] **Tú:** Android y iPhone: radio suena, botones de WhatsApp, formularios (pedido y comentario)
    - [ ] **Tú + Dueño:** panel desde el celular del dueño: subir foto de la galería, aprobar comentario, cambiar programa
 4. **Limpiar pruebas**
-   - [ ] **Tú:** borrar el comentario "PRUEBA CLAUDE" y cualquier otro dato de prueba
+   - [x] **Tú:** borrar el comentario "PRUEBA CLAUDE" y cualquier otro dato de prueba (13/11/2026)
 
 ### 🟡 Muy recomendable
 5. **Google y compartir** (Yo)
-   - [ ] Vista previa al compartir por WhatsApp/Facebook (logo + nombre)
-   - [ ] `sitemap` y `robots.txt` para que Google encuentre la página
-   - [ ] Página 404 bonita
+   - [x] Vista previa al compartir por WhatsApp/Facebook (logo + nombre)
+   - [x] `sitemap` y `robots.txt` para que Google encuentre la página
+   - [x] Página 404 bonita
 6. **Velocidad y accesibilidad** (Yo)
-   - [ ] Medir con Lighthouse (celular) y arreglar lo que salga bajo: velocidad, accesibilidad, SEO
+   - [x] Lighthouse (celular): accesibilidad, buenas prácticas y SEO en 100. Velocidad ~87 en Cloudflare; subir más
+         exigiría quitar efectos de diseño (desenfoques y animaciones), se dejó así.
 7. **Privacidad** (Yo)
-   - [ ] Aviso de privacidad corto: la página guarda nombre, país y comentarios / pedidos (qué y para qué)
+   - [x] Aviso de privacidad en /privacidad (enlaces en el pie y en los formularios)
 8. **Supabase gratis se puede pausar** si pasa días sin uso
    - [ ] Saberlo: si un día la página no muestra lo del panel, entrar a Supabase y reactivarlo
 9. **Copia de seguridad** (Yo)
-   - [ ] Sacar una copia de la base al entregar, y luego cada cierto tiempo (el plan gratis no guarda copias)
+   - [x] Primera copia 13/11/2026 en `respaldos/` (no se sube a GitHub). Cómo repetirla: `supabase/COMO-RESPALDAR.md`
 
 ### 🟢 La entrega
 10. **Manual del dueño** (Yo)
-    - [ ] Guía corta con capturas: entrar al panel, subir cantante, aprobar comentarios, colores, olvidé mi contraseña
+    - [x] `docs/manual-del-dueno.html` (sin capturas todavía; se pueden agregar)
 11. **Documento de entrega** (Yo)
-    - [ ] Qué se hizo, direcciones (página y panel), cuentas, costos y qué incluye el soporte después
+    - [x] `docs/entrega.html` (faltan los [POR DEFINIR]: cuentas, soporte, fecha, nombre legal del dueño, WhatsApp de Jonathan)
 
 ## 💡 Ideas para más adelante (solo si el dueño lo pide)
 - [ ] **"Escúchalo otra vez" (pódcast / programas grabados):** sección en la página con episodios o videos, manejada

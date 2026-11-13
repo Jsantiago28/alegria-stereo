@@ -66,6 +66,7 @@ function avisar(texto: string, tipo: "bien" | "mal" = "bien") {
   temporizadorToast = window.setTimeout(() => (toast.hidden = true), tipo === "bien" ? 2500 : 6000);
 }
 const ERROR_RED = "No se pudo guardar. Revisa tu internet e intenta de nuevo.";
+const NO_BORRO = "No se pudo borrar. Recarga la página e intenta de nuevo.";
 
 /* ---------- Confirmar antes de borrar ---------- */
 const dialogo = $<HTMLDialogElement>("#confirmar");
@@ -584,6 +585,56 @@ async function dibujar() {
 }
 
 /* ---------- Inicio ---------- */
+/* ---------- Escuchar la radio dentro del panel ---------- */
+const radio = new Audio();
+radio.preload = "none";
+let estadoRadio: "parado" | "cargando" | "sonando" = "parado";
+const IC_PLAY = '<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.52.85l10.4-6.5a1 1 0 0 0 0-1.7L9.52 4.65A1 1 0 0 0 8 5.5Z"/></svg>';
+const IC_PAUSA = '<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4.5" width="4.5" height="15" rx="1.2"/><rect x="13.5" y="4.5" width="4.5" height="15" rx="1.2"/></svg>';
+
+function botonRadioHTML() {
+  const sonando = estadoRadio !== "parado";
+  return `<button id="boton-radio" class="boton" data-accion="radio" aria-pressed="${sonando}" aria-label="${sonando ? "Pausar la radio" : "Escuchar la radio"}" style="width:52px;height:52px;padding:0;border-radius:50%;flex:none">${
+    estadoRadio === "cargando" ? svg('<path d="M21 12a9 9 0 1 1-6.22-8.56"/>') : sonando ? IC_PAUSA : IC_PLAY
+  }</button>`;
+}
+function ponerEstadoRadio(e: typeof estadoRadio) {
+  estadoRadio = e;
+  const b = document.getElementById("boton-radio");
+  if (b) b.outerHTML = botonRadioHTML();
+  // Arriba, junto a la campana: botón de pausa mientras suena (para pararla desde cualquier sección).
+  const arriba = $("#radio-cabecera");
+  arriba.hidden = e === "parado";
+  arriba.innerHTML = e === "cargando" ? svg('<path d="M21 12a9 9 0 1 1-6.22-8.56"/>') : IC_PAUSA;
+}
+$("#radio-cabecera").addEventListener("click", alternarRadio);
+async function alternarRadio() {
+  if (estadoRadio !== "parado") {
+    radio.pause();
+    radio.removeAttribute("src");
+    radio.load(); // corta la descarga de la señal
+    return ponerEstadoRadio("parado");
+  }
+  ponerEstadoRadio("cargando");
+  radio.src = emisora.stream; // señal en vivo: se conecta de nuevo para oír lo de ahora
+  try {
+    await radio.play();
+  } catch (e) {
+    if ((e as DOMException)?.name === "AbortError") return;
+    ponerEstadoRadio("parado");
+    avisar("No se pudo conectar con la radio. Intenta de nuevo.", "mal");
+  }
+}
+radio.addEventListener("playing", () => ponerEstadoRadio("sonando"));
+radio.addEventListener("waiting", () => {
+  if (radio.getAttribute("src")) ponerEstadoRadio("cargando");
+});
+radio.addEventListener("error", () => {
+  if (!radio.getAttribute("src")) return;
+  ponerEstadoRadio("parado");
+  avisar("Se perdió la conexión con la radio. Dale play otra vez.", "mal");
+});
+
 let fuenteSonando: EventSource | null = null;
 let ultimaCancion = "";
 function escucharSonando() {
@@ -643,8 +694,8 @@ async function dibujarInicio() {
       <div class="columna">
         <section class="tarjeta panelito">
           <h2>${svg(IC.musica)}Sonando ahora</h2>
-          <p class="nota">Viene de la señal de Zeno. Solo para mirar.</p>
-          <div class="fila"><div class="cuerpo-fila"><div class="nom" id="sonando">${esc(ultimaCancion || "Conectando con la radio…")}</div></div><span class="chip chip-ok">● Al aire</span></div>
+          <p class="nota">La misma radio que se escucha en la página. Sigue sonando aunque cambies de sección.</p>
+          <div class="fila">${botonRadioHTML()}<div class="cuerpo-fila"><div class="nom" id="sonando">${esc(ultimaCancion || "Conectando con la radio…")}</div></div><span class="chip chip-ok">● Al aire</span></div>
         </section>
         <section class="tarjeta panelito">
           <h2>${svg(IC.calendario)}Programación de la semana</h2>
@@ -938,6 +989,7 @@ contenido.addEventListener("click", async (e) => {
   const [sec] = location.hash.slice(1).split("/");
 
   if (accion === "ir") return ir(boton.dataset.ruta!);
+  if (accion === "radio") return alternarRadio();
   if (accion === "editar") return ir(`${sec}/${id}`);
   if (accion === "reintentar" || accion === "recargar") return dibujar();
   if (accion === "pestana") {
@@ -970,8 +1022,8 @@ contenido.addEventListener("click", async (e) => {
   if (accion === "com-borrar") {
     const c = datos.comentarios.find((x) => x.id === id);
     if (!c || !(await confirmar("¿Seguro que quieres borrar este comentario?", `El comentario de ${c.nombre} se borrará para siempre.`))) return;
-    const { error } = await supabase.from("comentarios").delete().eq("id", id);
-    if (error) return avisar(ERROR_RED, "mal");
+    const { data: borrados, error } = await supabase.from("comentarios").delete().eq("id", id).select("id");
+    if (error || !borrados?.length) return avisar(NO_BORRO, "mal");
     avisar("Comentario borrado");
     return dibujarComentarios();
   }
@@ -979,8 +1031,8 @@ contenido.addEventListener("click", async (e) => {
   if (accion === "borrar-pedido") {
     const p = datos.pedidos.find((x) => x.id === id);
     if (!p || !(await confirmar("¿Seguro que quieres borrar este pedido?", `El pedido de ${p.nombre} se borrará para siempre.`))) return;
-    const { error } = await supabase.from("pedidos").delete().eq("id", id);
-    if (error) return avisar(ERROR_RED, "mal");
+    const { data: borrados, error } = await supabase.from("pedidos").delete().eq("id", id).select("id");
+    if (error || !borrados?.length) return avisar(NO_BORRO, "mal");
     avisar("Pedido borrado");
     return dibujarPedidos();
   }
@@ -989,8 +1041,8 @@ contenido.addEventListener("click", async (e) => {
     const col = colecciones[sec];
     const fila = datos[col.tabla].find((f) => f.id === id);
     if (!fila || !(await confirmar(`¿Seguro que quieres borrar «${col.nombre(fila)}»?`, "Se borrará de la página para siempre. Si solo quieres esconderlo, apaga «Mostrar en la página»."))) return;
-    const { error } = await supabase.from(col.tabla).delete().eq("id", id);
-    if (error) return avisar(ERROR_RED, "mal");
+    const { data: borrados, error } = await supabase.from(col.tabla).delete().eq("id", id).select("id");
+    if (error || !borrados?.length) return avisar(NO_BORRO, "mal");
     await borrarFotos(col.campos.filter((c) => c.tipo === "foto").map((c) => fila[c.k])).catch(() => {});
     await cargar(col.tabla);
     avisar("Borrado");
@@ -1166,6 +1218,7 @@ supabase.auth.onAuthStateChange((evento, sesion) => {
       panelListo = false;
       clearInterval(intervaloPedidos);
       fuenteSonando?.close();
+      if (estadoRadio !== "parado") alternarRadio(); // al salir, se apaga la radio
       fuenteSonando = null;
       contenido.innerHTML = "";
       verVista("vista-entrar");

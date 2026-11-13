@@ -1,0 +1,28 @@
+---
+// Página que sale cuando alguien entra a una dirección que no existe.
+// Cloudflare Pages la sirve sola (dist/404.html) para cualquier ruta inexistente.
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import Icono from "../components/Icono.astro";
+import logo from "../assets/logo.png";
+import { emisora } from "../data/emisora";
+---
+
+<Layout titulo={`Página no encontrada · ${emisora.nombre}`} noindex>
+  <main class="luces flex min-h-svh items-center justify-center px-4 py-16">
+    <div class="vidrio borde-oro w-full max-w-lg rounded-3xl p-8 text-center sm:p-10">
+      <a href="/" aria-label={`Ir al inicio de ${emisora.nombre}`} class="inline-block">
+        <Image src={logo} alt="" width={112} height={112} densities={[1.5, 2]} class="mx-auto size-28 rounded-full" loading="eager" />
+      </a>
+      <p class="mt-6 font-titulo text-6xl font-extrabold sm:text-7xl"><span class="oro">404</span></p>
+      <h1 class="mt-4 font-titulo text-2xl font-bold text-white sm:text-3xl">Esta página no existe</h1>
+      <p class="mx-auto mt-3 max-w-sm text-suave">
+        Puede que el enlace esté mal escrito o que la página ya no esté. Pero tranquilo, la música sigue sonando.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/" class="boton-oro"><Icono nombre="radio" /> Volver al inicio</a>
+        <a href="/#inicio" class="boton-linea"><Icono nombre="play" /> Escuchar en vivo</a>
+      </div>
+    </div>
+  </main>
+</Layout>

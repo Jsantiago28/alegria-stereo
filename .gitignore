@@ -6,3 +6,6 @@ dist/
 
 # Configuración personal de Claude Code
 .claude/settings.local.json
+
+# Copias de seguridad de la base (tienen datos de oyentes)
+respaldos/

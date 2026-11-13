@@ -56,8 +56,8 @@ const barras = Array.from({ length: 28 });
         <Image
           src={logo}
           alt={`Logo de ${emisora.nombre}`}
-          widths={[320, 520, 840]}
-          sizes="(min-width: 1024px) 416px, 85vw"
+          widths={[320, 520, 680, 840]}
+          sizes="(min-width: 1024px) 416px, min(416px, calc(100vw - 2rem))"
           class="disco size-full scale-[1.02] object-cover"
           loading="eager"
           fetchpriority="high"

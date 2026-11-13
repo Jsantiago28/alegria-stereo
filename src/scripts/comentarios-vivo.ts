@@ -23,7 +23,7 @@ function bandera(pais: string | null) {
 const ESTRELLA = '<path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"/>';
 function estrellasHTML(n: number | null) {
   if (!n) return "";
-  return `<p class="flex gap-0.5 text-oro" aria-label="${n} de 5 estrellas">${[1, 2, 3, 4, 5]
+  return `<p class="flex gap-0.5 text-oro" role="img" aria-label="${n} de 5 estrellas">${[1, 2, 3, 4, 5]
     .map((i) => `<svg class="size-5 ${i <= n ? "" : "opacity-25"}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${ESTRELLA}</svg>`)
     .join("")}</p>`;
 }

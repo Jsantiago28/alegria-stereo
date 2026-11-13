@@ -91,22 +91,11 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 - [ ] Fotos de los cantantes **con su permiso** + nombre artístico, país, género y redes de cada uno
 - [ ] Fotos de la cabina y de Robinson Peña
 - [x] Su correo para el panel
-- [ ] Subir su logo al perfil de Zeno (hoy sale un círculo verde vacío)
 
-## 🔎 Que el dueño confirme con Zeno
-- [ ] **¿Zeno cuenta a los oyentes que escuchan desde nuestra página?** (NO está confirmado: Zeno no lo dice)
-      Prueba de 5 minutos:
-      1. El dueño abre las estadísticas de oyentes en vivo en su panel de Zeno y anota el número.
-      2. Abrimos alegriastereomusical.pages.dev en 2–3 teléfonos/computadoras y le damos play.
-      3. Si el número sube en 2–3 → confirmado.
-      → Si NO sube: cambiar nuestro reproductor por el reproductor oficial de Zeno (manteniendo el diseño).
-- [ ] **¿Los anuncios de audio de Zeno suenan también en nuestra página?** (deberían, porque van dentro de
-      la transmisión, pero confirmarlo; importante para la monetización)
-- [ ] **Licencias de música:** según Zeno, sus licencias (ASCAP, BMI, SESAC) solo cubren lo que se escucha en
-      zeno.fm, no en la página propia de la emisora. Zeno recomienda sacar licencias propias para el sitio web.
-      Pasa con cualquier página que transmita la radio (también con la demo de QCoreT).
-      → Que el dueño lo consulte, sobre todo antes de monetizar.
-      Fuente: https://help.zeno.fm/en/articles/8348796-plans-faq
+## 📻 Zeno — fuera de nuestro trabajo (decidido 12/11/2026)
+Todo lo de Zeno lo resuelve el dueño por su cuenta: logo en su perfil, si cuenta a los oyentes de nuestra página,
+si los anuncios de audio suenan aquí y las licencias de música (según Zeno, sus licencias solo cubren zeno.fm:
+https://help.zeno.fm/en/articles/8348796-plans-faq). Ya quedó avisado; no lo seguimos aquí.
 
 ## ✔️ Confirmado por el cliente
 - [x] Correo: alegriastereomusical@gmail.com

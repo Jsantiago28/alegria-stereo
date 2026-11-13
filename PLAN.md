@@ -82,6 +82,22 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 - [x] Programas desde el panel (12/11/2026)
 - [x] Facebook y YouTube: aparecen solos cuando el dueño los pone en "Datos de la emisora"
 
+## 💡 Ideas para más adelante (solo si el dueño lo pide)
+- [ ] **"Escúchalo otra vez" (pódcast / programas grabados):** sección en la página con episodios o videos, manejada
+      desde el panel como los anuncios (el dueño pega el enlace de YouTube o Spotify y se muestra).
+      Cómo lo haría la emisora:
+      1. Grabar el programa mientras sale al aire (botón "grabar" del programa de emisión, p. ej. BUTT, o Audacity
+         conectado a la salida de la consola). Preguntar qué programa usa el dueño para emitir.
+      2. Editar: cortar silencios/errores, poner entrada y salida.
+      3. **Quitar las canciones completas** (la licencia de la radio en vivo no cubre escucharlas a pedido); dejar
+         la conversación: entrevistas, saludos, comentarios.
+      4. Subir a una plataforma de pódcast (p. ej. Spotify for Creators, gratis) → se reparte a Spotify, Apple, etc.
+      - Video en vivo: celular/cámara en la cabina transmitiendo por Facebook Live, YouTube o TikTok Live mientras
+        sale al aire.
+      - Lo más prometedor: **Talentos sin Fronteras**. Los artistas cantan sus propias canciones, así que con su
+        permiso se puede publicar la presentación completa, y ellos la comparten.
+- [ ] Centrar la galería de cantantes cuando hay solo 1–2 (además del Talento de la semana).
+
 ---
 
 ## 📋 Pendiente que mande el dueño

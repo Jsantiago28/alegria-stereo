@@ -84,6 +84,47 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
       aprueba en el panel (Comentarios → Aprobar / Ocultar / Destacar / Borrar). Tabla: `supabase/04-comentarios.sql`
 - [ ] Borrar el comentario de prueba "PRUEBA CLAUDE" desde el panel (Comentarios → Por revisar)
 - [x] Facebook y YouTube: aparecen solos cuando el dueño los pone en "Datos de la emisora"
+- [x] Crédito en el pie de página: «Diseño y desarrollo web: Jonathan Santiago» → https://jonathansantiago.pages.dev
+
+## 🏁 PASO 5 — Revisión antes de la entrega (lo que valida un programador profesional)
+**Yo (Claude)** = lo puede hacer Claude · **Tú** = lo hace Jonathan · **Dueño** = lo hace el cliente
+
+### 🔴 Imprescindible
+1. **Seguridad**
+   - [x] Reglas de la base probadas (el público no ve pedidos ni comentarios pendientes; nadie edita sin ser admin)
+   - [x] En el código solo está la clave pública de Supabase (nunca la secreta)
+   - [ ] **Tú:** apagar registros públicos en Supabase (Authentication → Sign In / Providers → "Allow new users to sign up")
+   - [ ] **Dueño:** cambiar su contraseña del panel por una que solo él sepa (si la creó Jonathan)
+2. **Cuentas y propiedad** (dejarlo por escrito; es lo que más problemas da después)
+   - [x] Dominio a nombre del dueño (Cloudflare, US$11.17/año, renovación automática)
+   - [ ] **Tú:** decidir de quién quedan Cloudflare (hosting), GitHub (código) y Supabase (hoy en la cuenta de Jonathan):
+         pasárselas al dueño o dejar escrito que Jonathan las administra
+   - [ ] Lista de cuentas: qué es, a nombre de quién y cuánto cuesta
+3. **Prueba completa en teléfonos reales**
+   - [ ] **Tú:** Android y iPhone: radio suena, botones de WhatsApp, formularios (pedido y comentario)
+   - [ ] **Tú + Dueño:** panel desde el celular del dueño: subir foto de la galería, aprobar comentario, cambiar programa
+4. **Limpiar pruebas**
+   - [ ] **Tú:** borrar el comentario "PRUEBA CLAUDE" y cualquier otro dato de prueba
+
+### 🟡 Muy recomendable
+5. **Google y compartir** (Yo)
+   - [ ] Vista previa al compartir por WhatsApp/Facebook (logo + nombre)
+   - [ ] `sitemap` y `robots.txt` para que Google encuentre la página
+   - [ ] Página 404 bonita
+6. **Velocidad y accesibilidad** (Yo)
+   - [ ] Medir con Lighthouse (celular) y arreglar lo que salga bajo: velocidad, accesibilidad, SEO
+7. **Privacidad** (Yo)
+   - [ ] Aviso de privacidad corto: la página guarda nombre, país y comentarios / pedidos (qué y para qué)
+8. **Supabase gratis se puede pausar** si pasa días sin uso
+   - [ ] Saberlo: si un día la página no muestra lo del panel, entrar a Supabase y reactivarlo
+9. **Copia de seguridad** (Yo)
+   - [ ] Sacar una copia de la base al entregar, y luego cada cierto tiempo (el plan gratis no guarda copias)
+
+### 🟢 La entrega
+10. **Manual del dueño** (Yo)
+    - [ ] Guía corta con capturas: entrar al panel, subir cantante, aprobar comentarios, colores, olvidé mi contraseña
+11. **Documento de entrega** (Yo)
+    - [ ] Qué se hizo, direcciones (página y panel), cuentas, costos y qué incluye el soporte después
 
 ## 💡 Ideas para más adelante (solo si el dueño lo pide)
 - [ ] **"Escúchalo otra vez" (pódcast / programas grabados):** sección en la página con episodios o videos, manejada

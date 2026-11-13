@@ -62,7 +62,9 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 - [x] **Anunciantes:** logos/banners que el dueño sube y quita
 - [x] **Datos de la emisora:** teléfono, correo, redes
 - [x] **Pedidos de canciones** guardados en una lista (además de WhatsApp) — probado: se guardan y el público no los ve
-- [ ] Inscripciones de talentos a la lista (hoy los cuadros de Talentos solo abren WhatsApp → va con el paso 4)
+- [ ] Inscripciones de talentos a la lista: el dueño decidió dejarlo así por ahora (12/11/2026). Los cuadros de
+      Talentos solo abren WhatsApp; la pestaña "Inscripciones de talentos" del panel queda vacía. Las inscripciones
+      serían privadas; solo es público lo que el dueño agrega en Cantantes.
 - [x] Las fotos se achican solas antes de subirlas (el dueño sube la foto tal cual del celular)
 - [x] Colores de la pantalla: Noche / Día / Sol (se recuerda en el teléfono)
 - [ ] Supabase → Authentication → URL Configuration: Site URL `https://alegriastereomusical.com` y Redirect URL

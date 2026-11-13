@@ -38,10 +38,10 @@ La plataforma de monetización le pide la URL al dueño para activar anunciantes
 - [x] Correo de verificación ICANN confirmado por el dueño (12/11/2026)
 
 ## 🟠 PASO 2 — Base de datos (Supabase)
-- [ ] Crear proyecto `alegria-stereo` en Supabase (ideal: en una cuenta del dueño; la cuenta del usuario
+- [x] Crear proyecto `alegria-stereo` en Supabase (ideal: en una cuenta del dueño; la cuenta del usuario
       ya tiene Barbería PRO y el plan gratis permite 2 proyectos)
-- [ ] Pasar el **Project URL** y la **anon / publishable key** (NUNCA la service_role / secret)
-- [ ] Correo del dueño para entrar al panel
+- [x] Pasar el **Project URL** y la **anon / publishable key** (NUNCA la service_role / secret)
+- [x] Correo del dueño para entrar al panel
 - [x] Esquema aplicado (12/11/2026): tablas, carpeta de fotos y datos iniciales (2 programas + datos de contacto)
 - [x] Permisos probados: el visitante ve programas/ajustes y envía pedidos, pero NO ve pedidos;
       un usuario que no es admin NO puede editar
@@ -52,7 +52,7 @@ La plataforma de monetización le pide la URL al dueño para activar anunciantes
 - [ ] Apagar registros públicos: Authentication → Sign In / Providers → desactivar "Allow new users to sign up"
 - [ ] (Opcional) "Leaked password protection" en Authentication (puede requerir plan de pago)
 
-## 🟠 PASO 3 — Panel /admin para el dueño (programado 12/11/2026, falta probarlo con la cuenta del dueño)
+## ✅ PASO 3 — Panel /admin para el dueño (publicado 12/11/2026: alegriastereomusical.com/admin)
 Maqueta aprobada: https://claude.ai/artifact/LBiZstp2oRginYpnUYait5
 Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css`, `src/lib/`
 - [x] Entrar con correo y contraseña (solo el dueño) + "¿Olvidaste tu contraseña?"
@@ -70,14 +70,16 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 - [ ] Supabase → Authentication → URL Configuration: Site URL `https://alegriastereomusical.com` y Redirect URL
       `https://alegriastereomusical.com/admin` (para que funcione "¿Olvidaste tu contraseña?")
 - [ ] Borrar el pedido de prueba "PRUEBA CLAUDE" desde el panel
-- [ ] Si Supabase falla, la página sigue mostrando la información de respaldo (→ paso 4, cuando la página lea de Supabase)
+- [x] Si Supabase falla, la página sigue mostrando la información de respaldo (programas)
 
 ## 🟡 PASO 4 — Secciones nuevas en la página pública
 - [ ] "Voces que brillan aquí": Talento de la semana + galería de cantantes (se ve en grande al tocar,
       en el celular se desliza de lado) + botón "¿Quieres estar aquí? Participa"
       → va debajo de Talentos y antes de Pide tu canción
-- [ ] Anuncios / eventos
+- [x] Anuncios / eventos (se ven hasta el día del evento)
 - [ ] Espacio para anunciantes
+- [ ] Datos de contacto (teléfono, WhatsApp, correo, redes) que el dueño cambia en el panel
+- [x] Programas desde el panel (12/11/2026)
 - [ ] Facebook (cuando el dueño lo mande)
 
 ---
@@ -88,7 +90,7 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 - [ ] Facebook de la emisora (si tiene)
 - [ ] Fotos de los cantantes **con su permiso** + nombre artístico, país, género y redes de cada uno
 - [ ] Fotos de la cabina y de Robinson Peña
-- [ ] Su correo para el panel
+- [x] Su correo para el panel
 - [ ] Subir su logo al perfil de Zeno (hoy sale un círculo verde vacío)
 
 ## 🔎 Que el dueño confirme con Zeno

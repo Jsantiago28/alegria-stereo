@@ -1,4 +1,5 @@
 import { emisora, programas, DIFERENCIA_RD, nombresDias, enlaceWhatsApp } from "../data/emisora";
+import { guardarPedido } from "../lib/config";
 
 const raiz = document.documentElement;
 const audio = document.getElementById("audio") as HTMLAudioElement;
@@ -229,6 +230,16 @@ form.addEventListener("submit", (e) => {
   if (valor("saludo")) lineas.push(`💬 Saludo: ${valor("saludo")}`);
   lineas.push(`🙋 De parte de: ${valor("nombre")}`);
   if (valor("desde")) lineas.push(`📍 Desde: ${valor("desde")}`);
+
+  // También queda guardado en la lista de pedidos del panel. Si falla, el pedido igual sale por WhatsApp.
+  guardarPedido({
+    tipo: "cancion",
+    nombre: valor("nombre").slice(0, 60),
+    cancion: valor("cancion").slice(0, 120),
+    dedicada_a: valor("para").slice(0, 80) || null,
+    mensaje: valor("saludo").slice(0, 300) || null,
+    desde: valor("desde").slice(0, 60) || null,
+  }).catch(() => {});
 
   window.open(enlaceWhatsApp(lineas.join("\n")), "_blank", "noopener");
 });

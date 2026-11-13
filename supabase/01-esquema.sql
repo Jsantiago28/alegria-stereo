@@ -19,7 +19,12 @@ alter table public.administradores enable row level security;
 create policy "cada admin se ve a sí mismo" on public.administradores
   for select to authenticated using (user_id = (select auth.uid()));
 
-create or replace function public.es_admin()
+-- Va en un esquema "privado" que no se publica en la API (nadie la llama desde internet).
+create schema if not exists privado;
+revoke all on schema privado from public;
+grant usage on schema privado to anon, authenticated;
+
+create or replace function privado.es_admin()
 returns boolean
 language sql
 stable
@@ -28,8 +33,8 @@ set search_path = ''
 as $$
   select exists (select 1 from public.administradores where user_id = (select auth.uid()));
 $$;
-revoke all on function public.es_admin() from public;
-grant execute on function public.es_admin() to anon, authenticated;
+revoke all on function privado.es_admin() from public;
+grant execute on function privado.es_admin() to anon, authenticated;
 
 -- ---------- Datos de la emisora (una sola fila) ----------
 create table public.ajustes (
@@ -130,23 +135,23 @@ alter table public.pedidos enable row level security;
 
 -- Ver: el público ve lo activo; el admin lo ve todo.
 create policy "ver ajustes" on public.ajustes for select to anon, authenticated using (true);
-create policy "ver programas" on public.programas for select to anon, authenticated using (activo or (select public.es_admin()));
-create policy "ver cantantes" on public.cantantes for select to anon, authenticated using (activo or (select public.es_admin()));
-create policy "ver anuncios" on public.anuncios for select to anon, authenticated using (activo or (select public.es_admin()));
-create policy "ver anunciantes" on public.anunciantes for select to anon, authenticated using (activo or (select public.es_admin()));
+create policy "ver programas" on public.programas for select to anon, authenticated using (activo or (select privado.es_admin()));
+create policy "ver cantantes" on public.cantantes for select to anon, authenticated using (activo or (select privado.es_admin()));
+create policy "ver anuncios" on public.anuncios for select to anon, authenticated using (activo or (select privado.es_admin()));
+create policy "ver anunciantes" on public.anunciantes for select to anon, authenticated using (activo or (select privado.es_admin()));
 
 -- Crear / editar / borrar: solo el admin.
-create policy "admin ajustes" on public.ajustes for all to authenticated using ((select public.es_admin())) with check ((select public.es_admin()));
-create policy "admin programas" on public.programas for all to authenticated using ((select public.es_admin())) with check ((select public.es_admin()));
-create policy "admin cantantes" on public.cantantes for all to authenticated using ((select public.es_admin())) with check ((select public.es_admin()));
-create policy "admin anuncios" on public.anuncios for all to authenticated using ((select public.es_admin())) with check ((select public.es_admin()));
-create policy "admin anunciantes" on public.anunciantes for all to authenticated using ((select public.es_admin())) with check ((select public.es_admin()));
+create policy "admin ajustes" on public.ajustes for all to authenticated using ((select privado.es_admin())) with check ((select privado.es_admin()));
+create policy "admin programas" on public.programas for all to authenticated using ((select privado.es_admin())) with check ((select privado.es_admin()));
+create policy "admin cantantes" on public.cantantes for all to authenticated using ((select privado.es_admin())) with check ((select privado.es_admin()));
+create policy "admin anuncios" on public.anuncios for all to authenticated using ((select privado.es_admin())) with check ((select privado.es_admin()));
+create policy "admin anunciantes" on public.anunciantes for all to authenticated using ((select privado.es_admin())) with check ((select privado.es_admin()));
 
 -- Pedidos: cualquiera puede enviar uno (nuevo, sin marcar como atendido); solo el admin los ve y maneja.
 create policy "enviar pedido" on public.pedidos for insert to anon, authenticated with check (atendido = false);
-create policy "admin ve pedidos" on public.pedidos for select to authenticated using ((select public.es_admin()));
-create policy "admin maneja pedidos" on public.pedidos for update to authenticated using ((select public.es_admin())) with check ((select public.es_admin()));
-create policy "admin borra pedidos" on public.pedidos for delete to authenticated using ((select public.es_admin()));
+create policy "admin ve pedidos" on public.pedidos for select to authenticated using ((select privado.es_admin()));
+create policy "admin maneja pedidos" on public.pedidos for update to authenticated using ((select privado.es_admin())) with check ((select privado.es_admin()));
+create policy "admin borra pedidos" on public.pedidos for delete to authenticated using ((select privado.es_admin()));
 
 grant select on public.ajustes, public.programas, public.cantantes, public.anuncios, public.anunciantes to anon, authenticated;
 grant insert, update, delete on public.ajustes, public.programas, public.cantantes, public.anuncios, public.anunciantes to authenticated;
@@ -161,13 +166,13 @@ insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_typ
 values ('fotos', 'fotos', true, 5242880, array['image/jpeg', 'image/png', 'image/webp']);
 
 create policy "admin sube fotos" on storage.objects for insert to authenticated
-  with check (bucket_id = 'fotos' and (select public.es_admin()));
+  with check (bucket_id = 'fotos' and (select privado.es_admin()));
 create policy "admin cambia fotos" on storage.objects for update to authenticated
-  using (bucket_id = 'fotos' and (select public.es_admin()));
+  using (bucket_id = 'fotos' and (select privado.es_admin()));
 create policy "admin borra fotos" on storage.objects for delete to authenticated
-  using (bucket_id = 'fotos' and (select public.es_admin()));
+  using (bucket_id = 'fotos' and (select privado.es_admin()));
 create policy "admin lista fotos" on storage.objects for select to authenticated
-  using (bucket_id = 'fotos' and (select public.es_admin()));
+  using (bucket_id = 'fotos' and (select privado.es_admin()));
 
 -- ---------- Datos iniciales (lo que ya tiene la página) ----------
 insert into public.ajustes (id, telefono, whatsapp, correo, instagram, tiktok)

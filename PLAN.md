@@ -42,18 +42,33 @@ La plataforma de monetización le pide la URL al dueño para activar anunciantes
       ya tiene Barbería PRO y el plan gratis permite 2 proyectos)
 - [ ] Pasar el **Project URL** y la **anon / publishable key** (NUNCA la service_role / secret)
 - [ ] Correo del dueño para entrar al panel
-- [ ] Yo preparo el SQL (tablas, fotos, permisos) → el usuario lo pega en Supabase y le da "Run"
+- [x] Esquema aplicado (12/11/2026): tablas, carpeta de fotos y datos iniciales (2 programas + datos de contacto)
+- [x] Permisos probados: el visitante ve programas/ajustes y envía pedidos, pero NO ve pedidos;
+      un usuario que no es admin NO puede editar
+- [x] es_admin() escondida en el esquema `privado` (0 avisos de seguridad en Supabase)
+- [x] `supabase/03-endurecer-permisos.sql` aplicado a mano (0 avisos de rendimiento).
+      Ojo: Claude no puede aplicar SQL con `drop`; Supabase pide confirmarlo a mano.
+- [x] Usuario del dueño creado y hecho administrador (12/11/2026); probado: puede editar
+- [ ] Apagar registros públicos: Authentication → Sign In / Providers → desactivar "Allow new users to sign up"
+- [ ] (Opcional) "Leaked password protection" en Authentication (puede requerir plan de pago)
 
-## 🟠 PASO 3 — Panel /admin para el dueño
-- [ ] Entrar con correo y contraseña (solo el dueño)
-- [ ] **Cantantes:** agregar, editar, borrar, marcar "Talento de la semana" (foto, nombre, país, género, redes)
-- [ ] **Programas:** agregar, editar, borrar (nombre, días, hora, duración, descripción, volante)
-- [ ] **Anuncios / eventos / noticias** con foto: subir y borrar
-- [ ] **Anunciantes:** logos/banners que el dueño sube y quita
-- [ ] **Datos de la emisora:** teléfono, correo, redes
-- [ ] **Pedidos de canciones e inscripciones de talentos** guardados en una lista (además de WhatsApp)
-- [ ] Las fotos se achican solas antes de subirlas (el dueño sube la foto tal cual del celular)
-- [ ] Si Supabase falla, la página sigue mostrando la información de respaldo
+## 🟠 PASO 3 — Panel /admin para el dueño (programado 12/11/2026, falta probarlo con la cuenta del dueño)
+Maqueta aprobada: https://claude.ai/artifact/LBiZstp2oRginYpnUYait5
+Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css`, `src/lib/`
+- [x] Entrar con correo y contraseña (solo el dueño) + "¿Olvidaste tu contraseña?"
+- [x] **Cantantes:** agregar, editar, borrar, marcar "Talento de la semana" (foto, nombre, país, género, redes)
+- [x] **Programas:** agregar, editar, borrar (nombre, días, hora, duración, descripción, volante)
+- [x] **Anuncios / eventos / noticias** con foto: subir y borrar
+- [x] **Anunciantes:** logos/banners que el dueño sube y quita
+- [x] **Datos de la emisora:** teléfono, correo, redes
+- [x] **Pedidos de canciones** guardados en una lista (además de WhatsApp) — probado: se guardan y el público no los ve
+- [ ] Inscripciones de talentos a la lista (hoy los cuadros de Talentos solo abren WhatsApp → va con el paso 4)
+- [x] Las fotos se achican solas antes de subirlas (el dueño sube la foto tal cual del celular)
+- [x] Colores de la pantalla: Noche / Día / Sol (se recuerda en el teléfono)
+- [ ] Supabase → Authentication → URL Configuration: Site URL `https://alegriastereomusical.com` y Redirect URL
+      `https://alegriastereomusical.com/admin` (para que funcione "¿Olvidaste tu contraseña?")
+- [ ] Borrar el pedido de prueba "PRUEBA CLAUDE" desde el panel
+- [ ] Si Supabase falla, la página sigue mostrando la información de respaldo (→ paso 4, cuando la página lea de Supabase)
 
 ## 🟡 PASO 4 — Secciones nuevas en la página pública
 - [ ] "Voces que brillan aquí": Talento de la semana + galería de cantantes (se ve en grande al tocar,

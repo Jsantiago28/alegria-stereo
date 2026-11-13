@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
 import Nosotros from "../components/Nosotros.astro";
 import Programacion from "../components/Programacion.astro";
+import Anuncios from "../components/Anuncios.astro";
 import Talentos from "../components/Talentos.astro";
 import PideCancion from "../components/PideCancion.astro";
 import Contacto from "../components/Contacto.astro";
@@ -16,6 +17,7 @@ import Pie from "../components/Pie.astro";
     <Hero />
     <Nosotros />
     <Programacion />
+    <Anuncios />
     <Talentos />
     <PideCancion />
     <Contacto />
@@ -25,4 +27,6 @@ import Pie from "../components/Pie.astro";
 
 <script>
   import "../scripts/radio.ts";
+  import { cargarAnuncios } from "../scripts/anuncios-vivo.ts";
+  cargarAnuncios();
 </script>

@@ -8,6 +8,8 @@ import { emisora } from "../data/emisora";
 const enlaces = [
   { texto: "Nosotros", href: "#nosotros" },
   { texto: "Programación", href: "#programacion" },
+  // Solo se muestra cuando hay anuncios publicados (lo enciende src/scripts/anuncios-vivo.ts).
+  { texto: "Eventos", href: "#anuncios", soloConAnuncios: true },
   { texto: "Talentos", href: "#talentos" },
   { texto: "Pide tu canción", href: "#pide" },
   { texto: "Contacto", href: "#contacto" },
@@ -26,7 +28,7 @@ const enlaces = [
     <ul class="hidden items-center gap-6 text-sm font-semibold text-suave lg:flex">
       {
         enlaces.map((e) => (
-          <li>
+          <li hidden={e.soloConAnuncios} data-enlace-anuncios={e.soloConAnuncios ? "" : undefined}>
             <a href={e.href} class="enlace-nav transition hover:text-white">
               {e.texto}
             </a>
@@ -56,7 +58,12 @@ const enlaces = [
   <div id="menu-movil" class="flex-col gap-1 border-t border-white/5 px-4 pb-4 lg:hidden">
     {
       enlaces.map((e) => (
-        <a href={e.href} class="enlace-nav rounded-xl px-3 py-3 font-semibold text-suave hover:bg-white/5">
+        <a
+          href={e.href}
+          class="enlace-nav rounded-xl px-3 py-3 font-semibold text-suave hover:bg-white/5"
+          hidden={e.soloConAnuncios}
+          data-enlace-anuncios={e.soloConAnuncios ? "" : undefined}
+        >
           {e.texto}
         </a>
       ))

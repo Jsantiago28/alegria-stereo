@@ -1,0 +1,73 @@
+---
+// "Lo que dicen nuestros oyentes": comentarios y reseñas.
+// Los oyentes los envían aquí; solo salen en la página cuando el dueño los aprueba en el panel (/admin → Comentarios).
+import Icono from "./Icono.astro";
+
+const paises = [
+  "República Dominicana", "Estados Unidos", "Puerto Rico", "México", "Perú", "Colombia", "Venezuela", "España",
+  "Ecuador", "Chile", "Argentina", "Guatemala", "Honduras", "El Salvador", "Nicaragua", "Costa Rica", "Panamá",
+  "Cuba", "Bolivia", "Paraguay", "Uruguay", "Canadá", "Italia", "Francia", "Alemania", "Suiza", "Reino Unido",
+];
+const campo =
+  "mt-1.5 w-full rounded-xl border border-white/10 bg-noche/60 px-4 py-3 text-white placeholder:text-suave/60 outline-none transition focus:border-oro focus:ring-2 focus:ring-oro/30";
+---
+
+<section id="comentarios" class="relative py-24">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="aparece mx-auto max-w-2xl text-center">
+      <p class="text-sm font-semibold tracking-[0.3em] text-oro">COMENTARIOS</p>
+      <h2 class="mt-3 font-titulo text-4xl font-bold sm:text-5xl">Lo que dicen <span class="oro">nuestros oyentes</span></h2>
+      <p class="mt-4 text-lg text-suave" data-sin-comentarios>Sé el primero en contarnos qué te parece la emisora.</p>
+    </div>
+
+    <ul data-lista-comentarios class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" hidden></ul>
+
+    <div class="mt-10 text-center">
+      <button type="button" data-abrir-comentario class="boton-oro text-lg !px-8 !py-4" aria-expanded="false" aria-controls="form-comentario">
+        <Icono nombre="estrella" class="size-6" /> Deja tu comentario
+      </button>
+    </div>
+
+    <form id="form-comentario" class="vidrio borde-oro mx-auto mt-8 max-w-xl space-y-4 rounded-3xl p-6 text-left sm:p-8" novalidate hidden>
+      <div>
+        <span class="text-sm font-semibold" id="titulo-estrellas">¿Cuántas estrellas nos das? <span class="font-normal text-suave">(opcional)</span></span>
+        <div class="mt-2 flex gap-1" role="radiogroup" aria-labelledby="titulo-estrellas" data-estrellas>
+          {
+            [1, 2, 3, 4, 5].map((n) => (
+              <button type="button" role="radio" aria-checked="false" data-estrella={n} aria-label={`${n} ${n === 1 ? "estrella" : "estrellas"}`} class="text-suave/40 transition hover:scale-110">
+                <Icono nombre="estrella" class="size-9" />
+              </button>
+            ))
+          }
+        </div>
+      </div>
+      <div>
+        <label for="com-texto" class="text-sm font-semibold">Tu comentario</label>
+        <textarea id="com-texto" name="texto" rows="4" maxlength="300" required class={campo} placeholder="¿Qué te gusta de la emisora? ¿Qué programa escuchas?"></textarea>
+        <p class="mt-1 text-right text-xs text-suave"><span data-contador>0</span>/300</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="com-nombre" class="text-sm font-semibold">Tu nombre</label>
+          <input id="com-nombre" name="nombre" required maxlength="60" autocomplete="given-name" class={campo} />
+        </div>
+        <div>
+          <label for="com-pais" class="text-sm font-semibold">País</label>
+          <input id="com-pais" name="pais" maxlength="60" list="lista-paises" autocomplete="country-name" class={campo} placeholder="Escríbelo o elígelo" />
+          <datalist id="lista-paises">{paises.map((p) => <option value={p} />)}</datalist>
+        </div>
+      </div>
+      <!-- Trampa para robots: las personas no ven este campo. -->
+      <div class="absolute -left-[9999px]" aria-hidden="true">
+        <label for="com-web">No llenar</label><input id="com-web" name="web" tabindex="-1" autocomplete="off" />
+      </div>
+      <p data-error-comentario class="hidden rounded-xl bg-red-500/15 px-4 py-2 text-sm text-red-200" role="alert"></p>
+      <button type="submit" class="boton-oro w-full text-lg !py-4">Enviar comentario</button>
+      <p class="text-center text-xs text-suave">Solo pedimos tu nombre y país. Tu comentario aparecerá cuando la emisora lo revise.</p>
+    </form>
+
+    <p data-gracias class="vidrio mx-auto mt-8 max-w-xl rounded-3xl p-6 text-center text-lg" role="status" hidden>
+      ¡Gracias por tu comentario! 💛 Aparecerá en la página cuando la emisora lo revise.
+    </p>
+  </div>
+</section>

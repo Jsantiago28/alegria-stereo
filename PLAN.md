@@ -80,6 +80,9 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 - [x] Espacio para anunciantes (+ botón "¿Quieres anunciar tu negocio aquí?")
 - [x] Datos de contacto (teléfono, WhatsApp, correo, redes) que el dueño cambia en el panel
 - [x] Programas desde el panel (12/11/2026)
+- [x] Comentarios y reseñas de los oyentes (13/11/2026): nombre, país, estrellas; salen solo cuando el dueño los
+      aprueba en el panel (Comentarios → Aprobar / Ocultar / Destacar / Borrar). Tabla: `supabase/04-comentarios.sql`
+- [ ] Borrar el comentario de prueba "PRUEBA CLAUDE" desde el panel (Comentarios → Por revisar)
 - [x] Facebook y YouTube: aparecen solos cuando el dueño los pone en "Datos de la emisora"
 
 ## 💡 Ideas para más adelante (solo si el dueño lo pide)

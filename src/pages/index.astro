@@ -8,6 +8,7 @@ import Anuncios from "../components/Anuncios.astro";
 import Talentos from "../components/Talentos.astro";
 import Cantantes from "../components/Cantantes.astro";
 import PideCancion from "../components/PideCancion.astro";
+import Comentarios from "../components/Comentarios.astro";
 import Anunciantes from "../components/Anunciantes.astro";
 import Contacto from "../components/Contacto.astro";
 import Pie from "../components/Pie.astro";
@@ -23,6 +24,7 @@ import Pie from "../components/Pie.astro";
     <Talentos />
     <Cantantes />
     <PideCancion />
+    <Comentarios />
     <Anunciantes />
     <Contacto />
   </main>
@@ -36,6 +38,8 @@ import Pie from "../components/Pie.astro";
   import { cargarAnuncios } from "../scripts/anuncios-vivo.ts";
   import { cargarCantantes } from "../scripts/cantantes-vivo.ts";
   import { cargarAnunciantes } from "../scripts/anunciantes-vivo.ts";
+  import { iniciarComentarios } from "../scripts/comentarios-vivo.ts";
+  iniciarComentarios();
   cargarContacto();
   cargarAnuncios();
   cargarCantantes();

@@ -207,20 +207,21 @@ function duracionTexto(min: number) {
 /* =====================================================================
    Datos en memoria
    ===================================================================== */
-const datos: Record<string, Fila[]> = { programas: [], cantantes: [], anuncios: [], anunciantes: [], pedidos: [] };
+const datos: Record<string, Fila[]> = { programas: [], cantantes: [], anuncios: [], anunciantes: [], pedidos: [], comentarios: [] };
 let ajustes: Fila | null = null;
 let cargado: Record<string, boolean> = {};
 
 async function cargar(tabla: string) {
   const consulta = supabase.from(tabla).select("*");
   const { data, error } =
-    tabla === "anuncios" || tabla === "pedidos"
+    tabla === "anuncios" || tabla === "pedidos" || tabla === "comentarios"
       ? await consulta.order("creado", { ascending: false }).limit(300)
       : await consulta.order("orden").order("creado");
   if (error) throw error;
   datos[tabla] = data ?? [];
   cargado[tabla] = true;
-  if (tabla === "pedidos") ponerInsignia(datos.pedidos.filter((p) => !p.atendido).length);
+  if (tabla === "pedidos") ponerInsignia("pedidos", datos.pedidos.filter((p) => !p.atendido).length);
+  if (tabla === "comentarios") ponerInsignia("comentarios", datos.comentarios.filter((c) => !c.revisado).length);
 }
 async function cargarAjustes() {
   const { data, error } = await supabase.from("ajustes").select("*").eq("id", 1).maybeSingle();
@@ -228,16 +229,31 @@ async function cargarAjustes() {
   ajustes = data;
 }
 
-function ponerInsignia(n: number) {
-  document.querySelectorAll<HTMLElement>("[data-insignia]").forEach((el) => {
-    el.textContent = n > 99 ? "99+" : String(n);
-    el.hidden = n === 0;
-  });
-  $("#campana").setAttribute("aria-label", n ? `Ver pedidos (${n} nuevos)` : "Ver pedidos");
+// Números de pendientes: pedidos sin atender y comentarios sin revisar. La campana muestra la suma.
+const pendientes = { pedidos: 0, comentarios: 0 };
+function ponerInsignia(cual: "pedidos" | "comentarios", n: number) {
+  pendientes[cual] = n;
+  const total = pendientes.pedidos + pendientes.comentarios;
+  const poner = (sel: string, v: number) =>
+    document.querySelectorAll<HTMLElement>(sel).forEach((el) => {
+      el.textContent = v > 99 ? "99+" : String(v);
+      el.hidden = v === 0;
+    });
+  poner(`[data-insignia="${cual}"]`, n);
+  poner('[data-insignia="total"]', total);
+  const partes = [
+    pendientes.pedidos && `${pendientes.pedidos} ${pendientes.pedidos === 1 ? "pedido nuevo" : "pedidos nuevos"}`,
+    pendientes.comentarios && `${pendientes.comentarios} ${pendientes.comentarios === 1 ? "comentario" : "comentarios"} por revisar`,
+  ].filter(Boolean);
+  $("#campana").setAttribute("aria-label", partes.length ? `Pendientes: ${partes.join(" y ")}` : "Sin pendientes");
 }
-async function contarPedidosNuevos() {
-  const { count } = await supabase.from("pedidos").select("id", { count: "exact", head: true }).eq("atendido", false);
-  if (typeof count === "number") ponerInsignia(count);
+async function contarPendientes() {
+  const [p, c] = await Promise.all([
+    supabase.from("pedidos").select("id", { count: "exact", head: true }).eq("atendido", false),
+    supabase.from("comentarios").select("id", { count: "exact", head: true }).eq("revisado", false),
+  ]);
+  if (typeof p.count === "number") ponerInsignia("pedidos", p.count);
+  if (typeof c.count === "number") ponerInsignia("comentarios", c.count);
 }
 
 /* =====================================================================
@@ -523,9 +539,10 @@ function mostrarErrores(form: HTMLFormElement, errores: { k: string; msj: string
 /* =====================================================================
    Navegación (#seccion, #seccion/nuevo, #seccion/<id>)
    ===================================================================== */
-const SECCIONES = ["inicio", "pedidos", "cantantes", "programas", "anuncios", "anunciantes", "datos"];
+const SECCIONES = ["inicio", "pedidos", "comentarios", "cantantes", "programas", "anuncios", "anunciantes", "datos"];
 const contenido = $("#contenido");
 let pestanaPedidos: "cancion" | "talento" = "cancion";
+let pestanaComentarios: "revisar" | "publicados" | "ocultos" = "revisar";
 
 function ir(ruta: string) {
   if (location.hash === `#${ruta}`) dibujar();
@@ -544,6 +561,7 @@ async function dibujar() {
   try {
     if (seccion === "inicio") await dibujarInicio();
     else if (seccion === "pedidos") await dibujarPedidos();
+    else if (seccion === "comentarios") await dibujarComentarios();
     else if (seccion === "datos") await dibujarDatos();
     else {
       const col = colecciones[seccion];
@@ -719,6 +737,66 @@ async function dibujarPedidos() {
     }</div>`;
 }
 
+/* ---------- Comentarios de los oyentes ---------- */
+const ESTRELLA_LLENA = (n: number) =>
+  `<span style="color:var(--acc);letter-spacing:2px" aria-label="${n} de 5 estrellas">${"★".repeat(n)}<span style="opacity:.3">${"★".repeat(5 - n)}</span></span>`;
+
+async function dibujarComentarios() {
+  contenido.innerHTML = `<p class="cargando-texto">Cargando…</p>`;
+  await cargar("comentarios"); // siempre fresco
+  const todos = datos.comentarios;
+  const grupos = {
+    revisar: todos.filter((c) => !c.revisado),
+    publicados: todos.filter((c) => c.aprobado),
+    ocultos: todos.filter((c) => c.revisado && !c.aprobado),
+  };
+  const lista = [...grupos[pestanaComentarios]].sort((a, b) => Number(b.destacado) - Number(a.destacado));
+  const pest = (t: keyof typeof grupos, texto: string) =>
+    `<button role="tab" aria-selected="${pestanaComentarios === t}" data-accion="pestana-com" data-pestana="${t}">${texto} (${grupos[t].length})</button>`;
+  const vacio = {
+    revisar: "No hay comentarios nuevos. Cuando un oyente deje uno en la página, aparecerá aquí para que lo revises.",
+    publicados: "Todavía no has aprobado ningún comentario.",
+    ocultos: "No hay comentarios ocultos.",
+  }[pestanaComentarios];
+
+  contenido.innerHTML = `
+    <div class="encabezado"><div><h1 class="titulo-fuente">Comentarios</h1><p>Lo que escriben los oyentes. Solo salen en la página los que apruebes.</p></div>
+      <button class="boton-suave" data-accion="recargar">Actualizar</button></div>
+    <div class="pestanas" role="tablist">${pest("revisar", "Por revisar")}${pest("publicados", "Publicados")}${pest("ocultos", "Ocultos")}</div>
+    <div class="filas" style="gap:14px">${
+      lista.length
+        ? lista
+            .map(
+              (c) => `
+      <article class="tarjeta pedido">
+        <div class="arriba"><div class="avatar">${esc(iniciales(c.nombre))}</div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="nombre">${esc(c.nombre)}</span><span class="meta">${c.pais ? `${esc(c.pais)} · ` : ""}${esc(
+              haceCuanto(c.creado),
+            )}</span>${c.destacado ? `<span class="chip chip-oro">Destacado</span>` : ""}</div>
+            ${c.estrellas ? `<div style="margin-top:4px">${ESTRELLA_LLENA(c.estrellas)}</div>` : ""}
+            <div class="principal">«${esc(c.texto)}»</div>
+          </div></div>
+        <div class="botones">
+          ${c.aprobado ? "" : `<button class="boton" data-accion="com-aprobar" data-id="${esc(c.id)}">${svg(IC.check, 18)}Aprobar</button>`}
+          ${c.aprobado ? `<button class="boton-linea" data-accion="com-destacar" data-id="${esc(c.id)}">${c.destacado ? "Quitar destacado" : "★ Destacar"}</button>` : ""}
+          ${c.aprobado || !c.revisado ? `<button class="boton-suave" data-accion="com-ocultar" data-id="${esc(c.id)}">Ocultar</button>` : ""}
+          <button class="boton-peligro" data-accion="com-borrar" data-id="${esc(c.id)}">Borrar</button>
+        </div>
+      </article>`,
+            )
+            .join("")
+        : `<div class="tarjeta vacio">${svg(IC.pedidos, 40)}<div class="t">Nada por aquí</div><p>${esc(vacio)}</p></div>`
+    }</div>`;
+}
+
+async function cambiarComentario(id: string, cambios: Fila, aviso: string) {
+  const { error } = await supabase.from("comentarios").update(cambios).eq("id", id);
+  if (error) return avisar(ERROR_RED, "mal");
+  avisar(aviso);
+  return dibujarComentarios();
+}
+
 /* ---------- Listas ---------- */
 function dibujarLista(col: Coleccion) {
   const filas = [...datos[col.tabla]];
@@ -879,6 +957,25 @@ contenido.addEventListener("click", async (e) => {
     return dibujarPedidos();
   }
 
+  if (accion === "pestana-com") {
+    pestanaComentarios = boton.dataset.pestana as typeof pestanaComentarios;
+    return dibujarComentarios();
+  }
+  if (accion === "com-aprobar") return cambiarComentario(id, { aprobado: true, revisado: true }, "Aprobado: ya sale en la página");
+  if (accion === "com-ocultar") return cambiarComentario(id, { aprobado: false, destacado: false, revisado: true }, "Ocultado");
+  if (accion === "com-destacar") {
+    const c = datos.comentarios.find((x) => x.id === id);
+    if (c) return cambiarComentario(id, { destacado: !c.destacado }, c.destacado ? "Ya no está destacado" : "Destacado: sale primero");
+  }
+  if (accion === "com-borrar") {
+    const c = datos.comentarios.find((x) => x.id === id);
+    if (!c || !(await confirmar("¿Seguro que quieres borrar este comentario?", `El comentario de ${c.nombre} se borrará para siempre.`))) return;
+    const { error } = await supabase.from("comentarios").delete().eq("id", id);
+    if (error) return avisar(ERROR_RED, "mal");
+    avisar("Comentario borrado");
+    return dibujarComentarios();
+  }
+
   if (accion === "borrar-pedido") {
     const p = datos.pedidos.find((x) => x.id === id);
     if (!p || !(await confirmar("¿Seguro que quieres borrar este pedido?", `El pedido de ${p.nombre} se borrará para siempre.`))) return;
@@ -945,7 +1042,7 @@ document.addEventListener("keydown", (e) => {
   }
 });
 document.querySelectorAll<HTMLElement>("[data-ir]").forEach((b) => b.addEventListener("click", () => ir(b.dataset.ir!)));
-$("#campana").addEventListener("click", () => ir("pedidos"));
+$("#campana").addEventListener("click", () => ir(pendientes.pedidos || !pendientes.comentarios ? "pedidos" : "comentarios"));
 window.addEventListener("hashchange", dibujar);
 
 /* =====================================================================
@@ -970,8 +1067,8 @@ async function abrirPanel(uid: string) {
     panelListo = true;
     cargado = {};
     dibujar();
-    contarPedidosNuevos();
-    intervaloPedidos = window.setInterval(contarPedidosNuevos, 60_000);
+    contarPendientes();
+    intervaloPedidos = window.setInterval(contarPendientes, 60_000);
   }
 }
 

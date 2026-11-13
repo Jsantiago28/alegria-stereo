@@ -18,6 +18,7 @@ const i = (d: string) =>
 const secciones = [
   { id: "inicio", texto: "Inicio", icono: i('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>') },
   { id: "pedidos", texto: "Pedidos", icono: i('<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>') },
+  { id: "comentarios", texto: "Comentarios", icono: i('<path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"/>') },
   { id: "cantantes", texto: "Cantantes", icono: i('<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5"/>') },
   { id: "programas", texto: "Programas", icono: i('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/>') },
   { id: "anuncios", texto: "Anuncios y eventos", icono: i('<path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>') },
@@ -110,9 +111,9 @@ const temas = [
         <div class="acciones">
           <a href="/" target="_blank" rel="noopener" class="boton-linea solo-compu">Ver la página</a>
           <button id="tema-rapido" class="icono-boton" aria-label="Cambiar colores de la pantalla"></button>
-          <button id="campana" class="icono-boton" aria-label="Ver pedidos">
+          <button id="campana" class="icono-boton" aria-label="Pendientes">
             <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
-            <span class="insignia" data-insignia hidden></span>
+            <span class="insignia" data-insignia="total" hidden></span>
           </button>
           <div class="usuario solo-compu"><div class="avatar" aria-hidden="true">RP</div><span>Robinson</span></div>
           <button id="salir" class="boton-suave solo-compu">Salir</button>
@@ -127,7 +128,7 @@ const temas = [
               <button class="item-menu" data-ir={s.id}>
                 <Fragment set:html={s.icono} />
                 <span class="texto">{s.texto}</span>
-                {s.id === "pedidos" && <span class="insignia" data-insignia hidden />}
+                {(s.id === "pedidos" || s.id === "comentarios") && <span class="insignia" data-insignia={s.id} hidden />}
               </button>
             ))
           }

@@ -12,6 +12,7 @@ import { emisora } from "../data/emisora";
 
 const icono = await getImage({ src: logo, width: 192, height: 192, format: "png" });
 const logoChico = await getImage({ src: logo, width: 192, height: 192, format: "webp" });
+const iconoApple = await getImage({ src: logo, width: 180, height: 180, format: "png" });
 
 const i = (d: string) =>
   `<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
@@ -45,6 +46,9 @@ const temas = [
     <title>Panel · {emisora.nombre}</title>
     <meta name="theme-color" content="#0a1440" />
     <link rel="icon" type="image/png" href={icono.src} />
+    <link rel="apple-touch-icon" href={iconoApple.src} />
+    <link rel="manifest" href="/admin/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="Panel Alegría" />
     <script is:inline>
       try {
         var t = localStorage.getItem("tema-panel");
@@ -73,6 +77,7 @@ const temas = [
         <p id="aviso-entrar" class="chip-ok" style="padding:12px 14px;border-radius:12px;font-weight:600" role="status" hidden></p>
         <button type="submit" class="boton boton-grande">Entrar</button>
         <button type="button" id="olvide" class="enlace-boton" style="align-self:center">¿Olvidaste tu contraseña?</button>
+        <button type="button" data-instalar class="boton-suave" style="align-self:center">📲 Instalar el panel en este aparato</button>
       </form>
     </div>
 
@@ -135,6 +140,10 @@ const temas = [
           }
           <hr />
           <button class="item-menu" data-ir={datos.id}><Fragment set:html={datos.icono} /><span class="texto">{datos.texto}</span></button>
+          <button class="item-menu" data-instalar data-instalar-menu>
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"></rect><path d="M12 18h.01"></path></svg>
+            <span class="texto">Instalar el panel</span>
+          </button>
           <hr />
           <div class="temas">
             <div class="t">Colores de la pantalla</div>
@@ -165,6 +174,12 @@ const temas = [
         <button type="button" class="boton-suave" data-respuesta="no">No, cancelar</button>
         <button type="button" class="boton-borrar" data-respuesta="si">Sí, borrar</button>
       </div>
+    </dialog>
+
+    <dialog id="dialogo-instalar" class="confirmar" aria-labelledby="instalar-titulo">
+      <h2 id="instalar-titulo">Instalar el panel</h2>
+      <p id="instalar-texto"></p>
+      <div class="botones"><button type="button" class="boton" data-cerrar-instalar>Entendido</button></div>
     </dialog>
 
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>

@@ -1,6 +1,7 @@
 import { emisora, programas, DIFERENCIA_RD, nombresDias, enlaceWhatsApp } from "../data/emisora";
 import { guardarPedido } from "../lib/config";
 import { traerProgramas, ponerTarjetas, type ProgramaVivo } from "./programas-vivo";
+import { instalar, yaInstalada, pasosInstalar as pasosParaInstalar } from "./instalar";
 
 const raiz = document.documentElement;
 const audio = document.getElementById("audio") as HTMLAudioElement;
@@ -274,37 +275,29 @@ document.querySelectorAll("[data-compartir]").forEach((b) =>
   }),
 );
 
-/* ---------------- Llévanos en tu celular ---------------- */
-// En Android/Chrome el navegador ofrece instalarla directo; en iPhone hay que hacerlo desde Compartir.
-type AvisoInstalar = Event & { prompt: () => Promise<void>; userChoice: Promise<unknown> };
-let ofertaInstalar: AvisoInstalar | null = null;
-const botonInstalar = document.getElementById("boton-instalar");
+/* ---------------- Llévanos en tu celular o computadora ---------------- */
+// Android y Chrome/Edge en Windows o Mac: instala directo. iPhone y Safari: mostramos los pasos.
 const pasosInstalar = document.getElementById("pasos-instalar");
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  ofertaInstalar = e as AvisoInstalar;
-});
-window.addEventListener("appinstalled", () => {
+function mostrarPasos(texto: string) {
   if (!pasosInstalar) return;
-  pasosInstalar.textContent = "¡Listo! Ya tienes la emisora en tu celular.";
+  pasosInstalar.textContent = texto;
   pasosInstalar.hidden = false;
-});
-
-botonInstalar?.addEventListener("click", async () => {
-  if (ofertaInstalar) {
-    await ofertaInstalar.prompt();
-    await ofertaInstalar.userChoice;
-    ofertaInstalar = null;
-    return;
-  }
-  if (!pasosInstalar) return;
-  const esIphone = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  pasosInstalar.textContent = esIphone
-    ? "En Safari, toca el botón Compartir (el cuadrito con la flecha ↑) y luego «Agregar a inicio»."
-    : "Abre el menú del navegador (los tres puntitos ⋮) y toca «Agregar a la pantalla de inicio» o «Instalar aplicación».";
-  pasosInstalar.hidden = false;
-});
+}
+window.addEventListener("appinstalled", () => mostrarPasos("¡Listo! Ya tienes la emisora como aplicación."));
+document.querySelectorAll<HTMLElement>("[data-instalar]").forEach((b) =>
+  b.addEventListener("click", async () => {
+    const r = await instalar();
+    if (r === "ya") mostrarPasos("¡Ya tienes la emisora instalada en este aparato!");
+    else if (r === "pasos") mostrarPasos(pasosParaInstalar());
+    // Si se tocó desde arriba (no desde el cuadro de Contacto), llevar a donde salen los pasos.
+    if (r !== "instalada" && r !== "cancelada" && b.id !== "boton-instalar") {
+      if (b.closest("#menu-movil")) cerrarMenu();
+      pasosInstalar?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }),
+);
+// Si ya está instalada, el botón del menú sobra.
+if (yaInstalada()) document.querySelectorAll<HTMLElement>("[data-instalar-menu]").forEach((el) => (el.hidden = true));
 
 /* ---------------- Menú del celular ---------------- */
 const botonMenu = document.getElementById("boton-menu")!;

@@ -151,6 +151,14 @@
     th { background: var(--noche2); color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     ol.pasos > li::before, h2 .num { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
+  .captura { margin: 16px auto; text-align: center; break-inside: avoid; }
+  .captura img { width: 100%; max-width: 300px; height: auto; border-radius: 18px; border: 1px solid #d6dcee; box-shadow: 0 8px 24px rgba(5,10,36,.18); }
+  .captura.ancha img { max-width: 640px; border-radius: 10px; }
+  .captura.alta img { max-height: 620px; object-fit: cover; object-position: top; }
+  .capturas-dos { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .capturas-dos .captura { margin: 8px 0; flex: 0 1 260px; }
+  .captura figcaption { font-size: 13px; color: #4a5578; margin-top: 6px; }
+  @media print { .captura img { max-width: 220px; box-shadow: none; } .captura.ancha img { max-width: 480px; } .captura.alta img { max-height: 420px; } }
 </style>
 </head>
 <body>
@@ -167,7 +175,7 @@
   <h2>Lo que hay en este manual</h2>
   <ol>
     <li><a href="#entrar">Entrar al panel</a></li>
-    <li><a href="#inicio-celular">Ponerlo en tu celular</a></li>
+    <li><a href="#inicio-celular">Instalarlo en tu celular o computadora</a></li>
     <li><a href="#olvide">Si olvidas la contraseña</a></li>
     <li><a href="#menu">El menú</a></li>
     <li><a href="#inicio">Inicio</a></li>
@@ -187,6 +195,7 @@
 <!-- 1 -->
 <section class="parte junto" id="entrar">
   <h2><span class="num">1</span>Entrar al panel</h2>
+  <figure class="captura"><img src="capturas/panel-entrar.png" alt="La pantalla para entrar al panel." loading="lazy"><figcaption>La pantalla para entrar al panel.</figcaption></figure>
   <ol class="pasos">
     <li>Abre el navegador del celular (Chrome o Safari).</li>
     <li>Arriba, donde se escriben las direcciones, pon: <b>alegriastereomusical.com/admin</b></li>
@@ -202,14 +211,14 @@
 
 <!-- 2 -->
 <section class="parte junto" id="inicio-celular">
-  <h2><span class="num">2</span>Ponerlo en la pantalla de tu celular</h2>
-  <p>Así el panel queda como un botón más, igual que WhatsApp.</p>
-  <h3>Si tu celular es Android (Chrome)</h3>
+  <h2><span class="num">2</span>Instalar el panel en tu celular o computadora</h2>
+  <p>Así el panel queda como un botón más, igual que WhatsApp, y abre directo sin escribir la dirección. Se llama <b>«Panel Alegría»</b>.</p>
+  <h3>La forma fácil</h3>
   <ol class="pasos">
     <li>Abre el panel como en la parte 1.</li>
-    <li>Toca los tres puntitos <b>⋮</b> de arriba a la derecha.</li>
-    <li>Toca <b>Agregar a la pantalla principal</b> (o «Añadir a pantalla de inicio»).</li>
-    <li>Toca <b>Agregar</b>.</li>
+    <li>Toca el botón <span class="boton">📲 Instalar el panel en este aparato</span> (está debajo de «Entrar»), o abre el menú ☰ y toca <b>Instalar el panel</b>.</li>
+    <li>En <b>Android</b> y en <b>computadoras con Chrome o Edge</b> sale un aviso: toca <b>Instalar</b>.</li>
+    <li>En <b>iPhone</b> el panel te dice los pasos (abajo están también).</li>
   </ol>
   <h3>Si tu celular es iPhone (Safari)</h3>
   <ol class="pasos">
@@ -218,7 +227,12 @@
     <li>Baja y toca <b>Agregar a inicio</b>.</li>
     <li>Toca <b>Agregar</b>.</li>
   </ol>
-  <div class="nota"><b>Bueno saber</b>Los nombres de estos botones cambian un poco según el modelo del celular. Si no los encuentras, pídele ayuda a Jonathan.</div>
+  <h3>En una computadora con Windows</h3>
+  <ol class="pasos">
+    <li>Abre el panel en <b>Edge</b> o <b>Chrome</b>.</li>
+    <li>Toca <b>Instalar el panel</b> en el menú y luego <b>Instalar</b>. Queda en el menú de Inicio y en la barra de tareas.</li>
+  </ol>
+  <div class="nota"><b>Bueno saber</b>Los oyentes también pueden instalar la <b>emisora</b> desde la página: botón <b>Instalar la app</b> (arriba en la computadora, en el menú del celular y en la parte de Contacto). Son dos aplicaciones distintas: «Alegría Stereo» para escuchar y «Panel Alegría» para manejar la página.</div>
 </section>
 
 <!-- 3 -->
@@ -239,6 +253,8 @@
 <!-- 4 -->
 <section class="parte" id="menu">
   <h2><span class="num">4</span>El menú</h2>
+  <div class="capturas-dos"><figure class="captura"><img src="capturas/panel-menu.png" alt="El menú abierto en el celular (☰)." loading="lazy"><figcaption>El menú abierto en el celular (☰).</figcaption></figure></div>
+  <figure class="captura ancha"><img src="capturas/panel-computadora.png" alt="En la computadora el menú se ve siempre a la izquierda." loading="lazy"><figcaption>En la computadora el menú se ve siempre a la izquierda.</figcaption></figure>
   <p>En el celular, toca las tres rayitas <b>☰</b> de arriba a la izquierda. Se abre el menú con estas partes:</p>
   <table>
     <tr><th>Botón</th><th>Para qué sirve</th></tr>
@@ -260,6 +276,7 @@
 <!-- 5 -->
 <section class="parte junto" id="inicio">
   <h2><span class="num">5</span>Inicio</h2>
+  <figure class="captura alta"><img src="capturas/panel-inicio.png" alt="La pantalla de Inicio (los nombres son de ejemplo)." loading="lazy"><figcaption>La pantalla de Inicio (los nombres son de ejemplo).</figcaption></figure>
   <p>Es la primera pantalla. Aquí ves de un vistazo:</p>
   <ul>
     <li><b>Pedidos nuevos</b>: cuántos hay sin atender y cuál fue el último. Tócalo para verlos.</li>
@@ -274,6 +291,7 @@
 <!-- 6 -->
 <section class="parte" id="pedidos">
   <h2><span class="num">6</span>Pedidos de canciones</h2>
+  <div class="capturas-dos"><figure class="captura alta"><img src="capturas/panel-pedidos.png" alt="Lista de pedidos (de ejemplo)." loading="lazy"><figcaption>Lista de pedidos (de ejemplo).</figcaption></figure><figure class="captura"><img src="capturas/panel-borrar.png" alt="Antes de borrar, el panel siempre pregunta." loading="lazy"><figcaption>Antes de borrar, el panel siempre pregunta.</figcaption></figure></div>
   <p>Cuando un oyente pide una canción o un saludo en la página, te llega por WhatsApp <b>y también</b> queda guardado aquí. Los oyentes no pueden ver los pedidos de otros; solo tú.</p>
   <p>Cada pedido muestra el nombre, desde dónde escribe, la canción, para quién es y el saludo.</p>
   <h3>Cuando ya lo pusiste al aire</h3>
@@ -294,6 +312,7 @@
 <!-- 7 -->
 <section class="parte" id="comentarios">
   <h2><span class="num">7</span>Comentarios de los oyentes</h2>
+  <figure class="captura alta"><img src="capturas/panel-comentarios.png" alt="Comentarios por revisar (de ejemplo)." loading="lazy"><figcaption>Comentarios por revisar (de ejemplo).</figcaption></figure>
   <p>Los oyentes pueden dejar un comentario en la página, con su nombre, su país y estrellas. <b>Ningún comentario sale en la página hasta que tú lo apruebes.</b> Así nadie puede poner groserías ni cosas feas.</p>
   <p>Hay tres pestañas:</p>
   <table>
@@ -321,6 +340,7 @@
 <!-- 8 -->
 <section class="parte" id="cantantes">
   <h2><span class="num">8</span>Cantantes</h2>
+  <div class="capturas-dos"><figure class="captura alta"><img src="capturas/panel-cantantes.png" alt="Lista de cantantes: la estrella es el Talento de la semana." loading="lazy"><figcaption>Lista de cantantes: la estrella es el Talento de la semana.</figcaption></figure><figure class="captura alta"><img src="capturas/panel-cantante-nuevo.png" alt="Formulario para agregar un cantante." loading="lazy"><figcaption>Formulario para agregar un cantante.</figcaption></figure></div>
   <p>Los cantantes salen en la página en la parte <b>«Voces que brillan aquí»</b>. Si no hay ninguno, esa parte no aparece.</p>
   <div class="ojo"><b>Antes de publicar a un artista</b>Pídele permiso para poner su foto y su nombre en la página. Lo mejor es que te lo diga por WhatsApp, así queda escrito.</div>
   <h3>Agregar un cantante</h3>
@@ -352,6 +372,7 @@
 <!-- 9 -->
 <section class="parte" id="programas">
   <h2><span class="num">9</span>Programas</h2>
+  <figure class="captura alta"><img src="capturas/panel-programa-editar.png" alt="Editar un programa: días, hora, duración y volante." loading="lazy"><figcaption>Editar un programa: días, hora, duración y volante.</figcaption></figure>
   <p>Lo que pongas aquí sale en <b>«Nuestros programas»</b> de la página. La página calcula sola cuál está <b>al aire ahora</b>, cuál es el <b>próximo</b>, y la hora en otros países.</p>
   <h3>Agregar o cambiar un programa</h3>
   <ol class="pasos">
@@ -373,6 +394,7 @@
 <!-- 10 -->
 <section class="parte" id="anuncios">
   <h2><span class="num">10</span>Anuncios y eventos</h2>
+  <figure class="captura"><img src="capturas/panel-anuncios.png" alt="Lista de anuncios (de ejemplo)." loading="lazy"><figcaption>Lista de anuncios (de ejemplo).</figcaption></figure>
   <p>Noticias, avisos y eventos de la emisora. Salen en la página en <b>«Lo que viene»</b>, y arriba en el menú de la página aparece «Eventos».</p>
   <ol class="pasos">
     <li>Toca <b>Anuncios y eventos</b> en el menú.</li>
@@ -403,6 +425,7 @@
 <!-- 12 -->
 <section class="parte" id="datos">
   <h2><span class="num">12</span>Datos de la emisora</h2>
+  <figure class="captura alta"><img src="capturas/panel-datos.png" alt="Teléfono, WhatsApp, correo y redes." loading="lazy"><figcaption>Teléfono, WhatsApp, correo y redes.</figcaption></figure>
   <p>El teléfono, el WhatsApp, el correo y las redes que salen en la página.</p>
   <ol class="pasos">
     <li>Toca <b>Datos de la emisora</b> en el menú.</li>
@@ -424,6 +447,7 @@
 <!-- 13 -->
 <section class="parte junto" id="colores">
   <h2><span class="num">13</span>Colores de la pantalla: Noche, Día, Sol</h2>
+  <figure class="captura"><img src="capturas/panel-tema-sol.png" alt="El panel con los colores «Sol», para leer bajo el sol." loading="lazy"><figcaption>El panel con los colores «Sol», para leer bajo el sol.</figcaption></figure>
   <p>Puedes cambiar los colores del panel para verlo mejor. Esto <b>solo cambia tu pantalla</b>, no la página de los oyentes.</p>
   <ul>
     <li><b>Noche</b>: fondo azul oscuro. Bueno para de noche.</li>

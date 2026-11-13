@@ -229,8 +229,8 @@ img { max-width: 100%; display: block; }
 @media (max-width: 420px) { .columnas { grid-template-columns: minmax(0, 1fr); } }
 
 .filas { display: flex; flex-direction: column; gap: 10px; }
-.fila { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; background: var(--row); }
-.fila .cuerpo-fila { flex: 1; min-width: 0; }
+.fila { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 12px; border-radius: 12px; background: var(--row); }
+.fila .cuerpo-fila { flex: 1 1 9rem; min-width: 0; }
 .fila .nom { font-weight: 600; }
 .fila .det { font-size: 14px; color: var(--txt3); overflow-wrap: anywhere; }
 .chip { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 8px; font-size: 13px; font-weight: 700; white-space: nowrap; }

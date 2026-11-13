@@ -3,6 +3,7 @@
 // anuncios, anunciantes y los datos de la emisora. Todo se guarda en Supabase.
 import { supabase, CARPETA_FOTOS } from "../lib/supabase";
 import { emisora, DIFERENCIA_RD, nombresDias, hora12 } from "../data/emisora";
+import { instalar, yaInstalada, pasosInstalar } from "./instalar";
 
 /* =====================================================================
    Utilidades
@@ -1094,7 +1095,26 @@ document.addEventListener("keydown", (e) => {
   }
 });
 document.querySelectorAll<HTMLElement>("[data-ir]").forEach((b) => b.addEventListener("click", () => ir(b.dataset.ir!)));
-$("#campana").addEventListener("click", () => ir(pendientes.pedidos || !pendientes.comentarios ? "pedidos" : "comentarios"));
+/* ---------- Instalar el panel como aplicación (Android, iPhone, Windows, Mac) ---------- */
+const dialogoInstalar = $<HTMLDialogElement>("#dialogo-instalar");
+function explicarInstalar(texto: string) {
+  $("#instalar-texto").textContent = texto;
+  dialogoInstalar.showModal();
+}
+dialogoInstalar.querySelector("[data-cerrar-instalar]")!.addEventListener("click", () => dialogoInstalar.close());
+document.querySelectorAll<HTMLElement>("[data-instalar]").forEach((b) =>
+  b.addEventListener("click", async () => {
+    cerrarMenu();
+    const r = await instalar();
+    if (r === "ya") explicarInstalar("El panel ya está instalado en este aparato. Lo encuentras en tu pantalla de inicio o en el escritorio como «Panel Alegría».");
+    else if (r === "pasos") explicarInstalar(pasosInstalar());
+  }),
+);
+window.addEventListener("appinstalled", () => avisar("Panel instalado: búscalo como «Panel Alegría»"));
+// Si ya se abrió como aplicación, el botón del menú sobra.
+if (yaInstalada()) document.querySelectorAll<HTMLElement>("[data-instalar-menu]").forEach((el) => (el.hidden = true));
+
+$("#campana").addEventListener("click",() => ir(pendientes.pedidos || !pendientes.comentarios ? "pedidos" : "comentarios"));
 window.addEventListener("hashchange", dibujar);
 
 /* =====================================================================

@@ -85,6 +85,8 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 - [x] Borrar el comentario de prueba "PRUEBA CLAUDE" desde el panel (borrado 13/11/2026)
 - [x] Facebook y YouTube: aparecen solos cuando el dueño los pone en "Datos de la emisora"
 - [x] Crédito en el pie de página: «Diseño y desarrollo web: Jonathan Santiago» → https://jonathansantiago.pages.dev
+- [x] Botón «Instalar la app» (Android, iPhone, Windows, Mac) en la página (arriba, menú del celular y Contacto)
+      y «Instalar el panel» en el panel (entrada y menú); el panel se instala aparte como «Panel Alegría»
 
 ## 🏁 PASO 5 — Revisión antes de la entrega (lo que valida un programador profesional)
 **Yo (Claude)** = lo puede hacer Claude · **Tú** = lo hace Jonathan · **Dueño** = lo hace el cliente
@@ -97,9 +99,12 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
    - [ ] **Dueño:** cambiar su contraseña del panel por una que solo él sepa (si la creó Jonathan)
 2. **Cuentas y propiedad** (dejarlo por escrito; es lo que más problemas da después)
    - [x] Dominio a nombre del dueño (Cloudflare, US$11.17/año, renovación automática)
-   - [ ] **Tú:** decidir de quién quedan Cloudflare (hosting), GitHub (código) y Supabase (hoy en la cuenta de Jonathan):
-         pasárselas al dueño o dejar escrito que Jonathan las administra
-   - [ ] Lista de cuentas: qué es, a nombre de quién y cuánto cuesta
+   - [x] Decidido (13/11/2026): **Cloudflare y GitHub a nombre de Jonathan** (los administra para el mantenimiento);
+         **Supabase a nombre de la emisora**. Si el dueño cambia de desarrollador, Jonathan le pasa dominio y código.
+   - [x] Lista de cuentas en `docs/entrega.html` (sección 4)
+   - [x] Dueño para firma legal: **Robinzon Peña**. ⚠️ El dominio se registró a nombre de «Robinzon Urbaez»:
+         confirmar que el nombre del registro del dominio sea el correcto.
+   - [ ] Precio del proyecto, garantía y mantenimiento (Jonathan decide; Claude dio una recomendación)
 3. **Prueba completa en teléfonos reales**
    - [ ] **Tú:** Android y iPhone: radio suena, botones de WhatsApp, formularios (pedido y comentario)
    - [ ] **Tú + Dueño:** panel desde el celular del dueño: subir foto de la galería, aprobar comentario, cambiar programa
@@ -123,7 +128,7 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 
 ### 🟢 La entrega
 10. **Manual del dueño** (Yo)
-    - [x] `docs/manual-del-dueno.html` (sin capturas todavía; se pueden agregar)
+    - [x] `docs/manual-del-dueno.html` con 13 capturas (datos de ejemplo) en `docs/capturas/`
 11. **Documento de entrega** (Yo)
     - [x] `docs/entrega.html` (faltan los [POR DEFINIR]: cuentas, soporte, fecha, nombre legal del dueño, WhatsApp de Jonathan)
 

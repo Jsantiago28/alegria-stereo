@@ -45,6 +45,16 @@ const enlaces = [
         <span class="sm:hidden">En vivo</span>
       </BotonPlay>
       <button
+        type="button"
+        data-instalar
+        data-instalar-menu
+        class="hidden size-10 place-items-center rounded-full border border-white/15 text-oro transition hover:border-oro lg:grid"
+        aria-label="Instalar la app de la emisora"
+        title="Instalar la app"
+      >
+        <Icono nombre="celular" class="size-5" />
+      </button>
+      <button
         id="boton-menu"
         type="button"
         class="grid size-10 place-items-center rounded-full border border-white/15 lg:hidden"
@@ -71,6 +81,9 @@ const enlaces = [
         </a>
       ))
     }
+    <button type="button" data-instalar data-instalar-menu class="boton-linea mt-2">
+      <Icono nombre="celular" class="size-4" /> Instalar la app
+    </button>
     <a href={`https://wa.me/${emisora.whatsapp}`} class="boton-wa mt-2" target="_blank" rel="noopener">
       <Icono nombre="whatsapp" /> Escríbenos
     </a>

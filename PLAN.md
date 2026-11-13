@@ -67,9 +67,9 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
       serían privadas; solo es público lo que el dueño agrega en Cantantes.
 - [x] Las fotos se achican solas antes de subirlas (el dueño sube la foto tal cual del celular)
 - [x] Colores de la pantalla: Noche / Día / Sol (se recuerda en el teléfono)
-- [ ] Supabase → Authentication → URL Configuration: Site URL `https://alegriastereomusical.com` y Redirect URL
+- [x] Supabase → Authentication → URL Configuration: Site URL `https://alegriastereomusical.com` y Redirect URL
       `https://alegriastereomusical.com/admin` (para que funcione "¿Olvidaste tu contraseña?")
-- [ ] Borrar el pedido de prueba "PRUEBA CLAUDE" desde el panel
+- [x] Borrar el pedido de prueba "PRUEBA CLAUDE" desde el panel
 - [x] Si Supabase falla, la página sigue mostrando la información de respaldo (programas)
 
 ## ✅ PASO 4 — La página muestra lo del panel (publicado 12/11/2026)

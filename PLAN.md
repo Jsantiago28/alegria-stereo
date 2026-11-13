@@ -32,7 +32,7 @@ La plataforma de monetización le pide la URL al dueño para activar anunciantes
 - [ ] Revisar la vista previa al compartir el enlace por WhatsApp/redes
 - [x] `site` en `astro.config.mjs` = https://alegriastereomusical.com
 - [ ] Mandarle la URL al dueño
-- [x] Dominio **alegriastereomusical.com** comprado en Cloudflare (12/11/2026, US$11.17/año) a nombre de Robinzon Urbaez — revisar que la renovación automática esté activa
+- [x] Dominio **alegriastereomusical.com** comprado en Cloudflare (12/11/2026, US$11.17/año) a nombre de Robinzon Urbaez — renovación automática ACTIVA (confirmado 12/11/2026)
 - [x] Conectado a la página: https://alegriastereomusical.com funciona con https
 - [x] www.alegriastereomusical.com conectado (registro CNAME www → alegriastereomusical.pages.dev agregado a mano en DNS)
 - [ ] ⚠️ **El dueño debe verificar el correo de Cloudflare/ICANN en alegriastereomusical@gmail.com antes del 26/11/2026** o suspenden el dominio

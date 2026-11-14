@@ -2,10 +2,11 @@
 # - Solo se permite código de la propia página; datos solo de Supabase y Zeno.
 # - Nadie puede meter la página dentro de otra (clickjacking).
 # - Siempre por conexión segura (https).
+# Cloudflare Web Analytics (contador de visitas) también está permitido.
 # Si se agrega un servicio nuevo (otro reproductor, mapas, videos), hay que permitirlo aquí.
 
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https://rqrdoeknkmztsiouwxvw.supabase.co; media-src 'self' https: blob:; connect-src 'self' https://rqrdoeknkmztsiouwxvw.supabase.co wss://rqrdoeknkmztsiouwxvw.supabase.co https://api.zeno.fm; manifest-src 'self'; worker-src 'self'; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https://rqrdoeknkmztsiouwxvw.supabase.co; media-src 'self' https: blob:; connect-src 'self' https://rqrdoeknkmztsiouwxvw.supabase.co wss://rqrdoeknkmztsiouwxvw.supabase.co https://api.zeno.fm https://cloudflareinsights.com; manifest-src 'self'; worker-src 'self'; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin

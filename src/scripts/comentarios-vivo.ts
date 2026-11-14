@@ -128,7 +128,7 @@ export function iniciarComentarios() {
           texto: valor("texto").slice(0, 300),
         }),
       });
-      if (!r.ok) throw new Error(String(r.status));
+      if (!r.ok) throw new Error((await r.text().catch(() => "")).includes("demasiados") ? "demasiados" : String(r.status));
       form.reset();
       estrellas = null;
       pintarEstrellas();
@@ -136,8 +136,12 @@ export function iniciarComentarios() {
       form.hidden = true;
       abrir.setAttribute("aria-expanded", "false");
       gracias.hidden = false;
-    } catch {
-      mostrarError("No se pudo enviar. Revisa tu internet e intenta de nuevo.");
+    } catch (e) {
+      mostrarError(
+        (e as Error)?.message === "demasiados"
+          ? "Ya enviaste varios comentarios. Espera unos minutos y vuelve a intentarlo."
+          : "No se pudo enviar. Revisa tu internet e intenta de nuevo.",
+      );
     } finally {
       boton.disabled = false;
       boton.textContent = "Enviar comentario";

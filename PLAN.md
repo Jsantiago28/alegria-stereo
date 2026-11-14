@@ -115,6 +115,17 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
 4. **Limpiar pruebas**
    - [x] **Tú:** borrar el comentario "PRUEBA CLAUDE" y cualquier otro dato de prueba (13/11/2026)
 
+5b. **Protección extra contra ataques** (13/11/2026)
+   - [x] Encabezados de seguridad en `public/_headers` (CSP: solo código propio + Supabase, Zeno y Cloudflare
+         Analytics; anti-clickjacking; HSTS; nosniff). Probado en línea: radio, panel y páginas sin bloqueos.
+         ⚠️ Si se agrega un servicio nuevo (videos, mapas, otro reproductor), hay que permitirlo en `_headers`.
+   - [x] Freno contra el spam en la base (`supabase/05-anti-spam.sql`): 3 comentarios y 6 pedidos por conexión
+         cada 10 min (+ tope general). Guarda solo un código anónimo; el público no lo puede leer. Probado.
+   - [x] Revisión: 0 fallas conocidas en librerías (npm audit); Supabase sin avisos (salvo "leaked password", de pago).
+   - [ ] **Dueño:** verificación en dos pasos en el Gmail de la emisora (lo más importante) y en Supabase.
+   - [ ] **Tú:** verificación en dos pasos en Cloudflare y GitHub; activar "Bot Fight Mode" en Cloudflare
+         (dominio → Security → Bots).
+
 ### 🟡 Muy recomendable
 5. **Google y compartir** (Yo)
    - [x] Vista previa al compartir por WhatsApp/Facebook (logo + nombre)

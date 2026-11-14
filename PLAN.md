@@ -96,7 +96,8 @@ Archivos: `src/pages/admin.astro`, `src/scripts/admin.ts`, `src/styles/admin.css
    - [x] Reglas de la base probadas (el público no ve pedidos ni comentarios pendientes; nadie edita sin ser admin)
    - [x] En el código solo está la clave pública de Supabase (nunca la secreta)
    - [x] Registros públicos apagados en Supabase (13/11/2026, probado)
-   - [ ] **Dueño:** cambiar su contraseña del panel por una que solo él sepa (si la creó Jonathan)
+   - [x] Contraseña del panel cambiada desde Supabase (SQL Editor) el 13/11/2026; probado: entra con la nueva.
+         El correo de "¿Olvidaste tu contraseña?" sí llega (probado); el enlace no se llegó a probar.
 2. **Cuentas y propiedad** (dejarlo por escrito; es lo que más problemas da después)
    - [x] Dominio a nombre del dueño (Cloudflare, US$11.17/año, renovación automática)
    - [x] Decidido (13/11/2026): **Cloudflare y GitHub a nombre de Jonathan** (los administra para el mantenimiento);

@@ -111,10 +111,15 @@ new IntersectionObserver(([e]) => mostrarMini(!e.isIntersecting), { threshold: 0
 
 /* ---------------- Sonando ahora (Zeno) ---------------- */
 function mostrarCancion(texto: string) {
-  const limpio = texto.trim();
-  if (!limpio) return;
-  const partes = limpio.split(" - ");
-  const [artista, cancion] = partes.length > 1 ? [partes[0], partes.slice(1).join(" - ")] : [emisora.nombre, limpio];
+  // Zeno a veces manda solo "-" o " - " cuando no hay título: se deja el nombre y el lema de la emisora.
+  const tieneTexto = (s: string) => /[\p{L}\p{N}]/u.test(s);
+  const partes = texto.split(" - ").map((s) => s.trim()).filter(tieneTexto);
+  const [cancion, artista] =
+    partes.length === 0
+      ? [emisora.nombre, emisora.lema]
+      : partes.length === 1
+        ? [partes[0], emisora.nombre]
+        : [partes.slice(1).join(" - "), partes[0]];
   document.querySelectorAll("[data-cancion]").forEach((el) => (el.textContent = cancion));
   document.querySelectorAll("[data-artista]").forEach((el) => (el.textContent = artista));
   actualizarPantallaBloqueo(cancion, artista);
